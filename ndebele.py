@@ -1356,6 +1356,16 @@ action_mapping = {
     ),
 }
 
+ndebele_blueprint = Blueprint('ndebele', __name__)
+
+@ndebele_blueprint.route('/message', methods=['POST'])
+def ndebele_message_handler():
+    data = request.get_json()
+    message = data.get('message')
+    sender = data.get('sender')
+    phone_id = data.get('phone_id')
+    message_handler(message, sender, phone_id, {'type': 'text', 'text': {'body': message}})
+    return jsonify({"status": "ok"}), 200
 
 
 if __name__ == "__main__":

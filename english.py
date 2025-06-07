@@ -1372,6 +1372,18 @@ action_mapping = {
 }
 
 
+english_blueprint = Blueprint('english', __name__)
+
+@english_blueprint.route('/message', methods=['POST'])
+def english_message_handler():
+    data = request.get_json()
+    message = data.get('message')
+    sender = data.get('sender')
+    phone_id = data.get('phone_id')
+    message_handler(message, sender, phone_id, {'type': 'text', 'text': {'body': message}})
+    return jsonify({"status": "ok"}), 200
+  
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)

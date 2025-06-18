@@ -31127,6 +31127,9 @@ def handle_deepening_location_ndebele(prompt, user_data, phone_id):
     return {'step': 'deepening_booking_confirm_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
 
 
+def handle_agent_available(prompt, sender, phone_id, message, agent_state):
+    """Handles agent when not in conversation"""
+    send("ℹ️ You're currently not handling any conversation. Please wait for a new customer request.", sender, phone_id)
 
 
 def handle_select_pump_option_ndebele(prompt, user_data, phone_id):

@@ -2362,6 +2362,7 @@ def webhook():
                 # If user is talking to a human agent, suppress bot
                 if user_data.get("step") == "talking_to_human_agent":
                     forward_message_to_agent(message_text, user_data, phone_id)
+                    update_user_state(from_number, user_data)
                     return "OK"
 
                 

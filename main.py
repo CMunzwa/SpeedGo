@@ -9058,46 +9058,6 @@ def human_agent_followup(prompt, user_data, phone_id):
         return {'step': 'human_agent_followup', 'user': user.to_dict(), 'sender': user_data['sender']}
 
 
-def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
-    """Handles agent's initial response to customer request"""
-    prompt = prompt.strip() if isinstance(prompt, str) else ""
-    customer_number = agent_state.get('customer_number')
-    
-    if not customer_number:
-        send("⚠️ Error: No customer assigned. Please wait for a new request.", sender, phone_id)
-        update_user_state(sender, {'step': 'agent_available'})
-        return
-    
-    if prompt == '1':  # Accept conversation
-        send("✅ You're now talking to the customer. Send '2' to return to bot.", sender, phone_id)
-        send("✅ You are now connected to a human agent. Please wait for their response.", customer_number, phone_id)
-        
-        update_user_state(customer_number, {
-            'step': 'talking_to_human_agent',
-            'user': get_user_state(customer_number).get('user', {}),
-            'sender': customer_number
-        })
-        update_user_state(sender, {
-            'step': 'talking_to_customer',
-            'customer_number': customer_number,
-            'phone_id': phone_id,
-            'started_at': time.time()
-        })
-        
-    elif prompt == '2':  # Decline conversation
-        send("✅ You've returned the customer to the bot.", sender, phone_id)
-        send("👋 You're now back with our automated assistant.", customer_number, phone_id)
-        
-        update_user_state(customer_number, {
-            'step': 'main_menu',
-            'user': get_user_state(customer_number).get('user', {}),
-            'sender': customer_number
-        })
-        update_user_state(sender, {'step': 'agent_available'})
-        show_main_menu(customer_number, phone_id)
-        
-    else:
-        send("⚠️ Please reply with:\n1 - Talk to customer\n2 - Back to bot", sender, phone_id)
 
 def handle_agent_conversation(prompt, sender, phone_id, message, agent_state):
     """Handles ongoing agent-customer conversation"""
@@ -9152,54 +9112,10 @@ def handle_agent_message(prompt, sender, phone_id, message):
     current_step = agent_state.get('step', 'agent_available')
     
     # Get the appropriate handler
-    handler = AGENT_ACTION_MAPPINGS.get(current_step, handle_agent_available)
+    handler = action_mapping.get(current_step, handle_agent_available)
     return handler(prompt, sender, phone_id, message, agent_state)
 
 
-# Agent Handler Functions
-def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
-    """Handles agent's initial response to customer request"""
-    prompt = prompt.strip() if isinstance(prompt, str) else ""
-    customer_number = agent_state.get('customer_number')
-    
-    if not customer_number:
-        send("⚠️ Error: No customer assigned.", sender, phone_id)
-        return {'step': 'agent_available'}
-
-    if prompt == '1':  # Accept conversation
-        # Notify both parties
-        send("✅ You're now connected. Send '2' to return to bot.", sender, phone_id)
-        send("✅ Connected to agent. Please ask your question.", customer_number, phone_id)
-        
-        # Update states
-        update_user_state(customer_number, {
-            'step': 'talking_to_human_agent',
-            'user': get_user_state(customer_number).get('user', {}),
-            'sender': customer_number
-        })
-        
-        return {
-            'step': 'talking_to_customer',
-            'customer_number': customer_number,
-            'phone_id': phone_id,
-            'started_at': time.time()
-        }
-        
-    elif prompt == '2':  # Decline conversation
-        send("✅ Customer returned to bot.", sender, phone_id)
-        send("👋 You're back with our automated assistant.", customer_number, phone_id)
-        
-        update_user_state(customer_number, {
-            'step': 'main_menu',
-            'user': get_user_state(customer_number).get('user', {}),
-            'sender': customer_number
-        })
-        show_main_menu(customer_number, phone_id)
-        return {'step': 'agent_available'}
-        
-    else:
-        send("⚠️ Reply with:\n1 - Talk to customer\n2 - Back to bot", sender, phone_id)
-        return agent_state  # Maintain current state
 
 def handle_agent_conversation(prompt, sender, phone_id, message, agent_state):
     """Handles ongoing conversation between agent and customer"""
@@ -9270,6 +9186,7 @@ def handle_user_message(prompt, user_data, phone_id):
                 'user': user_data['user']
             })
             send_main_menu(user_data['sender'], phone_id)
+            
         elif prompt.strip() == '2':
             # Continue waiting
             send("We'll keep trying to connect you. Thank you for your patience.", user_data['sender'], phone_id)

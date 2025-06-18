@@ -21510,7 +21510,7 @@ def human_agent_shona(prompt, user_data, phone_id):
             send("Kana usati wabatikana, unogona kutifonera pa +263719835124", customer_number, phone_id)
             send("Unoda here:\n1. Kudzokera kumenu huru\n2. Kuramba wakamirira", customer_number, phone_id)
             update_user_state(customer_number, {
-                'step': 'human_agent_followup_shona',
+                'step': 'human_agent_followup_shona', 
                 'user': user_data.get('user', {}),
                 'sender': customer_number
             })

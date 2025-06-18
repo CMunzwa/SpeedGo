@@ -2326,7 +2326,7 @@ def webhook():
 
     elif request.method == "POST":
         data = request.get_json()
-        logging.info(f"Incoming webhook data: {json.dumps(data, indent=2)}")
+        logging.info(f"🔔 Incoming webhook data:\n{json.dumps(data, indent=2)}")
 
         try:
             entry = data.get("entry", [])[0]
@@ -2335,64 +2335,67 @@ def webhook():
             phone_id = value.get("metadata", {}).get("phone_number_id")
             messages = value.get("messages", [])
 
-            if messages:
-                message = messages[0]
-                from_number = message.get("from")
-                msg_type = message.get("type")
-                message_text = message.get("text", {}).get("body", "").strip()
+            if not messages:
+                logging.info("❗ No messages in webhook")
+                return jsonify({"status": "no_message"}), 200
 
-                # ✅ AGENT MESSAGE HANDLING
-                if from_number.endswith(AGENT_NUMBER.replace("+", "")):
-                    agent_state = get_user_state(AGENT_NUMBER)
-                    customer_number = agent_state.get("customer_number")
+            message = messages[0]
+            from_number = message.get("from")
+            msg_type = message.get("type")
+            message_text = message.get("text", {}).get("body", "").strip()
 
-                    if not customer_number:
-                        send("⚠️ No customer to reply to. Wait for a new request.", AGENT_NUMBER, phone_id)
-                        return "OK"
+            logging.info(f"📨 Message from {from_number}, type={msg_type}, text='{message_text}'")
 
-                    if agent_state.get("step") == "talking_to_human_agent":
-                    if message_text.strip() == "2":
-                        handle_agent_reply("2", customer_number, phone_id, agent_state)
-                        return "OK"
+            # ✅ AGENT HANDLING
+            if from_number.endswith(AGENT_NUMBER[-9:]):
+                logging.info("✅ Message is from agent")
+
+                agent_state = get_user_state(AGENT_NUMBER)
+                customer_number = agent_state.get("customer_number")
+
+                if not customer_number:
+                    send("⚠️ No customer to reply to. Wait for a new request.", AGENT_NUMBER, phone_id)
+                    return "OK"
+
+                # Agent sends "2" to return to bot
+                if message_text == "2":
+                    handle_agent_reply("2", customer_number, phone_id, agent_state)
+                    return "OK"
+
+                # Step: agent_reply
+                if agent_state.get("step") == "agent_reply":
+                    handle_agent_reply(message_text, customer_number, phone_id, agent_state)
+                    return "OK"
+
+                # Step: talking_to_human_agent
+                if agent_state.get("step") == "talking_to_human_agent":
                     send(message_text, customer_number, phone_id)
                     return "OK"
 
+                send("⚠️ No active chat. Please wait for a new request.", AGENT_NUMBER, phone_id)
+                return "OK"
 
-                    # ✅ Handle step = agent_reply
-                    if agent_state.get("step") == "agent_reply":
-                        handle_agent_reply(message_text, customer_number, phone_id, agent_state)
-                        return "OK"
+            # ✅ USER MESSAGE HANDLING
+            user_data = get_user_state(from_number) or {}
+            user_data["sender"] = from_number
 
-                    # ✅ Forward message if still talking to customer
-                    elif agent_state.get("step") == "talking_to_human_agent":
-                        send(message_text, customer_number, phone_id)
-                        return "OK"
+            if handle_waiting_for_human_agent_response(message_text, user_data, phone_id):
+                logging.info("📡 User is in agent chat – suppressed bot")
+                return "OK"
 
-                    # ✅ No active session
-                    send("⚠️ No active chat. Please wait for a new request.", AGENT_NUMBER, phone_id)
-                    return "OK"
+            if msg_type == "text":
+                message_handler(message_text, from_number, phone_id, message)
+            elif msg_type == "location":
+                gps_coords = f"{message['location']['latitude']},{message['location']['longitude']}"
+                message_handler(gps_coords, from_number, phone_id, message)
+            else:
+                send("Please send a text message or share your location using the 📍 button.", from_number, phone_id)
 
-                # ✅ USER MESSAGE HANDLING
-                user_data = get_user_state(from_number) or {}
-                user_data['sender'] = from_number
-
-                # If user is in agent chat state, suppress bot
-                if handle_waiting_for_human_agent_response(message_text, user_data, phone_id):
-                    return "OK"
-
-                # Continue with normal bot processing
-                if msg_type == "text":
-                    message_handler(message_text, from_number, phone_id, message)
-                elif msg_type == "location":
-                    gps_coords = f"{message['location']['latitude']},{message['location']['longitude']}"
-                    message_handler(gps_coords, from_number, phone_id, message)
-                else:
-                    send("Please send a text message or share your location using the 📍 button.", from_number, phone_id)
+            return jsonify({"status": "ok"}), 200
 
         except Exception as e:
-            logging.error(f"Error processing webhook: {e}", exc_info=True)
-
-        return jsonify({"status": "ok"}), 200
+            logging.exception("❌ Exception in webhook handler")
+            return jsonify({"error": str(e)}), 500
 
 
 def message_handler(prompt, sender, phone_id, message):

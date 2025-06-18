@@ -21455,8 +21455,7 @@ def human_agent_shona(prompt, user_data, phone_id):
     send("Tiri kukubatanidza neanhu anobatsira...", customer_number, phone_id)
 
     agent_message = (
-        f"👋 Chikumbiro chitsva kubva kumutengi
-\n\n"
+        f"👋 Chikumbiro chitsva kubva kumutengi\n\n"
         f"📱 Nhamba yemutengi: {customer_number}\n"
         f"📩 Mharidzo: \"{prompt}\"\n\n"
         f"Pindura ne:\n"

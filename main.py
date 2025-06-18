@@ -2311,7 +2311,6 @@ app = Flask(__name__)
 def index():
     return render_template("connected.html")
 
-
 @app.route("/webhook", methods=["GET", "POST"])
 def webhook():
     if request.method == "GET":
@@ -2339,52 +2338,38 @@ def webhook():
                 from_number = message.get("from")
                 msg_type = message.get("type")
                 message_text = message.get("text", {}).get("body", "").strip()
-            
-                # Handle agent messages
+
+                # ✅ AGENT MESSAGE HANDLING
                 if from_number.endswith(AGENT_NUMBER.replace("+", "")):
                     agent_state = get_user_state(AGENT_NUMBER)
                     customer_number = agent_state.get("customer_number")
-            
+
                     if not customer_number:
                         send("⚠️ No customer to reply to. Wait for a new request.", AGENT_NUMBER, phone_id)
                         return "OK"
 
-                        # Always re-store the agent state with the customer_number to ensure it's not lost
-                        agent_state["customer_number"] = customer_number
-                        agent_state["sender"] = AGENT_NUMBER
-                    
-                        # Persist again defensively
-                        update_user_state(AGENT_NUMBER, agent_state)
-            
+                    # ✅ Handle step = agent_reply
                     if agent_state.get("step") == "agent_reply":
                         handle_agent_reply(message_text, customer_number, phone_id, agent_state)
-                        
-                        # 🔄 Re-save agent state to ensure customer_number is preserved
-                        agent_state["customer_number"] = customer_number
-                        agent_state["step"] = "talking_to_human_agent"
-                        update_user_state(AGENT_NUMBER, agent_state)
+                        return "OK"
 
+                    # ✅ Forward message if still talking to customer
+                    elif agent_state.get("step") == "talking_to_human_agent":
+                        send(message_text, customer_number, phone_id)
                         return "OK"
-            
-                    if agent_state.get("step") == "talking_to_human_agent":
-                        send(message_text, customer_number, phone_id)   
-        
-                        return "OK"
-            
+
+                    # ✅ No active session
                     send("⚠️ No active chat. Please wait for a new request.", AGENT_NUMBER, phone_id)
                     return "OK"
-            
-                # Handle normal user messages (only if NOT agent)
 
-                user_data = get_user_state(from_number)
+                # ✅ USER MESSAGE HANDLING
+                user_data = get_user_state(from_number) or {}
                 user_data['sender'] = from_number
-                
-                # If user is talking to a human agent, suppress bot
-                if handle_customer_message_during_agent_chat(message_text, user_data, phone_id):
-                    forward_message_to_agent(message_text, user_data, phone_id)
-                    update_user_state(from_number, user_data) 
+
+                # If user is in agent chat state, suppress bot
+                if handle_waiting_for_human_agent_response(message_text, user_data, phone_id):
                     return "OK"
-                
+
                 # Continue with normal bot processing
                 if msg_type == "text":
                     message_handler(message_text, from_number, phone_id, message)
@@ -2393,7 +2378,6 @@ def webhook():
                     message_handler(gps_coords, from_number, phone_id, message)
                 else:
                     send("Please send a text message or share your location using the 📍 button.", from_number, phone_id)
-
 
         except Exception as e:
             logging.error(f"Error processing webhook: {e}", exc_info=True)

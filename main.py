@@ -21425,9 +21425,9 @@ def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_stat
         show_main_menu(customer_number, phone_id)
 
     else:
-        send("⚠️ Ndapota pindura ne:
-1 - Taura nemutengi
-2 - Dzokera kubot", sender, phone_id)
+        send("⚠️ Ndapota pindura ne:\n\
+        1 - Taura nemutengi\n\
+        2 - Dzokera kubot", sender, phone_id)
 
 def handle_agent_conversation_shona(prompt, sender, phone_id, message, agent_state):
     customer_number = agent_state.get('customer_number')

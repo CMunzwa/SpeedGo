@@ -20496,6 +20496,30 @@ def handle_check_project_status_menu_shona(prompt, user_data, phone_id):
         send("Sarudzo isiriyo. Ndapota sarudza 1, 2, 3, kana 4.", user_data['sender'], phone_id)
         return {'step': 'check_project_status_menu_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
+def handle_user_message_shona(prompt, user_data, phone_id):
+    if user_data.get('step') == 'human_agent_followup_shona':
+        if prompt.strip() == '1':
+            # Return to main menu (Shona: Dzokera kumenu huru)
+            update_user_state_shona(user_data['sender'], {
+                'step': 'main_menu_shona',
+                'user': user_data['user']
+            })
+            send_main_menu_shona(user_data['sender'], phone_id)
+            
+        elif prompt.strip() == '2':
+            # Continue waiting (Shona: Ramba wakamirira)
+            send("Tichaenderera mberi nekuedza kukubatanidza. Tinotenda nekumirira kwako.", 
+                 user_data['sender'], phone_id)
+            update_user_state_shona(user_data['sender'], {
+                'step': 'waiting_for_human_agent_response_shona',
+                'user': user_data['user']
+            })
+        else:
+            send("Ndapota sarudza 1 kana 2", user_data['sender'], phone_id)
+    
+    return user_data
+    
+
 def handle_drilling_status_info_request_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
 

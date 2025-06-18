@@ -10471,6 +10471,14 @@ def handle_select_pump_option(prompt, user_data, phone_id):
         'sender': user_data['sender']
     }
 
+
+def forward_message_to_agent(message_text, user_data, phone_id):
+    agent_number = AGENT_NUMBER
+    customer_number = user_data['sender']
+    
+    send(f"💬 Customer ({customer_number}): {message_text}", agent_number, phone_id)
+
+
 def handle_quote_followup(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
 

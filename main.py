@@ -2355,9 +2355,14 @@ def webhook():
                         return "OK"
             
                     if agent_state.get("step") == "talking_to_human_agent":
-                        send(message_text, customer_number, phone_id)   
-        
+                        if message_text.strip() == "2":
+                            # ✅ This is the agent saying "return to bot"
+                            handle_agent_reply("2", customer_number, phone_id, agent_state)
+                        else:
+                            # ✅ Forward any other message to the customer
+                            send(message_text, customer_number, phone_id)
                         return "OK"
+
             
                     send("⚠️ No active chat. Please wait for a new request.", AGENT_NUMBER, phone_id)
                     return "OK"

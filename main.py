@@ -568,38 +568,50 @@ def human_agent(prompt, user_data, phone_id):
 
 def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
     agent_reply = message_text.strip()
-    
+    agent_customer_number = agent_state.get('customer_number')
+
+    if not agent_customer_number:
+        logging.error("Missing customer number in agent state.")
+        return
+
     if agent_reply == "1":
-         # Cancel fallback timer if exists
-        agent_customer_number = agent_state.get('customer_number')
+        # Cancel fallback timer if it exists
         timer = fallback_timers.pop(agent_customer_number, None)
         if timer:
             timer.cancel()
-        # Agent chooses to talk to customer
-        send("✅ You're now talking to the customer. Bot is paused until you send '2' to return to bot.", AGENT_NUMBER, phone_id)
-        send("✅ You are now connected to a human agent. Please wait for their response.", customer_number, phone_id)
 
-        update_user_state(customer_number, {
+        # Update customer's state
+        update_user_state(agent_customer_number, {
             'step': 'talking_to_human_agent',
-            'user': get_user_state(customer_number).get('user', {}),
-            'sender': customer_number
+            'user': get_user_state(agent_customer_number).get('user', {}),
+            'sender': agent_customer_number
         })
+
+        # Notify both agent and customer
+        send("✅ You're now talking to the customer. Bot is paused until you send '2' to return to bot.", AGENT_NUMBER, phone_id)
+        send("✅ You are now connected to a human agent. Please wait for their response.", agent_customer_number, phone_id)
 
     elif agent_reply == "2":
-        # Agent returns control to bot
-        send("✅ The bot has resumed and will assist the customer from here.", AGENT_NUMBER, phone_id)
-        send("👋 You're now back with our automated assistant.", customer_number, phone_id)
+        # Cancel fallback timer if it exists
+        timer = fallback_timers.pop(agent_customer_number, None)
+        if timer:
+            timer.cancel()
 
-        update_user_state(customer_number, {
+        # Return control to bot
+        update_user_state(agent_customer_number, {
             'step': 'main_menu',
-            'user': get_user_state(customer_number).get('user', {}),
-            'sender': customer_number
+            'user': get_user_state(agent_customer_number).get('user', {}),
+            'sender': agent_customer_number
         })
-        show_main_menu(customer_number, phone_id)
+
+        send("✅ The bot has resumed and will assist the customer from here.", AGENT_NUMBER, phone_id)
+        send("👋 You're now back with our automated assistant.", agent_customer_number, phone_id)
+        show_main_menu(agent_customer_number, phone_id)
 
     else:
-        # Forward other agent messages to the customer directly
-        send(agent_reply, customer_number, phone_id)
+        # Forward any other message from agent to customer
+        send(agent_reply, agent_customer_number, phone_id)
+
 
 def handle_waiting_for_human_agent_response(message, user_data, phone_id):
     customer_number = user_data['sender']

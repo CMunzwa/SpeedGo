@@ -19199,37 +19199,6 @@ def handle_select_service_quote(prompt, user_data, phone_id):
     }
 
 # Shona version of human agent handler
-def human_agent_shona(prompt, user_data, phone_id):
-    customer_number = user_data['sender']
-    
-    send("Tiri kukubatanidza nemumiriri wevanhu...", customer_number, phone_id)
-    
-    agent_number = "+263719835124"
-    agent_message = f"Mutengi mutsva kubva ku{customer_number}\nMharidzo: {prompt}"
-    threading.Thread(target=send, args=(agent_message, agent_number, phone_id)).start()
-    
-    def send_fallback():
-        user_data = get_user_state(customer_number)
-        if user_data and user_data.get('step') in ['human_agent_shona', 'waiting_for_human_agent_response_shona']:
-            send("Kana usati wafonerwa, unogona kutifonera pa +263719835124", customer_number, phone_id)
-            send("Unoda here:\n1. Dzokera kumenu huru\n2. Ramba wakamirira", customer_number, phone_id)
-            update_user_state(customer_number, {
-                'step': 'human_agent_followup_shona',
-                'user': user_data.get('user', {}),
-                'sender': customer_number
-            })
-    
-    threading.Timer(10, send_fallback).start()
-    
-    update_user_state(customer_number, {
-        'step': 'waiting_for_human_agent_response_shona',
-        'user': user_data.get('user', {}),
-        'sender': customer_number,
-        'waiting_since': time.time()
-    })
-    
-    return {'step': 'waiting_for_human_agent_response_shona', 'user': user_data.get('user', {}), 'sender': customer_number}
-
 
 # Shona version of location handler
 def handle_enter_location_for_quote_shona(prompt, user_data, phone_id):
@@ -19815,6 +19784,582 @@ def handle_offer_response_shona(prompt, user_data, phone_id):
     else:
         send("Ndapota sarudza sarudzo inoshanda (1-3).", user_data['sender'], phone_id)
         return {'step': 'offer_response_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def get_pricing_for_location_quotes_shona(location, service_type, pump_option_selected=None):
+    location_key = location.strip().lower()
+    service_key = service_type.strip().title()  # Normalize e.g. "Pump Installation"
+
+    # Handle Pump Installation separately
+    if service_key == "Pump Installation":
+        if pump_option_selected is None:            
+            message_lines = [f"💧 Sarudzo dzekuisa Pombi:\n"]
+            for key, option in pump_installation_shona_options.items():
+                desc = option.get('description', 'Hapana tsananguro')
+                message_lines.append(f"{key}. {desc}")
+            return "\n".join(message_lines)
+        else:
+            option = pump_installation_options_shona.get(pump_option_selected)
+            if not option:
+                return "Ndine urombo, sarudzo yekuisa pombi haina kuvapo."
+            desc = option.get('description', 'Hapana tsananguro')
+            price = option.get('price', 'Hapana mutengo')
+            message = f"💧 Mutengo wesarudzo {pump_option_shona_selected}:\n{desc}\nMutengo: ${price}\n"
+            message += "\nUnoda here:\n1. Kumbvunza mutengo weimwe sevhisi\n2. Kudzokera kumenu huru\n3. Kupa mutengo wako"
+            return message
+
+    # Rest of the function remains the same...
+    loc_data = location_pricing.get(location_key)
+    if not loc_data:
+        return "Ndine urombo, mutengo hausi kuwanikwa munzvimbo iyi."
+
+    price = loc_data.get(service_key)
+    if not price:
+        return f"Ndine urombo, mutengo we {service_key} hauna kuwanikwa mu {location.title()}."
+
+    # Format complex pricing dicts nicely
+    if isinstance(price, dict):
+        included_depth = price.get("included_depth_m", "Hapana")
+        extra_rate = price.get("extra_per_m", "Hapana")
+
+        classes = {k: v for k, v in price.items() if k.startswith("class")}
+        message_lines = [f"{service_key} Mutengo mu {location.title()}:"]
+        for cls, amt in classes.items():
+            message_lines.append(f"- {cls.title()}: ${amt}")
+        message_lines.append("Unoda here:\n1. Kumbvunza mutengo weimwe sevhisi\n2. Kudzokera kumenu huru\n3. Kupa mutengo wako\n4. Sarudza chibhorani Class")
+        return "\n".join(message_lines)
+
+    # Flat rate or per meter pricing
+    unit = "pamita" if service_key in ["Commercial Hole Drilling", "chibhorani Deepening"] else "mutengo wakafanana"
+    return (f"{service_key} mu {location.title()}: ${price} {unit}\n\n"
+            "Unoda here:\n1. Kumbvunza mutengo weimwe sevhisi\n2. Kudzokera kumenu huru\n3. Kupa mutengo wako")
+
+def handle_quote_followup_shona(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+
+    if prompt.strip() == "1":
+        # Stay in quote flow, show services again
+        update_user_state(user_data['sender'], {
+            'step': 'select_service_quote_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Sarudza imwe sevhisi:\n"
+            "1. Ongororo yemvura\n"
+            "2. Kuchera chibhorani\n"
+            "3. Kuisa pombi\n"
+            "4. Kuchera maburi emabhizinesi\n"
+            "5. Kuchera chibhorani kudzika",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'select_service_quote_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+    elif prompt.strip() == "2":
+        # Go back to main menu
+        update_user_state(user_data['sender'], {
+            'step': 'main_menu_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Tingakubatsire sei nhasi?\n\n"
+            "1. Kukumbira mutengo\n"
+            "2. Tsvaga mutengo uchishandisa nzvimbo\n"
+            "3. Tarisa mamiriro eprojekiti\n"
+            "4. Mibvunzo yakajairika kana kudzidza nezvekuchera chibhorani\n"
+            "5. Mamwe masevhisi\n"
+            "6. Taura nemumiriri wevanhu\n\n"
+            "Pindura nenhamba (semuenzaniso, 1)",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'main_menu_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+    elif prompt.strip() == "3":
+        # Offer price
+        update_user_state(user_data['sender'], {
+            'step': 'collect_offer_details_shona',
+            'user': user.to_dict()    
+        })
+        send(
+            "Hongu! Unogona kugovera mutengo wako wekupa pazasi.\n\n",
+            user_data['sender'], phone_id
+        )
+
+    elif prompt.strip() == "4":
+        # chibhorani Classes
+        update_user_state(user_data['sender'], {
+            'step': 'chibhorani_class_pricing_shona',
+            'user': user.to_dict()    
+        })
+        send(
+            "Ndapota sarudza kirasi\n\n"
+            "1. Kirasi 6\n"
+            "2. Kirasi 9\n"
+            "3. Kirasi 10\n",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'chibhorani_class_pricing_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    else:
+        send("Sarudzo isiriyo. Pindura 1 kuti ubvunze nezveimwe sevhisi kana 2 kuti udzokere kumenu huru kana 3 kana uchida kupa mutengo.", 
+             user_data['sender'], phone_id)
+        return {'step': 'quote_followup_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def handle_chibhorani_class_pricing_shona(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    if prompt.strip() == "1":
+        update_user_state(user_data['sender'], {
+            'step': 'selected_chibhorani_class_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Mutengo weKiras 6:\n\n"
+            "extra_per_m i $27\n"
+            "included_depth_m 40m\n\n"
+            "Unoda here:\n"
+            "1. Kumbvunza mutengo weimwe sevhisi\n"
+            "2. Kudzokera kumenu huru\n"
+            "3. Kupa mutengo",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'quote_followup_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+    elif prompt.strip() == "2":
+        update_user_state(user_data['sender'], {
+            'step': 'selected_chibhorani_class_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Mutengo weKiras 9:\n\n"
+            "extra_per_m i $30\n"
+            "included_depth_m 40m\n\n"
+            "Unoda here:\n"
+            "1. Kumbvunza mutengo weimwe sevhisi\n"
+            "2. Kudzokera kumenu huru\n"
+            "3. Kupa mutengo",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'quote_followup_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+    elif prompt.strip() == "3":
+        update_user_state(user_data['sender'], {
+            'step': 'selected_chibhorani_class_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Mutengo weKiras 10:\n\n"
+            "extra_per_m i $35\n"
+            "included_depth_m 40m\n\n"
+            "Unoda here:\n"
+            "1. Kumbvunza mutengo weimwe sevhisi\n"
+            "2. Kudzokera kumenu huru\n"
+            "3. Kupa mutengo",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'quote_followup_shona', 'user': user.to_dict(), 'sender': user_data['sender']}  
+
+def human_agent_shona(prompt, user_data, phone_id):
+    customer_number = user_data['sender']
+
+    # 1. Notify customer
+    send("Kukubatanidza nemumiriri wevanhu...", customer_number, phone_id)
+
+    # 2. Notify agent
+    agent_message = (
+        f"👋 Chikumbiro chitsva paWhatsApp\n\n"
+        f"📱 Mutengi: {customer_number}\n"
+        f"📩 Meseji: \"{prompt}\"\n\n"
+        f"Pindura ne:\n"
+        f"1 - Taura nemutengi\n"
+        f"2 - Dzokera kubhoti"
+    )
+    send(agent_message, AGENT_NUMBER, phone_id) 
+    
+    update_user_state(AGENT_NUMBER, {
+        'step': 'agent_reply_shona',
+        'customer_number': customer_number,
+        'phone_id': phone_id
+    })
+
+    # Update customer's state (waiting for agent)
+    update_user_state(customer_number, {
+        'step': 'waiting_for_human_agent_response_shona',
+        'user': user_data.get('user', {}),
+        'sender': customer_number,
+        'waiting_since': time.time()
+    })
+
+    # 3. Schedule fallback
+    def send_fallback():
+        user_data = get_user_state(customer_number)
+        if user_data and user_data.get('step') == 'waiting_for_human_agent_response_shona':
+            send("Kana usati wabatanidzwa, unogona kutifonera pa +263719835124", customer_number, phone_id)
+            send("Unoda here:\n1. Kudzokera kumenu huru\n2. Kuramba wakamirira", customer_number, phone_id)
+            update_user_state(customer_number, {
+                'step': 'human_agent_followup_shona',
+                'user': user_data.get('user', {}),
+                'sender': customer_number
+            })
+
+    fallback_timer = threading.Timer(90, send_fallback)
+    fallback_timer.start()
+
+    # 4. Update customer state
+    update_user_state(customer_number, {
+        'step': 'waiting_for_human_agent_response_shona',
+        'user': user_data.get('user', {}),
+        'sender': customer_number,
+        'waiting_since': time.time()
+    })
+
+    return {'step': 'waiting_for_human_agent_response_shona', 'user': user_data.get('user', {}), 'sender': customer_number}
+
+def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_state):
+    agent_reply = message_text.strip()
+    
+    if agent_reply == "1":
+        agent_customer_number = agent_state.get('customer_number')
+        timer = fallback_timers.pop(agent_customer_number, None)
+        if timer:
+            timer.cancel()
+        send("✅ Wave kutaura nemutengi. Bhoti rakamiswa kusvikira watumira '2' kuti udzokere kubhoti.", AGENT_NUMBER, phone_id)
+        send("✅ Wave kubatanidzwa nemumiriri wevanhu. Ndapota mirira mhinduro yavo.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'talking_to_human_agent_shona',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+
+    elif agent_reply == "2":
+        send("✅ Bhoti radzoka uye richabatsira mutengi kubva pano.", AGENT_NUMBER, phone_id)
+        send("👋 Wave zvakare neboti redu.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'main_menu_shona',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+        show_main_menu_shona(customer_number, phone_id)
+
+    else:
+        send(agent_reply, customer_number, phone_id)
+
+def message_handler_shona(prompt, sender, phone_id, message):
+    prompt = (prompt or "").strip()
+    user_data = get_user_state(sender)
+    user_data['sender'] = sender
+
+    if user_data.get('step') == 'talking_to_human_agent_shona':
+        forward_message_to_agent_shona(prompt, user_data, phone_id)
+        update_user_state(sender, user_data)
+        return
+
+    if message.get("type") == "location":
+        location = message.get("location", {})
+        if "latitude" in location and "longitude" in location:
+            user_data["location"] = {
+                "latitude": location["latitude"],
+                "longitude": location["longitude"]
+            }
+            prompt = f"{location['latitude']},{location['longitude']}"
+
+    if 'user' not in user_data:
+        user_data['user'] = User(sender).to_dict()
+
+    logging.info(f"[{sender}] Step: {user_data.get('step', 'welcome')} | Prompt: {prompt}")
+    step = user_data.get('step', 'welcome_shona')
+    next_state = get_action_shona(step, prompt, user_data, phone_id)
+    update_user_state(sender, next_state)
+
+    def show_main_menu_shona(sender, phone_id):
+    menu_text = (
+        "Tingakubatsire sei nhasi?\n\n"
+        "1. Kukumbira mutengo\n"
+        "2. Tsvaga mutengo uchishandisa nzvimbo\n"
+        "3. Tarisa mamiriro eprojekiti\n"
+        "4. Mibvunzo yakajairika kana kudzidza nezvekuchera chibhorani\n"
+        "5. Mamwe masevhisi\n"
+        "6. Taura nemumiriri wevanhu\n\n"
+        "Pindura nenhamba (semuenzaniso, 1)"
+    )
+    send(menu_text, sender, phone_id)
+    return {'step': 'main_menu_shona', 'sender': sender}
+
+def handle_main_menu_shona(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    if prompt.strip() == "1":
+        update_user_state(user_data['sender'], {
+            'step': 'select_service_quote_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Sarudza sevhisi:\n"
+            "1. Ongororo yemvura\n"
+            "2. Kuchera chibhorani\n"
+            "3. Kuisa pombi\n"
+            "4. Kuchera maburi emabhizinesi\n"
+            "5. Kuchera chibhorani kudzika",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'select_service_quote_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "2":
+        update_user_state(user_data['sender'], {
+            'step': 'request_location_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Titumira nzvimbo yako kana kuti nyora zita renzvimbo (semuenzaniso: Harare, Bulawayo)",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'request_location_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "3":
+        update_user_state(user_data['sender'], {
+            'step': 'check_project_status_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Nyora nhamba yereferensi yepurojekiti yako:",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'check_project_status_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "4":
+        update_user_state(user_data['sender'], {
+            'step': 'faqs_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Sarudza chidzidzo:\n\n"
+            "1. Mari yekuchera chibhorani\n"
+            "2. Nguva inotora kuita chibhorani\n"
+            "3. Mhando dzechibhorani\n"
+            "4. Kudzokera kumenu huru",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'faqs_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "5":
+        update_user_state(user_data['sender'], {
+            'step': 'other_services_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Mamwe masevhisi:\n\n"
+            "1. Kugadzirisa chibhorani\n"
+            "2. Kuchenesa chibhorani\n"
+            "3. Kudzokera kumenu huru",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'other_services_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "6":
+        return human_agent_shona("", user_data, phone_id)
+    
+    else:
+        send("Sarudzo isiriyo. Pindura nenhamba kubva pa1 kusvika pa6", user_data['sender'], phone_id)
+        return {'step': 'main_menu_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def handle_select_service_quote_shona(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    service_map = {
+        '1': 'Water survey',
+        '2': 'chibhorani drilling',
+        '3': 'Pump Installation',
+        '4': 'Commercial Hole Drilling',
+        '5': 'chibhorani Deepening'
+    }
+    
+    service = service_map.get(prompt.strip())
+    if not service:
+        send("Sarudzo isiriyo. Pindura nenhamba kubva pa1 kusvika pa5", user_data['sender'], phone_id)
+        return {'step': 'select_service_quote_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    if 'location' not in user_data:
+        update_user_state(user_data['sender'], {
+            'step': 'request_location_for_quote_shona',
+            'service': service,
+            'user': user.to_dict()
+        })
+        send(
+            "Titumira nzvimbo yako kana kuti nyora zita renzvimbo (semuenzaniso: Harare, Bulawayo)",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'request_location_for_quote_shona', 'service': service, 'user': user.to_dict(), 'sender': user_data['sender']}
+    else:
+        location = user_data['location']
+        quote = get_pricing_for_location_quotes_shona(location, service)
+        send(quote, user_data['sender'], phone_id)
+        return {'step': 'quote_followup_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def handle_request_location_for_quote_shona(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    if prompt.strip().lower() in ['back', 'b']:
+        update_user_state(user_data['sender'], {
+            'step': 'select_service_quote_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Sarudza sevhisi:\n"
+            "1. Ongororo yemvura\n"
+            "2. Kuchera chibhorani\n"
+            "3. Kuisa pombi\n"
+            "4. Kuchera maburi emabhizinesi\n"
+            "5. Kuchera chibhorani kudzika",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'select_service_quote_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    location = prompt.strip()
+    user_data['location'] = location
+    update_user_state(user_data['sender'], user_data)
+    
+    quote = get_pricing_for_location_quotes_shona(location, user_data['service'])
+    send(quote, user_data['sender'], phone_id)
+    return {'step': 'quote_followup_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def handle_faqs_shona(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    if prompt.strip() == "1":
+        send(
+            "💵 Mutengo wekuchera chibhorani unotarisisa:\n\n"
+            "- Nzvimbo yekuchera\n"
+            "- Kuoma kwepasi\n"
+            "- Hupamhi hwechibhorani\n"
+            "- Mhando yechibhorani\n\n"
+            "Mutengo unogona kubva pa $1,500 kusvika pa $5,000",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'faqs_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "2":
+        send(
+            "⏳ Nguva inotora kuita chibhorani:\n\n"
+            "- Ongororo: Mazuva 1-3\n"
+            "- Kuchera: Mazuva 1-7 zvichienderana nekuoma kwepasi\n"
+            "- Kuisa pombi: Zuva 1\n\n"
+            "Zvinogona kutora svondo rimwe kusvika zviviri kuti chibhorani ripere",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'faqs_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "3":
+        send(
+            "🏗 Mhando dzechibhorani:\n\n"
+            "1. Kirasi 6 - Yemadhaka\n"
+            "2. Kirasi 9 - Yematombo\n"
+            "3. Kirasi 10 - Yematombo akaomarara\n\n"
+            "Mhando inotarisisa kuoma kwepasi uye huwandu hwemvura",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'faqs_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "4":
+        update_user_state(user_data['sender'], {
+            'step': 'main_menu_shona',
+            'user': user.to_dict()
+        })
+        return show_main_menu_shona(user_data['sender'], phone_id)
+    
+    else:
+        send("Sarudzo isiriyo. Pindura nenhamba kubva pa1 kusvika pa4", user_data['sender'], phone_id)
+        return {'step': 'faqs_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def handle_other_services_shona(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    if prompt.strip() == "1":
+        send(
+            "🔧 Kugadzirisa chibhorani:\n\n"
+            "Tinogadzirisa:\n"
+            "- Pombi dzakanganisika\n"
+            "- Matangi emvura\n"
+            "- Zvinhu zvekufambisa mvura\n\n"
+            "Mutengo unobva pa $100 zvichienderana nekukanganisa",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'other_services_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "2":
+        send(
+            "🚿 Kuchenesa chibhorani:\n\n"
+            "Tinochenesa:\n"
+            "- chibhorani yakaora\n"
+            "- chibhorani ine tsvina\n"
+            "- chibhorani ine mvura isina kunaka\n\n"
+            "Mutengo unobva pa $200",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'other_services_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "3":
+        update_user_state(user_data['sender'], {
+            'step': 'main_menu_shona',
+            'user': user.to_dict()
+        })
+        return show_main_menu_shona(user_data['sender'], phone_id)
+    
+    else:
+        send("Sarudzo isiriyo. Pindura nenhamba kubva pa1 kusvika pa3", user_data['sender'], phone_id)
+        return {'step': 'other_services_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def handle_check_project_status_shona(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    ref_number = prompt.strip()
+    if len(ref_number) < 5:
+        send("Nhamba yereferensi haisi kumira mushe. Edza zvakare.", user_data['sender'], phone_id)
+        return {'step': 'check_project_status_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    # Simulate checking status
+    status = "In progress"
+    if ref_number.startswith("C"):
+        status = "Completed"
+    elif ref_number.startswith("P"):
+        status = "Pending payment"
+    
+    send(
+        f"🔄 Mamiriro epurojekiti #{ref_number}:\n\n"
+        f"Status: {status}\n"
+        f"Date started: 2023-05-15\n"
+        f"Estimated completion: 2023-06-20\n\n"
+        "Kana uine mibvunzo, sarudza '6' kuti utaure nemumiriri wevanhu.",
+        user_data['sender'], phone_id
+    )
+    
+    update_user_state(user_data['sender'], {
+        'step': 'main_menu_shona',
+        'user': user.to_dict()
+    })
+    return {'step': 'main_menu_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def forward_message_to_agent_shona(prompt, user_data, phone_id):
+    customer_number = user_data['sender']
+    agent_message = (
+        f"📩 Meseji kubva kumutengi {customer_number}:\n\n"
+        f"\"{prompt}\"\n\n"
+        f"Pindura nemutengi nekunyora meseji yako kana kudzvanya '2' kudzokera kubhoti"
+    )
+    send(agent_message, AGENT_NUMBER, phone_id)
+    
+    # Keep customer in same state
+    return {'step': 'talking_to_human_agent_shona', 'user': user_data.get('user', {}), 'sender': customer_number}
+
+    
+def handle_human_agent_followup_shona(prompt, user_data, phone_id):
+    if prompt.strip() == "1":
+        return show_main_menu_shona(user_data['sender'], phone_id)
+    elif prompt.strip() == "2":
+        send("Tichakubatsira nekukurumidza sezvinobvira. Tinokutendai nekumirira.", user_data['sender'], phone_id)
+        return {'step': 'waiting_for_human_agent_response_shona', 'user': user_data.get('user', {}), 'sender': user_data['sender']}
+    else:
+        send("Sarudzo isiriyo. Pindura 1 kana 2", user_data['sender'], phone_id)
+        return {'step': 'human_agent_followup_shona', 'user': user_data.get('user', {}), 'sender': user_data['sender']}
 
 def handle_booking_details_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -20571,14 +21116,6 @@ def handle_enter_location_for_quote_shona(prompt, user_data, phone_id):
         return {'step': 'select_service_quote_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
 
-def handle_user_message_shona(prompt, user_data, phone_id):
-    user = User.from_dict(user_data['user'])
-    # Example: just echo the message or respond in Shona
-    response = "Mharidzo yenyu yagamuchirwa. Tichakupindurai munguva pfupi."
-    send(response, user_data['sender'], phone_id)
-    return {'step': 'main_menu_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-
 
 def handle_select_pump_option_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -20849,6 +21386,113 @@ def handle_select_service_shona(prompt, user_data, phone_id):
         send("Ndokumbirawo usarudze basa riri pakati pe 1 kusvika ku 5.", user_data['sender'], phone_id)
         return {'step': 'select_service_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
+
+def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_state):
+    prompt = message_text.strip() if isinstance(message_text, str) else ""
+    customer_number = agent_state.get('customer_number')
+
+    if not customer_number:
+        send("⚠️ Kukanganisa: Hapana mutengi akabatana. Ndapota mirira chikumbiro chitsva.", sender, phone_id)
+        update_user_state(sender, {'step': 'agent_available_shona'})
+        return
+
+    if prompt == '1':
+        send("✅ Wava kutaura nemutengi. Tumira '2' kudzokera kubot.", sender, phone_id)
+        send("✅ Wabatanidzwa neanhu. Ndapota mirira mhinduro yavo.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'talking_to_human_agent_shona',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+        update_user_state(sender, {
+            'step': 'talking_to_customer_shona',
+            'customer_number': customer_number,
+            'phone_id': phone_id,
+            'started_at': time.time()
+        })
+
+    elif prompt == '2':
+        send("✅ Wadzorera mutengi kubot.", sender, phone_id)
+        send("👋 Wava kutaura neanobatsira otomatiki.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'main_menu_shona',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+        update_user_state(sender, {'step': 'agent_available_shona'})
+        show_main_menu(customer_number, phone_id)
+
+    else:
+        send("⚠️ Ndapota pindura ne:
+1 - Taura nemutengi
+2 - Dzokera kubot", sender, phone_id)
+
+def handle_agent_conversation_shona(prompt, sender, phone_id, message, agent_state):
+    customer_number = agent_state.get('customer_number')
+
+    if prompt.strip().lower() == '2':
+        send("✅ Hurukuro yapera. Bot richatora zvakare.", sender, phone_id)
+        send("👋 Hurukuro neanhu yapera. Wadzokera kubot otomatiki.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'main_menu_shona',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+        update_user_state(sender, {'step': 'agent_available_shona'})
+        show_main_menu(customer_number, phone_id)
+    else:
+        forward_agent_message(prompt, message, customer_number, phone_id)
+
+def handle_agent_available_shona(prompt, sender, phone_id, message, agent_state):
+    send("ℹ️ Parizvino hauna hurukuro iri kufambiswa. Ndapota mirira chikumbiro chitsva.", sender, phone_id)
+
+def human_agent_shona(prompt, user_data, phone_id):
+    customer_number = user_data['sender']
+
+    send("Tiri kukubatanidza neanhu anobatsira...", customer_number, phone_id)
+
+    agent_message = (
+        f"👋 Chikumbiro chitsva kubva kumutengi
+\n\n"
+        f"📱 Nhamba yemutengi: {customer_number}\n"
+        f"📩 Mharidzo: \"{prompt}\"\n\n"
+        f"Pindura ne:\n"
+        f"1 - Taura nemutengi\n"
+        f"2 - Dzokera kubot"
+    )
+    send(agent_message, AGENT_NUMBER, phone_id)
+
+    update_user_state(AGENT_NUMBER, {
+        'step': 'agent_reply_shona',
+        'customer_number': customer_number,
+        'phone_id': phone_id
+    })
+
+    update_user_state(customer_number, {
+        'step': 'waiting_for_human_agent_response_shona',
+        'user': user_data.get('user', {}),
+        'sender': customer_number,
+        'waiting_since': time.time()
+    })
+
+    def send_fallback():
+        user_data = get_user_state(customer_number)
+        if user_data and user_data.get('step') == 'waiting_for_human_agent_response_shona':
+            send("Kana usati wabatsirwa, unogona kutifonera pa +263719835124", customer_number, phone_id)
+            send("Unoda here:\n1. Dzokera kumenu\n2. Rambai makamirira", customer_number, phone_id)
+            update_user_state(customer_number, {
+                'step': 'human_agent_followup_shona',
+                'user': user_data.get('user', {}),
+                'sender': customer_number
+            })
+
+    fallback_timer = threading.Timer(90, send_fallback)
+    fallback_timer.start()
+
+    return {'step': 'waiting_for_human_agent_response_shona', 'user': user_data.get('user', {}), 'sender': customer_number}
 
 
 def human_agent_shona(prompt, user_data, phone_id):
@@ -32204,6 +32848,10 @@ action_mapping = {
     "select_service_quote_shona": handle_select_service_quote_shona,
     "select_service_shona": handle_select_service_shona,
     "select_pump_option_shona": handle_select_pump_option_shona,
+    "borehole_class_pricing_shona": handle_borehole_class_pricing,
+    "agent_reply_shona": handle_agent_reply,
+    "talking_to_customer_shona": handle_agent_conversation,
+    "agent_available_shona": handle_agent_available,
     "quote_followup_shona": handle_quote_followup_shona,
     "collect_quote_details_shona": handle_collect_quote_details_shona,
     "quote_response_shona": handle_quote_response_shona,

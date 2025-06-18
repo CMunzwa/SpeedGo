@@ -67,7 +67,7 @@ def get_user_state(phone_number):
         return json.loads(state)
     return state
 
-def update_user_state(phone_number, updates, ttl_seconds=60):
+def update_user_state(phone_number, updates, ttl_seconds=3600):
     updates['phone_number'] = phone_number
     if 'sender' not in updates:
         updates['sender'] = phone_number
@@ -554,9 +554,7 @@ def human_agent(prompt, user_data, phone_id):
     fallback_timer = threading.Timer(90, send_fallback)
     fallback_timer.start()
     
-    # Save fallback timer in user state (optional memory for cancellation)
-    user_data['fallback_timer'] = fallback_timer
-    update_user_state(customer_number, user_data)
+
 
     # 4. Update customer state
     update_user_state(customer_number, {

@@ -13,6 +13,8 @@ import time
 
 
 logging.basicConfig(level=logging.INFO)
+fallback_timers = {}
+
 
 # Environment variables
 wa_token = os.environ.get("WA_TOKEN")

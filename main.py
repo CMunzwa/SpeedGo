@@ -2360,12 +2360,11 @@ def webhook():
                 user_data['sender'] = from_number
                 
                 # If user is talking to a human agent, suppress bot
-                if handle_customer_message_during_agent_chat(message_text, user_data, phone_id):
-                    forward_message_to_agent(message_text, user_data, phone_id)
-                    update_user_state(from_number, user_data) 
-                    return "OK"
+                if user_data.get("step") == "talking_to_human_agent":
+                forward_message_to_agent(message_text, user_data, phone_id)
+                return "OK"
+
                 
-                # Continue with normal bot processing
                 if msg_type == "text":
                     message_handler(message_text, from_number, phone_id, message)
                 elif msg_type == "location":

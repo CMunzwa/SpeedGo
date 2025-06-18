@@ -9186,6 +9186,24 @@ def custom_question(prompt, user_data, phone_id):
 
     return {'step': 'custom_question_followup', 'user': user.to_dict(), 'sender': user_data['sender']}
 
+def handle_agent_conversation(prompt, sender, phone_id, message, agent_state):
+    """Handles ongoing agent-customer conversation"""
+    customer_number = agent_state.get('customer_number')
+    
+    if prompt.strip().lower() == '2':  # End conversation
+        send("✅ Conversation ended. The bot will take over.", sender, phone_id)
+        send("👋 The agent has ended the conversation. You're back with our automated assistant.", customer_number, phone_id)
+        
+        update_user_state(customer_number, {
+            'step': 'main_menu',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+        update_user_state(sender, {'step': 'agent_available'})
+        show_main_menu(customer_number, phone_id)
+    else:
+        forward_agent_message(prompt, message, customer_number, phone_id)
+
 
 def custom_question_followup(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])

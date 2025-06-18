@@ -12,6 +12,8 @@ import threading
 import time
 
 logging.basicConfig(level=logging.INFO)
+fallback_timers = {}
+
 
 # Environment variables
 wa_token = os.environ.get("WA_TOKEN")
@@ -549,7 +551,12 @@ def human_agent(prompt, user_data, phone_id):
                 'sender': customer_number
             })
 
-    threading.Timer(10, send_fallback).start()
+    fallback_timer = threading.Timer(90, send_fallback)
+    fallback_timer.start()
+    
+    # Save fallback timer in user state (optional memory for cancellation)
+    user_data['fallback_timer'] = fallback_timer
+    update_user_state(customer_number, user_data)
 
     # 4. Update customer state
     update_user_state(customer_number, {
@@ -565,6 +572,11 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
     agent_reply = message_text.strip()
     
     if agent_reply == "1":
+         # Cancel fallback timer if exists
+        agent_customer_number = agent_state.get('customer_number')
+        timer = fallback_timers.pop(agent_customer_number, None)
+        if timer:
+            timer.cancel()
         # Agent chooses to talk to customer
         send("✅ You're now talking to the customer. Bot is paused until you send '2' to return to bot.", AGENT_NUMBER, phone_id)
         send("✅ You are now connected to a human agent. Please wait for their response.", customer_number, phone_id)

@@ -19283,7 +19283,7 @@ def handle_select_service_quote_shona(prompt, user_data, phone_id):
         })
         message_lines = [f"💧 Sarudzo dzekuisa Pombi:\n"]
         for key, option in pump_installation_options_shona.items():
-            desc = option.get('description', 'Tsananguro haisipo')
+            desc = option_shona.get('description', 'Tsananguro haisipo')
             message_lines.append(f"{key}. {desc}")
         send("\n".join(message_lines), user_data['sender'], phone_id)
         return {'step': 'select_pump_option_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
@@ -19514,7 +19514,7 @@ def human_agent_shona(prompt, user_data, phone_id):
     threading.Thread(target=send, args=(agent_message, agent_number, phone_id)).start()
     
     # 3. After 10 seconds, send fallback options
-    def send_fallback():
+    def send_fallback_shona():
         user_data = get_user_state(customer_number)
         if user_data and user_data.get('step') in ['human_agent_shona', 'waiting_for_human_agent_response_shona']:
             send("Kana musati mafonerwa, mungatideedzera pa +263719835124", customer_number, phone_id)
@@ -20166,11 +20166,11 @@ def handle_select_service_quote_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     
     service_map = {
-        '1': 'Water survey',
-        '2': 'chibhorani drilling',
-        '3': 'Pump Installation',
-        '4': 'Commercial Hole Drilling',
-        '5': 'chibhorani Deepening'
+        "1": "Water Survey",
+        "2": "Borehole Drilling",
+        "3": "Pump Installation",
+        "4": "Commercial Hole Drilling",
+        "5": "Borehole Deepening"
     }
     
     service = service_map.get(prompt.strip())

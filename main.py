@@ -590,6 +590,7 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
         # Notify both agent and customer
         send("✅ You're now talking to the customer. Bot is paused until you send '2' to return to bot.", AGENT_NUMBER, phone_id)
         send("✅ You are now connected to a human agent. Please wait for their response.", agent_customer_number, phone_id)
+        return
 
     elif agent_reply == "2":
         # Cancel fallback timer if it exists
@@ -607,6 +608,7 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
         send("✅ The bot has resumed and will assist the customer from here.", AGENT_NUMBER, phone_id)
         send("👋 You're now back with our automated assistant.", agent_customer_number, phone_id)
         show_main_menu(agent_customer_number, phone_id)
+        return
 
     else:
         # Forward any other message from agent to customer
@@ -2347,6 +2349,14 @@ def webhook():
                     if not customer_number:
                         send("⚠️ No customer to reply to. Wait for a new request.", AGENT_NUMBER, phone_id)
                         return "OK"
+
+                    if agent_state.get("step") == "talking_to_human_agent":
+                    if message_text.strip() == "2":
+                        handle_agent_reply("2", customer_number, phone_id, agent_state)
+                        return "OK"
+                    send(message_text, customer_number, phone_id)
+                    return "OK"
+
 
                     # ✅ Handle step = agent_reply
                     if agent_state.get("step") == "agent_reply":

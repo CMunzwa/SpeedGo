@@ -11055,8 +11055,6 @@ def handle_collect_offer_details(prompt, user_data, phone_id):
     )
     return {'step': 'offer_response', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-update_recent_messages(sender, incoming_message)
-
 
 def handle_offer_response(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -37415,6 +37413,22 @@ def webhook():
                 from_number = message.get("from")
                 msg_type = message.get("type")
                 message_text = message.get("text", {}).get("body", "").strip()
+
+                def update_recent_messages(sender, new_message):
+                state = get_user_state(sender)
+                user_data = state.get('user', {})
+                messages = state.get('recent_messages', [])
+                
+                # Append new message and keep only last 5
+                messages.append(new_message.strip())
+                messages = messages[-5:]
+            
+                update_user_state(sender, {
+                    'user': user_data,
+                    'recent_messages': messages,
+                    'sender': sender
+                })
+
             
                 # Handle agent messages
                 if from_number.endswith(AGENT_NUMBER.replace("+", "")):
@@ -37441,6 +37455,8 @@ def webhook():
                         update_user_state(AGENT_NUMBER, agent_state)
 
                         return "OK"
+
+                    update_recent_messages(sender, incoming_message)
             
                     if agent_state.get("step") == "talking_to_human_agent":
                         if message_text.strip() == "2":

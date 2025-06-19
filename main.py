@@ -20124,6 +20124,11 @@ def message_handler_shona(prompt, sender, phone_id, message):
     next_state = get_action_shona(step, prompt, user_data, phone_id)
     update_user_state(sender, next_state)
 
+    def get_action_shona(current_state, prompt, user_data, phone_id):
+    prompt = (prompt or "").strip()
+    handler = action_mapping.get(current_state, handle_welcome)
+    return handler(prompt, user_data, phone_id)
+
     def show_main_menu_shona(sender, phone_id):
         menu_text = (
             "Tingakubatsire sei nhasi?\n\n"
@@ -20215,38 +20220,6 @@ def handle_main_menu_shona(prompt, user_data, phone_id):
         send("Sarudzo isiriyo. Pindura nenhamba kubva pa1 kusvika pa6", user_data['sender'], phone_id)
         return {'step': 'main_menu_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-def handle_select_service_quote_shona(prompt, user_data, phone_id):
-    user = User.from_dict(user_data['user'])
-    
-    service_map = {
-        "1": "Water Survey",
-        "2": "Borehole Drilling",
-        "3": "Pump Installation",
-        "4": "Commercial Hole Drilling",
-        "5": "Borehole Deepening"
-    }
-    
-    service = service_map.get(prompt.strip())
-    if not service:
-        send("Sarudzo isiriyo. Pindura nenhamba kubva pa1 kusvika pa5", user_data['sender'], phone_id)
-        return {'step': 'select_service_quote_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
-    
-    if 'location' not in user_data:
-        update_user_state(user_data['sender'], {
-            'step': 'request_location_for_quote_shona',
-            'service': service,
-            'user': user.to_dict()
-        })
-        send(
-            "Titumira nzvimbo yako kana kuti nyora zita renzvimbo (semuenzaniso: Harare, Bulawayo)",
-            user_data['sender'], phone_id
-        )
-        return {'step': 'request_location_for_quote_shona', 'service': service, 'user': user.to_dict(), 'sender': user_data['sender']}
-    else:
-        location = user_data['location']
-        quote = get_pricing_for_location_quotes_shona(location, service)
-        send(quote, user_data['sender'], phone_id)
-        return {'step': 'quote_followup_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
 def handle_request_location_for_quote_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -30761,6 +30734,11 @@ def message_handler_ndebele(prompt, sender, phone_id, message):
     step = user_data.get('step', 'welcome_ndebele')
     next_state = get_action_ndebele(step, prompt, user_data, phone_id)
     update_user_state(sender, next_state)
+
+def get_action_ndebele(current_state, prompt, user_data, phone_id):
+    prompt = (prompt or "").strip()
+    handler = action_mapping.get(current_state, handle_welcome)
+    return handler(prompt, user_data, phone_id)
 
 def show_main_menu_ndebele(sender, phone_id):
     menu_text = (

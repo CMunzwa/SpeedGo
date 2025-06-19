@@ -206,6 +206,1368 @@ location_pricing = {
         "Commercial Hole Drilling": 80,
         "Borehole Deepening": 30
     },
+    
+    "ada_middle_sabi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bachi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "badza": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bangwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "batanai": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bhefurai": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "biriri": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bumha_(shinja_rs)": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chabika": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chakowa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "changazi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "charandura": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chasiyatende": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chayamiti": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "checheche": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chechingwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chemuzangari": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chengwena": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibavahlengwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibunji": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibuwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibwedziva": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chigwikwi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikombedzi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikore": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikukwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikwakwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chinyaduma": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chinyuni": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chipinge": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chiramba": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chisumbanje": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chisungo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chitenderano": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chitepo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chitsa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chivero": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chizhou": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chizvirizvi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "dikitiki": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "doroi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "dumisani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "dzidzela": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gonakudzingwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gonarezhou": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gora": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gumira": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "guune": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "hikwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "hondoyapera": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "jersey": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "kudzanga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "kuvhirimara": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "machona": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "madamombe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "madhuku": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "madzivadondo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "magcobafuthi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mahenye": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "makambe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "makhulela": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "malanswazi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mambale": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maninji": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "manyanga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "manyuseni": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "manzvire": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maongere": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maose": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mapiravana": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mapungwana": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "marihuru": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "marula": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "masendu": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mashayamombe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "masonga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "matjingwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "matsveru": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maware": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mazihuru": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mbuyanehanda": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mhakwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mhandarume": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mhende": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mkwasine": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mphoengs": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mukamba": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mukuwini": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "munaka": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mupinga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "murombedzi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "musani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mushandirapamwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "musirizwi_a": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "musoropamwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mutandahwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "muzite": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "natane": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ndolwane": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "neruvanga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngaone": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngezi_c": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngezi_d": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngorima": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nherera": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nherera_a": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyagadza": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyahonde": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyamukunga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyamweda": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyangambe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyanyadzi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyaringire": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyele": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "raditladi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "rudo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "rupise": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "rwizi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sabi_valley_ica": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sangulube": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sansukwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sengwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "shinja": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "small_dell_estate": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "somnene": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "takawira": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tamandayi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tatonga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tjankwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tokwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tongogara": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tshovani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "turaizvombo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tuzuka": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "twananani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "xini": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+
     "bindura": {
         "Water Survey": 150,
         "Borehole Drilling": {
@@ -10709,6 +12071,1368 @@ location_pricing_shona = {
         "Commercial Hole Drilling": 80,
         "Borehole Deepening": 30
     },
+    
+    "ada_middle_sabi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bachi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "badza": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bangwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "batanai": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bhefurai": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "biriri": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bumha_(shinja_rs)": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chabika": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chakowa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "changazi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "charandura": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chasiyatende": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chayamiti": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "checheche": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chechingwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chemuzangari": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chengwena": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibavahlengwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibunji": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibuwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibwedziva": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chigwikwi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikombedzi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikore": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikukwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikwakwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chinyaduma": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chinyuni": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chipinge": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chiramba": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chisumbanje": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chisungo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chitenderano": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chitepo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chitsa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chivero": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chizhou": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chizvirizvi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "dikitiki": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "doroi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "dumisani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "dzidzela": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gonakudzingwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gonarezhou": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gora": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gumira": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "guune": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "hikwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "hondoyapera": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "jersey": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "kudzanga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "kuvhirimara": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "machona": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "madamombe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "madhuku": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "madzivadondo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "magcobafuthi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mahenye": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "makambe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "makhulela": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "malanswazi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mambale": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maninji": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "manyanga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "manyuseni": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "manzvire": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maongere": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maose": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mapiravana": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mapungwana": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "marihuru": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "marula": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "masendu": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mashayamombe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "masonga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "matjingwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "matsveru": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maware": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mazihuru": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mbuyanehanda": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mhakwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mhandarume": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mhende": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mkwasine": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mphoengs": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mukamba": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mukuwini": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "munaka": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mupinga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "murombedzi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "musani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mushandirapamwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "musirizwi_a": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "musoropamwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mutandahwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "muzite": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "natane": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ndolwane": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "neruvanga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngaone": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngezi_c": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngezi_d": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngorima": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nherera": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nherera_a": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyagadza": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyahonde": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyamukunga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyamweda": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyangambe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyanyadzi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyaringire": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyele": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "raditladi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "rudo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "rupise": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "rwizi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sabi_valley_ica": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sangulube": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sansukwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sengwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "shinja": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "small_dell_estate": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "somnene": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "takawira": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tamandayi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tatonga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tjankwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tokwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tongogara": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tshovani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "turaizvombo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tuzuka": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "twananani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "xini": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+
     "bubi": {
         "Water Survey": 150,
         "Borehole Drilling": {
@@ -21887,6 +24611,1368 @@ location_pricing_ndebele = {
         "Commercial Hole Drilling": 80,
         "Borehole Deepening": 30
     },
+    
+    "ada_middle_sabi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bachi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "badza": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bangwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "batanai": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bhefurai": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "biriri": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "bumha_(shinja_rs)": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chabika": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chakowa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "changazi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "charandura": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chasiyatende": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chayamiti": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "checheche": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chechingwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chemuzangari": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chengwena": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibavahlengwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibunji": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibuwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chibwedziva": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chigwikwi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikombedzi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikore": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikukwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chikwakwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chinyaduma": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chinyuni": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chipinge": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chiramba": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chisumbanje": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chisungo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chitenderano": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chitepo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chitsa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chivero": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chizhou": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "chizvirizvi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "dikitiki": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "doroi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "dumisani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "dzidzela": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gonakudzingwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gonarezhou": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gora": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "gumira": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "guune": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "hikwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "hondoyapera": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "jersey": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "kudzanga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "kuvhirimara": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "machona": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "madamombe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "madhuku": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "madzivadondo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "magcobafuthi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mahenye": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "makambe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "makhulela": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "malanswazi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mambale": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maninji": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "manyanga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "manyuseni": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "manzvire": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maongere": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maose": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mapiravana": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mapungwana": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "marihuru": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "marula": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "masendu": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mashayamombe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "masonga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "matjingwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "matsveru": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "maware": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mazihuru": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mbuyanehanda": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mhakwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mhandarume": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mhende": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mkwasine": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mphoengs": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mukamba": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mukuwini": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "munaka": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mupinga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "murombedzi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "musani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mushandirapamwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "musirizwi_a": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "musoropamwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "mutandahwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "muzite": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "natane": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ndolwane": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "neruvanga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngaone": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngezi_c": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngezi_d": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "ngorima": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nherera": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nherera_a": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyagadza": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyahonde": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyamukunga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyamweda": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyangambe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyanyadzi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyaringire": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "nyele": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "raditladi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "rudo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "rupise": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "rwizi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sabi_valley_ica": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sangulube": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sansukwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "sengwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "shinja": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "small_dell_estate": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "somnene": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "takawira": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tamandayi": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tatonga": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tjankwa": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tokwe": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tongogara": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tshovani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "turaizvombo": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "tuzuka": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "twananani": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+    "xini": {
+        "Water Survey": 150,
+        "Borehole Drilling": {
+            "class 6": 1150,
+            "class 9": 1293.75,
+            "class 10": 1437.5
+        },
+        "Commercial Hole Drilling": 80,
+        "Borehole Deepening": 30
+    },
+
     "binga": {
         "Water Survey": 150,
         "Borehole Drilling": {

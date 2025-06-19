@@ -19406,6 +19406,21 @@ def handle_quote_followup_shona(prompt, user_data, phone_id):
         )
         return {'step': 'collect_offer_details_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
+        elif prompt.strip() == "4":
+        # Borehole Classes
+        update_user_state(user_data['sender'], {
+            'step': 'borehole_class_pricing_shona',
+            'user': user.to_dict()    
+        })
+        send(
+            "Sarudza class\n\n"
+            "1. Class 6\n"
+            "2. Class 9\n"
+            "3. Class 10\n",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'borehole_class_pricing_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
     else:
         send("Sarudzo isiriyo. Pindura ne1 kubvunza nezveimwe sevhisi kana 2 kudzokera kumenu huru kana 3 kana uchida kuita mutengo.", user_data['sender'], phone_id)
         return {'step': 'quote_followup_shona', 'user': user.to_dict(), 'sender': user_data['sender']}

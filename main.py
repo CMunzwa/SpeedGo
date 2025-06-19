@@ -14,6 +14,8 @@ import time
 
 logging.basicConfig(level=logging.INFO)
 fallback_timers = {}
+fallback_timers_shona = {}
+fallback_timers_ndebele = {}
 
 
 # Environment variables
@@ -19593,7 +19595,7 @@ def human_agent_shona(prompt, user_data, phone_id):
                 'sender': customer_number
             })
     
-    threading.Timer(10, send_fallback).start()
+    threading.Timer(10, send_fallback_shona).start()
     
     # 4. Update state to waiting
     update_user_state(customer_number, {
@@ -20056,37 +20058,12 @@ def human_agent_shona(prompt, user_data, phone_id):
         'waiting_since': time.time()
     })
 
-    # 3. Schedule fallback
-    def send_fallback_shona():
-        user_data = get_user_state(customer_number)
-        if user_data and user_data.get('step') == 'waiting_for_human_agent_response_shona':
-            send("Kana usati wabatanidzwa, unogona kutifonera pa v+263779562095 kana +263779469216", customer_number, phone_id)
-            send("Unoda here:\n1. Kudzokera kumenu huru\n2. Kuramba wakamirira", customer_number, phone_id)
-            update_user_state(customer_number, {
-                'step': 'human_agent_followup_shona',
-                'user': user_data.get('user', {}),
-                'sender': customer_number
-            })
-
-    fallback_timer = threading.Timer(90, send_fallback)
-    fallback_timer.start()
-
-    # 4. Update customer state
-    update_user_state(customer_number, {
-        'step': 'waiting_for_human_agent_response_shona',
-        'user': user_data.get('user', {}),
-        'sender': customer_number,
-        'waiting_since': time.time()
-    })
-
-    return {'step': 'waiting_for_human_agent_response_shona', 'user': user_data.get('user', {}), 'sender': customer_number}
-
 def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_state):
     agent_reply = message_text.strip()
     
     if agent_reply == "1":
         agent_customer_number = agent_state.get('customer_number')
-        timer = fallback_timers.pop(agent_customer_number, None)
+        timer = fallback_timers_shona.pop(agent_customer_number, None)
         if timer:
             timer.cancel()
         send("✅ Wave kutaura nemutengi. Bhoti rakamiswa kusvikira watumira '2' kuti udzokere kubhoti.", AGENT_NUMBER, phone_id)
@@ -21310,47 +21287,6 @@ def handle_select_service_shona(prompt, user_data, phone_id):
         return {'step': 'select_service_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
 
-def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_state):
-    prompt = message_text.strip() if isinstance(message_text, str) else ""
-    customer_number = agent_state.get('customer_number')
-
-    if not customer_number:
-        send("⚠️ Kukanganisa: Hapana mutengi akabatana. Ndapota mirira chikumbiro chitsva.", sender, phone_id)
-        update_user_state(sender, {'step': 'agent_available_shona'})
-        return
-
-    if prompt == '1':
-        send("✅ Wava kutaura nemutengi. Tumira '2' kudzokera kubot.", sender, phone_id)
-        send("✅ Wabatanidzwa neanhu. Ndapota mirira mhinduro yavo.", customer_number, phone_id)
-
-        update_user_state(customer_number, {
-            'step': 'talking_to_human_agent_shona',
-            'user': get_user_state(customer_number).get('user', {}),
-            'sender': customer_number
-        })
-        update_user_state(sender, {
-            'step': 'talking_to_customer_shona',
-            'customer_number': customer_number,
-            'phone_id': phone_id,
-            'started_at': time.time()
-        })
-
-    elif prompt == '2':
-        send("✅ Wadzorera mutengi kubot.", sender, phone_id)
-        send("👋 Wava kutaura neanobatsira otomatiki.", customer_number, phone_id)
-
-        update_user_state(customer_number, {
-            'step': 'main_menu_shona',
-            'user': get_user_state(customer_number).get('user', {}),
-            'sender': customer_number
-        })
-        update_user_state(sender, {'step': 'agent_available_shona'})
-        show_main_menu(customer_number, phone_id)
-
-    else:
-        send("⚠️ Ndapota pindura ne:\n\
-        1 - Taura nemutengi\n\
-        2 - Dzokera kubot", sender, phone_id)
 
 def handle_agent_conversation_shona(prompt, sender, phone_id, message, agent_state):
     customer_number = agent_state.get('customer_number')
@@ -30603,8 +30539,8 @@ def human_agent_ndebele(prompt, user_data, phone_id):
                 'sender': customer_number
             })
     
-    fallback_ndebele_timer = threading.Timer(90, send_fallback_ndebele)
-    fallback_ndebele_timer.start()
+    fallback_timer_ndebele = threading.Timer(90, send_fallback_ndebele)
+    fallback_timer_ndebele.start()
     
     # 4. Vuselela isimo sekhasimende
     update_user_state(customer_number, {
@@ -30621,7 +30557,7 @@ def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_st
     
     if agent_reply == "1":
         agent_customer_number = agent_state.get('customer_number')
-        timer = fallback_ndebele_timers.pop(agent_customer_number, None)
+        timer = fallback_timers_ndebele.pop(agent_customer_number, None)
         if timer:
             timer.cancel()
         send("✅ Usuxhumene nekhasimende. I-bhoti imisiwe kuze kuthumele '2' ukuze ubuyele ku-bhoti.", AGENT_NUMBER, phone_id)

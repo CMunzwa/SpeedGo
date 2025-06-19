@@ -19406,7 +19406,7 @@ def handle_quote_followup_shona(prompt, user_data, phone_id):
         )
         return {'step': 'collect_offer_details_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-        elif prompt.strip() == "4":
+    elif prompt.strip() == "4":
         # Borehole Classes
         update_user_state(user_data['sender'], {
             'step': 'borehole_class_pricing_shona',

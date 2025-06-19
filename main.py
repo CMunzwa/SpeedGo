@@ -21681,6 +21681,22 @@ def handle_collect_quote_details_shona(prompt, user_data, phone_id):
         )
         return {'step': 'collect_quote_details_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
+def handle_waiting_for_human_agent_response_shona(message, user_data, phone_id):
+    customer_number = user_data['sender']
+    step = user_data.get('step', '')
+
+    # Kana mushandisi ari mukutaurirana nemumiriri (kugamuchira kana kutumira)
+    if step in ['waiting_for_human_agent_response_shona', 'talking_to_human_agent_shona']:
+        if step == 'waiting_for_human_agent_response_shona':
+            send("💬 Uchiri kubatana nemumiriri. Ndapota mirira kuti apindure.", customer_number, phone_id)
+        elif step == 'talking_to_human_agent_shona':
+            # Tumira meseji yemutengi kumuagent
+            send(f"👤 Mutengi anoti:\n{message}", AGENT_NUMBER, phone_id)
+        return True  # Dzivirira bot kubva pakuita default flow
+
+    return False  # Rambai mberi nebot's normal flow
+
+
 def quote_response_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     user.quote_data['details'] = prompt.strip()
@@ -31919,6 +31935,20 @@ def handle_deepening_booking_confirm_ndebele(prompt, user_data, phone_id):
         send("Sicela ukhethe inketho efanele (1 noma 2).", user_data['sender'], phone_id)
         return {'step': 'deepening_booking_confirm_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
 
+def handle_waiting_for_human_agent_response_ndebele(message, user_data, phone_id):
+    customer_number = user_data['sender']
+    step = user_data.get('step', '')
+
+    # Uma umsebenzisi ese agent mode (ukulinda noma ukuxoxa)
+    if step in ['waiting_for_human_agent_response_ndebele', 'talking_to_human_agent_ndebele']:
+        if step == 'waiting_for_human_agent_response_ndebele':
+            send("💬 Usaxhumene lomeluleki. Sicela ulinde impendulo yakhe.", customer_number, phone_id)
+        elif step == 'talking_to_human_agent_ndebele':
+            # Thumela umlayezo womsebenzisi kumeluleki
+            send(f"👤 Umthengi uthi:\n{message}", AGENT_NUMBER, phone_id)
+        return True  # Vimba i-bot ukuthi iqhubeke ne-default flow
+
+    return False  # Qhubeka ne-normal flow ye-bot
 
 
 def faq_borehole_ndebele(prompt, user_data, phone_id):

@@ -30769,28 +30769,28 @@ def human_agent_ndebele(prompt, user_data, phone_id):
     
     # 3. Schedule fallback
     def send_fallback_ndebele():
-    user_data = get_user_state(customer_number)
-    if user_data and user_data.get('step') == 'waiting_for_human_agent_response_ndebele':
-        send("Uma ungakaxhumaniswa, ungafonela ku-+263719835124", customer_number, phone_id)
-        send("Uyafuna:\n1. Buyela kumenu enkulu\n2. Qhubeka ulinde", customer_number, phone_id)
-        update_user_state(customer_number, {
-            'step': 'human_agent_followup_ndebele',
-            'user': user_data.get('user', {}),
-            'sender': customer_number
-        })
-
-fallback_ndebele_timer = threading.Timer(90, send_fallback_ndebele)
-fallback_ndebele_timer.start()
-
-# 4. Vuselela isimo sekhasimende
-update_user_state(customer_number, {
-    'step': 'waiting_for_human_agent_response_ndebele',
-    'user': user_data.get('user', {}),
-    'sender': customer_number,
-    'waiting_since': time.time()
-})
-
-return {'step': 'waiting_for_human_agent_response_ndebele', 'user': user_data.get('user', {}), 'sender': customer_number}
+        user_data = get_user_state(customer_number)
+        if user_data and user_data.get('step') == 'waiting_for_human_agent_response_ndebele':
+            send("Uma ungakaxhumaniswa, ungafonela ku-+263719835124", customer_number, phone_id)
+            send("Uyafuna:\n1. Buyela kumenu enkulu\n2. Qhubeka ulinde", customer_number, phone_id)
+            update_user_state(customer_number, {
+                'step': 'human_agent_followup_ndebele',
+                'user': user_data.get('user', {}),
+                'sender': customer_number
+            })
+    
+    fallback_ndebele_timer = threading.Timer(90, send_fallback_ndebele)
+    fallback_ndebele_timer.start()
+    
+    # 4. Vuselela isimo sekhasimende
+    update_user_state(customer_number, {
+        'step': 'waiting_for_human_agent_response_ndebele',
+        'user': user_data.get('user', {}),
+        'sender': customer_number,
+        'waiting_since': time.time()
+    })
+    
+    return {'step': 'waiting_for_human_agent_response_ndebele', 'user': user_data.get('user', {}), 'sender': customer_number}
 
 def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_state):
     agent_reply = message_text.strip()

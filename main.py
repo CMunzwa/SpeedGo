@@ -24,7 +24,7 @@ phone_id = os.environ.get("PHONE_ID")
 gen_api = os.environ.get("GEN_API")
 owner_phone = os.environ.get("OWNER_PHONE")
 GOOGLE_MAPS_API_KEY = "AlzaSyCXDMMhg7FzP|ElKmrlkv1TqtD3HgHwW50"
-AGENT_NUMBER = "+263719835124"
+AGENT_NUMBER = "+263779562095"
 
 # Upstash Redis setup
 redis = Redis(
@@ -37414,22 +37414,7 @@ def webhook():
                 msg_type = message.get("type")
                 message_text = message.get("text", {}).get("body", "").strip()
 
-                def update_recent_messages(sender, new_message):
-                state = get_user_state(sender)
-                user_data = state.get('user', {})
-                messages = state.get('recent_messages', [])
                 
-                # Append new message and keep only last 5
-                messages.append(new_message.strip())
-                messages = messages[-5:]
-            
-                update_user_state(sender, {
-                    'user': user_data,
-                    'recent_messages': messages,
-                    'sender': sender
-                })
-
-            
                 # Handle agent messages
                 if from_number.endswith(AGENT_NUMBER.replace("+", "")):
                     agent_state = get_user_state(AGENT_NUMBER)

@@ -8970,7 +8970,7 @@ def human_agent(prompt, user_data, phone_id):
     def send_fallback():
         user_data = get_user_state(customer_number)
         if user_data and user_data.get('step') == 'waiting_for_human_agent_response':
-            send("If you haven't been contacted yet, you can call us directly at +263719835124", customer_number, phone_id)
+            send("If you haven't been contacted yet, you can call us directly at +263779562095 or +263779469216", customer_number, phone_id)
             send("Would you like to:\n1. Return to main menu\n2. Keep waiting", customer_number, phone_id)
             update_user_state(customer_number, {
                 'step': 'human_agent_followup',
@@ -9023,6 +9023,39 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
             'sender': customer_number
         })
         show_main_menu(customer_number, phone_id)
+
+    elif current_state == "awaiting_offer_approval":
+        if agent_reply == "3":
+            # Agent accepts offer
+            quote['offer_data']['status'] = 'agent_accepted'
+            redis.set(quote_key, json.dumps(quote))
+
+            # Notify customer
+            send("✅ Your offer has been accepted by our team! Let's proceed to the next step.", customer_number, phone_id)
+
+            # Notify agent
+            send("👍 You have accepted the customer's offer.", agent_number, phone_id)
+
+            # Update customer state
+            update_user_state(customer_number, {"step": "booking_details"})
+            redis.delete(state_key)
+            return
+
+        elif agent_reply == "4":
+            # Agent declines offer
+            quote['offer_data']['status'] = 'agent_declined'
+            redis.set(quote_key, json.dumps(quote))
+
+            # Notify customer
+            send("❌ Your offer was declined. Please revise your offer or proceed with the listed prices.", customer_number, phone_id)
+
+            # Notify agent
+            send("☑️ You have declined the customer's offer.", agent_number, phone_id)
+
+            # Revert customer to offer step
+            update_user_state(customer_number, {"step": "offer_response"})
+            redis.delete(state_key)
+            return
 
     else:
         # Forward other agent messages to the customer directly
@@ -9650,31 +9683,50 @@ def handle_collect_offer_details(prompt, user_data, phone_id):
 def handle_offer_response(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     quote_id = user.quote_data.get('quote_id')
-    if prompt == "1":  # Offer accepted (simulated)
-        user.offer_data['status'] = 'accepted'
+
+    if prompt == "1":
+        # User accepts offer — send to agent for confirmation
+        user.offer_data['status'] = 'pending_agent_review'
+
         if quote_id:
             q = redis.get(f"quote:{quote_id}")
             if q:
                 q = json.loads(q)
                 q['offer_data'] = user.offer_data
                 redis.set(f"quote:{quote_id}", json.dumps(q))
-        update_user_state(user_data['sender'], {
-            'step': 'booking_details',
-            'user': user.to_dict()
-        })
-        send(
-            "Great news! Your offer has been accepted.\n\n"
-            "Let's confirm your next step.\n\n"
-            "Would you like to:\n"
-            "1. Book Site Survey\n"
-            "2. Pay Deposit\n"
-            "3. Confirm Drilling Date",
-            user_data['sender'], phone_id
-        )
-        return {'step': 'booking_details', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+        # Notify user
+        send("Thank you! We’re confirming your offer with our team. Please wait while we verify.", user_data['sender'], phone_id)
+
+        # Prepare message for agent
+        offer_data = user.offer_data
+        offer_msg = "\n".join([
+            "📝 Offer Pending Approval",
+            f"📱 Customer: {user_data['sender']}",
+            f"💧 Water Survey: ${offer_data.get('survey_price', 'N/A')}",
+            f"🛠️ Drilling: ${offer_data.get('drilling_price', 'N/A')}",
+            f"📄 Status: {offer_data.get('status', 'N/A')}",
+            "",
+            "Agent options:",
+            "3. Accept Offer ✅",
+            "4. Decline Offer ❌"
+        ])
+        send(offer_msg, AGENT_NUMBER, phone_id)
+
+        # Save agent-customer link for follow-up
+        redis.set(f"agent_fallback:{AGENT_NUMBER}", json.dumps({
+            "customer_number": user_data['sender'],
+            "quote_id": quote_id,
+            "state": "awaiting_offer_approval"
+        }))
+
+        return {'step': 'waiting_on_agent', 'user': user.to_dict(), 'sender': user_data['sender']}
+
     elif prompt == "2":
         send("Connecting you to a human agent...", user_data['sender'], phone_id)
+        send("💬 Customer requests direct agent support.\n📱 Customer: {}".format(user_data['sender']), AGENT_NUMBER, phone_id)
         return {'step': 'human_agent', 'user': user.to_dict(), 'sender': user_data['sender']}
+
     elif prompt == "3":
         update_user_state(user_data['sender'], {
             'step': 'collect_offer_details',
@@ -9687,9 +9739,11 @@ def handle_offer_response(prompt, user_data, phone_id):
             user_data['sender'], phone_id
         )
         return {'step': 'collect_offer_details', 'user': user.to_dict(), 'sender': user_data['sender']}
+
     else:
         send("Please select a valid option (1-3).", user_data['sender'], phone_id)
         return {'step': 'offer_response', 'user': user.to_dict(), 'sender': user_data['sender']}
+
 
 def handle_booking_details(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -19283,7 +19337,7 @@ def handle_select_service_quote_shona(prompt, user_data, phone_id):
         })
         message_lines = [f"💧 Sarudzo dzekuisa Pombi:\n"]
         for key, option in pump_installation_options_shona.items():
-            desc = option_shona.get('description', 'Tsananguro haisipo')
+            desc = option.get('description', 'Tsananguro haisipo')
             message_lines.append(f"{key}. {desc}")
         send("\n".join(message_lines), user_data['sender'], phone_id)
         return {'step': 'select_pump_option_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
@@ -19303,7 +19357,6 @@ def handle_select_service_quote_shona(prompt, user_data, phone_id):
         'user': user.to_dict(),
         'sender': user_data['sender']
     }
-
 # Shona version of quote followup
 def handle_quote_followup_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -19989,10 +20042,10 @@ def human_agent_shona(prompt, user_data, phone_id):
     })
 
     # 3. Schedule fallback
-    def send_fallback():
+    def send_fallback_shona():
         user_data = get_user_state(customer_number)
         if user_data and user_data.get('step') == 'waiting_for_human_agent_response_shona':
-            send("Kana usati wabatanidzwa, unogona kutifonera pa +263719835124", customer_number, phone_id)
+            send("Kana usati wabatanidzwa, unogona kutifonera pa v+263779562095 kana +263779469216", customer_number, phone_id)
             send("Unoda here:\n1. Kudzokera kumenu huru\n2. Kuramba wakamirira", customer_number, phone_id)
             update_user_state(customer_number, {
                 'step': 'human_agent_followup_shona',
@@ -21013,38 +21066,6 @@ def custom_question_shona(prompt, user_data, phone_id):
 
 
 
-def human_agent_shona(prompt, user_data, phone_id):
-    customer_number = user_data['sender']
-    
-    send("Ndiri kukubatanidza kune mumwe wevashandi vedu...", customer_number, phone_id)
-    
-    agent_number = "+263719835124"
-    agent_message = f"Mutengi mutsva kubva ku {customer_number}\nMharidzo: {prompt}"
-    threading.Thread(target=send, args=(agent_message, agent_number, phone_id)).start()
-    
-    def send_fallback():
-        user_data = get_user_state(customer_number)
-        if user_data and user_data.get('step') in ['human_agent_shona', 'waiting_for_human_agent_response_shona']:
-            send("Kana usati wafonerwa, unogona kutifonera pa +263719835124", customer_number, phone_id)
-            send("Unoda here:\n1. Kudzokera kumenu huru\n2. Kuramba wakamirira", customer_number, phone_id)
-            update_user_state(customer_number, {
-                'step': 'human_agent_followup_shona',
-                'user': user_data.get('user', {}),
-                'sender': customer_number
-            })
-    
-    threading.Timer(10, send_fallback).start()
-    
-    update_user_state(customer_number, {
-        'step': 'waiting_for_human_agent_response_shona',
-        'user': user_data.get('user', {}),
-        'sender': customer_number,
-        'waiting_since': time.time()
-    })
-    
-    return {'step': 'waiting_for_human_agent_response_shona', 'user': user_data.get('user', {}), 'sender': customer_number}
-
-
 def notify_agent_shona(customer_number, prompt, agent_number, phone_id):
     agent_message = (
         f"👋 Chikumbiro chitsva chevatengi paWhatsApp\n\n"
@@ -21054,40 +21075,6 @@ def notify_agent_shona(customer_number, prompt, agent_number, phone_id):
     send(agent_message, agent_number, phone_id)
 
 
-def human_agent_shona(prompt, user_data, phone_id):
-    customer_number = user_data['sender']
-    
-    # 1. Notify customer immediately
-    send("Tiri kukubatanidza nemumiriri wevanhu...", customer_number, phone_id)
-    
-    # 2. Notify agent in background
-    agent_number = "+263719835124"
-    agent_message = f"Mutengi mutsva kubva ku {customer_number}\nMharidzo: {prompt}"
-    threading.Thread(target=notify_agent_shona, args=(customer_number, prompt, agent_number, phone_id)).start()
-    
-    # 3. After 10 seconds, send fallback options
-    def send_fallback():
-        user_data = get_user_state(customer_number)
-        if user_data and user_data.get('step') in ['human_agent_shona', 'waiting_for_human_agent_response_shona']:
-            send("Kana musati maburitswa, mungatifonera pa +263719835124", customer_number, phone_id)
-            send("Unoda here:\n1. Kudzokera kumenu huru\n2. Kuramba wakamirira", customer_number, phone_id)
-            update_user_state(customer_number, {
-                'step': 'human_agent_followup_shona',
-                'user': user_data.get('user', {}),
-                'sender': customer_number
-            })
-    
-    threading.Timer(10, send_fallback).start()
-    
-    # 4. Update state to waiting
-    update_user_state(customer_number, {
-        'step': 'waiting_for_human_agent_response_shona',
-        'user': user_data.get('user', {}),
-        'sender': customer_number,
-        'waiting_since': time.time()
-    })
-    
-    return {'step': 'waiting_for_human_agent_response_shona', 'user': user_data.get('user', {}), 'sender': customer_number}
 
 def handle_enter_location_for_quote_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -21473,81 +21460,6 @@ def handle_agent_conversation_shona(prompt, sender, phone_id, message, agent_sta
 def handle_agent_available_shona(prompt, sender, phone_id, message, agent_state):
     send("ℹ️ Parizvino hauna hurukuro iri kufambiswa. Ndapota mirira chikumbiro chitsva.", sender, phone_id)
 
-def human_agent_shona(prompt, user_data, phone_id):
-    customer_number = user_data['sender']
-
-    send("Tiri kukubatanidza neanhu anobatsira...", customer_number, phone_id)
-
-    agent_message = (
-        f"👋 Chikumbiro chitsva kubva kumutengi\n\n"
-        f"📱 Nhamba yemutengi: {customer_number}\n"
-        f"📩 Mharidzo: \"{prompt}\"\n\n"
-        f"Pindura ne:\n"
-        f"1 - Taura nemutengi\n"
-        f"2 - Dzokera kubot"
-    )
-    send(agent_message, AGENT_NUMBER, phone_id)
-
-    update_user_state(AGENT_NUMBER, {
-        'step': 'agent_reply_shona',
-        'customer_number': customer_number,
-        'phone_id': phone_id
-    })
-
-    update_user_state(customer_number, {
-        'step': 'waiting_for_human_agent_response_shona',
-        'user': user_data.get('user', {}),
-        'sender': customer_number,
-        'waiting_since': time.time()
-    })
-
-    def send_fallback():
-        user_data = get_user_state(customer_number)
-        if user_data and user_data.get('step') == 'waiting_for_human_agent_response_shona':
-            send("Kana usati wabatsirwa, unogona kutifonera pa +263719835124", customer_number, phone_id)
-            send("Unoda here:\n1. Dzokera kumenu\n2. Rambai makamirira", customer_number, phone_id)
-            update_user_state(customer_number, {
-                'step': 'human_agent_followup_shona',
-                'user': user_data.get('user', {}),
-                'sender': customer_number
-            })
-
-    fallback_timer = threading.Timer(90, send_fallback)
-    fallback_timer.start()
-
-    return {'step': 'waiting_for_human_agent_response_shona', 'user': user_data.get('user', {}), 'sender': customer_number}
-
-
-def human_agent_shona(prompt, user_data, phone_id):
-    customer_number = user_data['sender']
-    
-    send("Tiri kukubatanidza nemumiriri wevanhu...", customer_number, phone_id)
-    
-    agent_number = "+263719835124"
-    agent_message = f"Chikumbiro chitsva kubva kumutengi {customer_number}\nMharidzo: {prompt}"
-    threading.Thread(target=send, args=(agent_message, agent_number, phone_id)).start()
-    
-    def send_fallback():
-        user_data = get_user_state(customer_number)
-        if user_data and user_data.get('step') in ['human_agent_shona', 'waiting_for_human_agent_response_shona']:
-            send("Kana usati wabatikana, unogona kutifonera pa +263719835124", customer_number, phone_id)
-            send("Unoda here:\n1. Kudzokera kumenu huru\n2. Kuramba wakamirira", customer_number, phone_id)
-            update_user_state(customer_number, {
-                'step': 'human_agent_followup_shona', 
-                'user': user_data.get('user', {}),
-                'sender': customer_number
-            })
-    
-    threading.Timer(10, send_fallback).start()
-    
-    update_user_state(customer_number, {
-        'step': 'waiting_for_human_agent_response_shona',
-        'user': user_data.get('user', {}),
-        'sender': customer_number,
-        'waiting_since': time.time()
-    })
-    
-    return {'step': 'waiting_for_human_agent_response_shona', 'user': user_data.get('user', {}), 'sender': customer_number}
 
 def handle_enter_location_for_quote_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -30771,7 +30683,7 @@ def human_agent_ndebele(prompt, user_data, phone_id):
     def send_fallback_ndebele():
         user_data = get_user_state(customer_number)
         if user_data and user_data.get('step') == 'waiting_for_human_agent_response_ndebele':
-            send("Uma ungakaxhumaniswa, ungafonela ku-+263719835124", customer_number, phone_id)
+            send("Uma ungakaxhumaniswa, ungafonela ku +263779562095 or +263779469216", customer_number, phone_id)
             send("Uyafuna:\n1. Buyela kumenu enkulu\n2. Qhubeka ulinde", customer_number, phone_id)
             update_user_state(customer_number, {
                 'step': 'human_agent_followup_ndebele',

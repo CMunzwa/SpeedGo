@@ -33166,12 +33166,6 @@ def webhook():
                             send(message_text, customer_number, phone_id)
                         return "OK"
 
-            
-                    send("⚠️ No active chat. Please wait for a new request.", AGENT_NUMBER, phone_id)
-                    return "OK"                 
-
-                    
-            
                     if agent_state.get("step") == "agent_reply_shona":
                         handle_agent_reply_shona(message_text, customer_number, phone_id, agent_state)
                         
@@ -33192,9 +33186,7 @@ def webhook():
                         return "OK"
 
             
-                    send("⚠️ Hapana hurukuro iripo pari zvino. Ndapota mirira chikumbiro chitsva.", AGENT_NUMBER, phone_id)
-                    return "OK"
-
+     
                     if agent_state.get("step") == "agent_reply_ndebele":
                         handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_state)
                         
@@ -33215,11 +33207,10 @@ def webhook():
                         return "OK"
 
             
-                    send("⚠️ Akulakho okuxoxiswana ngakho okwamanje. Sicela ulinde isicelo esilandelayo.", AGENT_NUMBER, phone_id)
-                    return "OK"
-            
-            
-            
+                    send("⚠️ No active chat. Please wait for a new request.", AGENT_NUMBER, phone_id)
+                    return "OK"                 
+
+                            
                 # Handle normal user messages (only if NOT agent)
 
                 user_data = get_user_state(from_number)

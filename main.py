@@ -19803,7 +19803,7 @@ def get_pricing_for_location_quotes_shona(location, service_type, pump_option_se
                 return "Ndine urombo, sarudzo yekuisa pombi haina kuvapo."
             desc = option.get('description', 'Hapana tsananguro')
             price = option.get('price', 'Hapana mutengo')
-            message = f"💧 Mutengo wesarudzo {pump_option_shona_selected}:\n{desc}\nMutengo: ${price}\n"
+            message = f"💧 Mutengo wesarudzo {pump_option_selected}:\n{desc}\nMutengo: ${price}\n"
             message += "\nUnoda here:\n1. Kumbvunza mutengo weimwe sevhisi\n2. Kudzokera kumenu huru\n3. Kupa mutengo wako"
             return message
 
@@ -30612,6 +30612,647 @@ pump_installation_options_ndebele = {
 }
 
 
+def handle_quote_followup_ndebele(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+
+    if prompt.strip() == "1":
+        # Stay in quote flow, show services again
+        update_user_state(user_data['sender'], {
+            'step': 'select_service_quote_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Khetha enye inkonzo:\n"
+            "1. Ukuhlola amanzi\n"
+            "2. Ukumba umgodi\n"
+            "3. Ukufaka ipompi\n"
+            "4. Ukumba imigodi yamabhizinisi\n"
+            "5. Ukujula komgodi",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'select_service_quote_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+    elif prompt.strip() == "2":
+        # Go back to main menu
+        update_user_state(user_data['sender'], {
+            'step': 'main_menu_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Singakusiza kanjani namhlanje?\n\n"
+            "1. Cela intengo\n"
+            "2. Thola intengo usebenzisa indawo\n"
+            "3. Bheka isimo sephrojekthi\n"
+            "4. Imibuzo evamelekile noma funda ngokumba imigodi\n"
+            "5. Ezinye izinkonzo\n"
+            "6. Khuluma nommeleli wabantu\n\n"
+            "Phendula ngenombolo (isibonelo, 1)",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'main_menu_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+    elif prompt.strip() == "3":
+        # Offer price
+        update_user_state(user_data['sender'], {
+            'step': 'collect_offer_details_ndebele',
+            'user': user.to_dict()    
+        })
+        send(
+            "Yebo! Unganikeza intengo yakho yokunikezela ngezansi.\n\n",
+            user_data['sender'], phone_id
+        )
+
+    elif prompt.strip() == "4":
+        # Hole Classes
+        update_user_state(user_data['sender'], {
+            'step': 'mgodi_class_pricing_ndebele',
+            'user': user.to_dict()    
+        })
+        send(
+            "Sicela ukhethe ikilasi\n\n"
+            "1. I-Class 6\n"
+            "2. I-Class 9\n"
+            "3. I-Class 10\n",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'mgodi_class_pricing_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    else:
+        send("Ukukhetha akulungile. Phendula u-1 ukuze ubuze ngenye inkonzo noma u-2 ukuze ubuyele kumenyu enkulu noma u-3 uma ufuna ukunikeza intengo.", 
+             user_data['sender'], phone_id)
+        return {'step': 'quote_followup_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def handle_mgodi_class_pricing_ndebele(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    if prompt.strip() == "1":
+        update_user_state(user_data['sender'], {
+            'step': 'selected_mgodi_class_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Intengo ye-Class 6:\n\n"
+            "extra_per_m yi-$27\n"
+            "included_depth_m 40m\n\n"
+            "Uyafuna:\n"
+            "1. Buza intengo yenye inkonzo\n"
+            "2. Buyela kumenyu enkulu\n"
+            "3. Nika intengo",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'quote_followup_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+    elif prompt.strip() == "2":
+        update_user_state(user_data['sender'], {
+            'step': 'selected_mgodi_class_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Intengo ye-Class 9:\n\n"
+            "extra_per_m yi-$30\n"
+            "included_depth_m 40m\n\n"
+            "Uyafuna:\n"
+            "1. Buza intengo yenye inkonzo\n"
+            "2. Buyela kumenyu enkulu\n"
+            "3. Nika intengo",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'quote_followup_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+    elif prompt.strip() == "3":
+        update_user_state(user_data['sender'], {
+            'step': 'selected_mgodi_class_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Intengo ye-Class 10:\n\n"
+            "extra_per_m yi-$35\n"
+            "included_depth_m 40m\n\n"
+            "Uyafuna:\n"
+            "1. Buza intengo yenye inkonzo\n"
+            "2. Buyela kumenyu enkulu\n"
+            "3. Nika intengo",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'quote_followup_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}  
+
+def human_agent_ndebele(prompt, user_data, phone_id):
+    customer_number = user_data['sender']
+
+    # 1. Notify customer
+    send("Kuxhumanisa nommeleli wabantu...", customer_number, phone_id)
+
+    # 2. Notify agent
+    agent_message = (
+        f"👋 Isicelo esisha ku-WhatsApp\n\n"
+        f"📱 Umthengi: {customer_number}\n"
+        f"📩 Umlayezo: \"{prompt}\"\n\n"
+        f"Phendula nge:\n"
+        f"1 - Khuluma nomthengi\n"
+        f"2 - Buyela kubhothi"
+    )
+    send(agent_message, AGENT_NUMBER, phone_id) 
+    
+    update_user_state(AGENT_NUMBER, {
+        'step': 'agent_reply_ndebele',
+        'customer_number': customer_number,
+        'phone_id': phone_id
+    })
+
+    # Update customer's state (waiting for agent)
+    update_user_state(customer_number, {
+        'step': 'waiting_for_human_agent_response_ndebele',
+        'user': user_data.get('user', {}),
+        'sender': customer_number,
+        'waiting_since': time.time()
+    })
+    
+    # 3. Schedule fallback
+    def send_fallback_ndebele():
+    user_data = get_user_state(customer_number)
+    if user_data and user_data.get('step') == 'waiting_for_human_agent_response_ndebele':
+        send("Uma ungakaxhumaniswa, ungafonela ku-+263719835124", customer_number, phone_id)
+        send("Uyafuna:\n1. Buyela kumenu enkulu\n2. Qhubeka ulinde", customer_number, phone_id)
+        update_user_state(customer_number, {
+            'step': 'human_agent_followup_ndebele',
+            'user': user_data.get('user', {}),
+            'sender': customer_number
+        })
+
+fallback_ndebele_timer = threading.Timer(90, send_fallback_ndebele)
+fallback_ndebele_timer.start()
+
+# 4. Vuselela isimo sekhasimende
+update_user_state(customer_number, {
+    'step': 'waiting_for_human_agent_response_ndebele',
+    'user': user_data.get('user', {}),
+    'sender': customer_number,
+    'waiting_since': time.time()
+})
+
+return {'step': 'waiting_for_human_agent_response_ndebele', 'user': user_data.get('user', {}), 'sender': customer_number}
+
+def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_state):
+    agent_reply = message_text.strip()
+    
+    if agent_reply == "1":
+        agent_customer_number = agent_state.get('customer_number')
+        timer = fallback_ndebele_timers.pop(agent_customer_number, None)
+        if timer:
+            timer.cancel()
+        send("✅ Usuxhumene nekhasimende. I-bhoti imisiwe kuze kuthumele '2' ukuze ubuyele ku-bhoti.", AGENT_NUMBER, phone_id)
+        send("✅ Usuxhumene nomuntu ongumphathi. Sicela ulinde impendulo yakhe.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'talking_to_human_agent_ndebele',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+
+    elif agent_reply == "2":
+        send("✅ I-bhoti ibuyile futhi izosiza ikhasimende kusukela manje.", AGENT_NUMBER, phone_id)
+        send("👋 Usubuya ne-bhoti yethu.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'main_menu_ndebele',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+        show_main_menu_ndebele(customer_number, phone_id)
+
+    else:
+        send(agent_reply, customer_number, phone_id)
+
+def message_handler_ndebele(prompt, sender, phone_id, message):
+    prompt = (prompt or "").strip()
+    user_data = get_user_state(sender)
+    user_data['sender'] = sender
+
+    if user_data.get('step') == 'talking_to_human_agent_ndebele':
+        forward_message_to_agent_ndebele(prompt, user_data, phone_id)
+        update_user_state(sender, user_data)
+        return
+
+    if message.get("type") == "location":
+        location = message.get("location", {})
+        if "latitude" in location and "longitude" in location:
+            user_data["location"] = {
+                "latitude": location["latitude"],
+                "longitude": location["longitude"]
+            }
+            prompt = f"{location['latitude']},{location['longitude']}"
+
+    if 'user' not in user_data:
+        user_data['user'] = User(sender).to_dict()
+
+    logging.info(f"[{sender}] Isinyathelo: {user_data.get('step', 'welcome')} | Impendulo: {prompt}")
+    step = user_data.get('step', 'welcome_ndebele')
+    next_state = get_action_ndebele(step, prompt, user_data, phone_id)
+    update_user_state(sender, next_state)
+
+def show_main_menu_ndebele(sender, phone_id):
+    menu_text = (
+        "Singakusiza kanjani namhlanje?\n\n"
+        "1. Cela intengo\n"
+        "2. Bheka intengo usebenzisa indawo\n"
+        "3. Bheka isimo sephrojekthi\n"
+        "4. Imibuzo ejwayelekile noma ufunde ngokumba umgodi\n"
+        "5. Eminye imisebenzi\n"
+        "6. Khuluma nomuntu\n\n"
+        "Phendula ngenombolo (isib., 1)"
+    )
+    send(menu_text, sender, phone_id)
+    return {'step': 'main_menu_ndebele', 'sender': sender}
+
+def handle_main_menu_ndebele(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    if prompt.strip() == "1":
+        update_user_state(user_data['sender'], {
+            'step': 'select_service_quote_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Khetha isevisi:\n"
+            "1. Ukuhlola amanzi\n"
+            "2. Ukumba umgodi\n"
+            "3. Ukufaka ipompi\n"
+            "4. Ukumba imigodi yebhizinisi\n"
+            "5. Ukujulisa umgodi",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'select_service_quote_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "2":
+        update_user_state(user_data['sender'], {
+            'step': 'request_location_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Thumela indawo yakho noma ubhale igama lendawo (isib., Bulawayo, Harare)",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'request_location_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "3":
+        update_user_state(user_data['sender'], {
+            'step': 'check_project_status_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Bhala inombolo yereferensi yephrojekthi yakho:",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'check_project_status_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "4":
+        update_user_state(user_data['sender'], {
+            'step': 'faqs_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Khetha isifundo:\n\n"
+            "1. Imali yokumba umgodi\n"
+            "2. Isikhathi sokwenza umgodi\n"
+            "3. Izinhlobo zomgodi\n"
+            "4. Buyela kumenu enkulu",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'faqs_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "5":
+        update_user_state(user_data['sender'], {
+            'step': 'other_services_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Eminye imisebenzi:\n\n"
+            "1. Ukulungisa umgodi\n"
+            "2. Ukuhlanza umgodi\n"
+            "3. Buyela kumenu enkulu",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'other_services_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "6":
+        return human_agent_ndebele("", user_data, phone_id)
+    
+    else:
+        send("Ukukhetha akulungile. Phendula ngenombolo kusuka ku-1 kuya ku-6", user_data['sender'], phone_id)
+        return {'step': 'main_menu_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def handle_select_service_quote_ndebele(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    service_map = {
+        "1": "Water Survey",
+        "2": "Borehole Drilling",
+        "3": "Pump Installation",
+        "4": "Commercial Hole Drilling",
+        "5": "Borehole Deepening"
+    }
+
+    
+    service = service_map.get(prompt.strip())
+    if not service:
+        send("Ukukhetha akulungile. Phendula ngenombolo kusuka ku-1 kuya ku-5", user_data['sender'], phone_id)
+        return {'step': 'select_service_quote_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    if 'location' not in user_data:
+        update_user_state(user_data['sender'], {
+            'step': 'request_location_for_quote_ndebele',
+            'service': service,
+            'user': user.to_dict()
+        })
+        send(
+            "Thumela indawo yakho noma ubhale igama lendawo (isib., Bulawayo, Harare)",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'request_location_for_quote_ndebele', 'service': service, 'user': user.to_dict(), 'sender': user_data['sender']}
+    else:
+        location = user_data['location']
+        quote = get_pricing_for_location_quotes_ndebele(location, service)
+        send(quote, user_data['sender'], phone_id)
+        return {'step': 'quote_followup_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+        
+def handle_request_location_for_quote_ndebele(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    if prompt.strip().lower() in ['back', 'b']:
+        update_user_state(user_data['sender'], {
+            'step': 'select_service_quote_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Khetha isevisi:\n"
+            "1. Ukuhlola amanzi\n"
+            "2. Ukumba umgodi\n"
+            "3. Ukufaka ipompi\n"
+            "4. Ukumba imigodi yebhizinisi\n"
+            "5. Ukujulisa umgodi",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'select_service_quote_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    location = prompt.strip()
+    user_data['location'] = location
+    update_user_state(user_data['sender'], user_data)
+    
+    quote = get_pricing_for_location_quotes_ndebele(location, user_data['service'])
+    send(quote, user_data['sender'], phone_id)
+    return {'step': 'quote_followup_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def handle_faqs_ndebele(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    if prompt.strip() == "1":
+        send(
+            "💵 Intengo yokumba umgodi ibheka:\n\n"
+            "- Indawo yokumba\n"
+            "- Ukuqina komhlabathi\n"
+            "- Ububanzi bomgodi\n"
+            "- Uhlobo lomgodi\n\n"
+            "Intengo ingaba $1,500 kuya ku-$5,000",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'faqs_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "2":
+        send(
+            "⏳ Isikhathi sokwenza umgodi:\n\n"
+            "- Ukuhlola: Izinsuku 1-3\n"
+            "- Ukumba: Izinsuku 1-7 kuya nokuqina komhlabathi\n"
+            "- Ukufaka ipompi: Usuku 1\n\n"
+            "Kungathatha isonto elilodwa kuya kwamabili ukuze umgodi uphele",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'faqs_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "3":
+        send(
+            "🏗 Izinhlobo zomgodi:\n\n"
+            "1. Ikilasi 6 - Yodaka\n"
+            "2. Ikilasi 9 - Yamatshe\n"
+            "3. Ikilasi 10 - Yamatshe aqinile\n\n"
+            "Uhlobo lubheka ukuqina komhlabathi kanye nenani lamanzi",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'faqs_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "4":
+        update_user_state(user_data['sender'], {
+            'step': 'main_menu_ndebele',
+            'user': user.to_dict()
+        })
+        return show_main_menu_ndebele(user_data['sender'], phone_id)
+    
+    else:
+        send("Ukukhetha akulungile. Phendula ngenombolo kusuka ku-1 kuya ku-4", user_data['sender'], phone_id)
+        return {'step': 'faqs_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def handle_other_services_ndebele(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    if prompt.strip() == "1":
+        send(
+            "🔧 Ukulungisa umgodi:\n\n"
+            "Siyalungisa:\n"
+            "- Amapompi angasebenzi\n"
+            "- Amathangi amanzi\n"
+            "- Izinto zokuhambisa amanzi\n\n"
+            "Intengo isukela ku-$100 kuya ngephutha",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'other_services_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "2":
+        send(
+            "🚿 Ukuhlanza umgodi:\n\n"
+            "Siyahlanza:\n"
+            "- Umgodi ongcolile\n"
+            "- Umgodi onezinto ezingcolile\n"
+            "- Umgodi onamanzi angahlanzekile\n\n"
+            "Intengo isukela ku-$200",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'other_services_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    elif prompt.strip() == "3":
+        update_user_state(user_data['sender'], {
+            'step': 'main_menu_ndebele',
+            'user': user.to_dict()
+        })
+        return show_main_menu_ndebele(user_data['sender'], phone_id)
+    
+    else:
+        send("Ukukhetha akulungile. Phendula ngenombolo kusuka ku-1 kuya ku-3", user_data['sender'], phone_id)
+        return {'step': 'other_services_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def handle_check_project_status_ndebele(prompt, user_data, phone_id):
+    user = User.from_dict(user_data['user'])
+    
+    ref_number = prompt.strip()
+    if len(ref_number) < 5:
+        send("Inombolo yereferensi ayilungile. Zama futhi.", user_data['sender'], phone_id)
+        return {'step': 'check_project_status_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+    
+    # Simulate checking status
+    status = "Iyasebenza"
+    if ref_number.startswith("C"):
+        status = "Iphelele"
+    elif ref_number.startswith("P"):
+        status = "Ilindele inkokhelo"
+    
+    send(
+        f"🔄 Isimo sephrojekthi #{ref_number}:\n\n"
+        f"Isimo: {status}\n"
+        f"Usuku lokuqala: 2023-05-15\n"
+        f"Usuku lokugcina: 2023-06-20\n\n"
+        "Uma unemibuzo, khetha '6' ukuze ukhulume nomuntu",
+        user_data['sender'], phone_id
+    )
+    
+    update_user_state(user_data['sender'], {
+        'step': 'main_menu_ndebele',
+        'user': user.to_dict()
+    })
+    return {'step': 'main_menu_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+def forward_message_to_agent_ndebele(prompt, user_data, phone_id):
+    customer_number = user_data['sender']
+    agent_message = (
+        f"📩 Umlayezo ovela kukhasimende {customer_number}:\n\n"
+        f"\"{prompt}\"\n\n"
+        f"Phendula ukhasimende ngokuthumela umlayezo noma uchofoze '2' ukuze ubuyele kubhoti"
+    )
+    send(agent_message, AGENT_NUMBER, phone_id)
+    
+    # Keep customer in same state
+    return {'step': 'talking_to_human_agent_ndebele', 'user': user_data.get('user', {}), 'sender': customer_number}
+
+def handle_human_agent_followup_ndebele(prompt, user_data, phone_id):
+    if prompt.strip() == "1":
+        return show_main_menu_ndebele(user_data['sender'], phone_id)
+    elif prompt.strip() == "2":
+        send("Sizokuzama ukukuxhumanisa ngokushesha okukhulu. Siyabonga ngokulinda.", user_data['sender'], phone_id)
+        return {'step': 'waiting_for_human_agent_response_ndebele', 'user': user_data.get('user', {}), 'sender': user_data['sender']}
+    else:
+        send("Ukukhetha akulungile. Phendula ngenombolo 1 noma 2", user_data['sender'], phone_id)
+        return {'step': 'human_agent_followup_ndebele', 'user': user_data.get('user', {}), 'sender': user_data['sender']}
+
+def handle_user_message_ndebele(prompt, user_data, phone_id):
+    if user_data.get('step') == 'human_agent_followup_ndebele':
+        if prompt.strip() == '1':
+            update_user_state_ndebele(user_data['sender'], {
+                'step': 'main_menu_ndebele',
+                'user': user_data['user']
+            })
+            send_main_menu_ndebele(user_data['sender'], phone_id)
+            
+        elif prompt.strip() == '2':
+            send("Sizoqhubeka nokuzama ukukuxhumanisa. Siyabonga ngokulinda kwakho.", 
+                 user_data['sender'], phone_id)
+            update_user_state_ndebele(user_data['sender'], {
+                'step': 'waiting_for_human_agent_response_ndebele',
+                'user': user_data['user']
+            })
+        else:
+            send("Sicela ukhethe 1 noma 2", user_data['sender'], phone_id)
+    
+    return user_data
+
+def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_state):
+    prompt = message_text.strip() if isinstance(message_text, str) else ""
+    customer_number = agent_state.get('customer_number')
+
+    if not customer_number:
+        send("⚠️ Iphutha: Akukho khasimende elixhunyiwe. Sicela ulinde isicelo esisha.", sender, phone_id)
+        update_user_state(sender, {'step': 'agent_available_ndebele'})
+        return
+
+    if prompt == '1':
+        send("✅ Usuxhumene nekhasimende. Thumela '2' ukuze ubuyele kubhoti.", sender, phone_id)
+        send("✅ Usuxhunyiwe nomuntu. Sicela ulinde impendulo yabo.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'talking_to_human_agent_ndebele',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+        update_user_state(sender, {
+            'step': 'talking_to_customer_ndebele',
+            'customer_number': customer_number,
+            'phone_id': phone_id,
+            'started_at': time.time()
+        })
+
+    elif prompt == '2':
+        send("✅ Ubuyisele ikhasimende kubhoti.", sender, phone_id)
+        send("👋 Usubuya ne-bhoti oyizwanele.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'main_menu_ndebele',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+        update_user_state(sender, {'step': 'agent_available_ndebele'})
+        show_main_menu(customer_number, phone_id)
+
+    else:
+        send("⚠️ Sicela uphendule nge:\n1 - Khuluma nekhasimende\n2 - Buyela kubhoti", sender, phone_id)
+
+
+
+def handle_agent_conversation_ndebele(prompt, sender, phone_id, message, agent_state):
+    customer_number = agent_state.get('customer_number')
+
+    if prompt.strip().lower() == '2':
+        send("✅ Inkulumo isiphelile. I-bhoti izophinde isebenze.", sender, phone_id)
+        send("👋 Inkulumo nomuntu isiphelile. Usubuyele ku-bhoti ozenzakalelayo.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'main_menu_ndebele',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+        update_user_state(sender, {'step': 'agent_available_ndebele'})
+        show_main_menu_ndebele(customer_number, phone_id)
+    else:
+        forward_agent_message(prompt, message, customer_number, phone_id)
+
+def handle_agent_available_ndebele(prompt, sender, phone_id, message, agent_state):
+    send("ℹ️ Okwamanje awunayo inkulumo eqhubekayo. Sicela ulinde isicelo esisha.", sender, phone_id)
+
+def human_agent_ndebele(prompt, user_data, phone_id):
+    customer_number = user_data['sender']
+
+    send("Sikuxhumanisa nomuntu ozokusiza...", customer_number, phone_id)
+
+    agent_message = (
+        f"👋 Isicelo esisha esivela kukhasimende\n\n"
+        f"📱 Inombolo yekhasimende: {customer_number}\n"
+        f"📩 Umlayezo: \"{prompt}\"\n\n"
+        f"Phendula nge:\n"
+        f"1 - Khuluma nekhasimende\n"
+        f"2 - Buyela kubhoti"
+    )
+    send(agent_message, AGENT_NUMBER, phone_id)
+
+    update_user_state(AGENT_NUMBER, {
+        'step': 'agent_reply_ndebele',
+        'customer_number': customer_number,
+        'phone_id': phone_id
+    })
+
+    update_user_state(customer_number, {
+        'step': 'waiting_for_human_agent_response_ndebele',
+        'user': user_data.get('user', {}),
+        'sender': customer_number,
+        'waiting_since': time.time()
+    })
+
+
 def get_pricing_for_location_quotes_ndebele(location, service_type, pump_option_selected=None):
     location_key = location.strip().lower()
     service_key = service_type.strip().title()  # Normalize e.g. "Pump Installation"
@@ -30704,125 +31345,6 @@ def handle_collect_quote_details_ndebele(prompt, user_data, phone_id):
         return {'step': 'collect_quote_details_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
 
 
-def handle_user_message_ndebele(prompt, user_data, phone_id):
-    if user_data.get('step') == 'human_agent_followup_ndebele':
-        if prompt.strip() == '1':
-            # Return to main menu
-            update_user_state(user_data['sender'], {
-                'step': 'main_menu_ndebele',
-                'user': user_data['user']
-            })
-            send_main_menu(user_data['sender'], phone_id)
-        elif prompt.strip() == '2':
-            # Continue waiting
-            send("Sizolokhu sizama ukukuxhumanisa. Siyabonga ngokubekezela kwakho.", user_data['sender'], phone_id)
-            update_user_state(user_data['sender'], {
-                'step': 'waiting_for_human_agent_response_ndebele',
-                'user': user_data['user']
-            })
-        else:
-            send("Sicela ukhethe u-1 noma u-2", user_data['sender'], phone_id)
-    
-    return user_data
-
-
-def human_agent_followup_ndebele(prompt, user_data, phone_id):
-    user = User.from_dict(user_data['user'])
-
-    if prompt == "1":
-        return handle_select_language("1", user_data, phone_id)
-
-    elif prompt == "2":
-        send("Kulungile. Uxolo ukubuza uma udinga okunye.", user_data['sender'], phone_id)
-        return {'step': 'human_agent_followup_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-    else:
-        send("Sicela uphendule ngo-1 ukuya kumenyu oyinhloko noma u-2 uhlale lapha.", user_data['sender'], phone_id)
-        return {'step': 'human_agent_followup_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-
-def handle_main_menu_ndebele(prompt, user_data, phone_id):
-    user = User.from_dict(user_data['user'])
-    if prompt == "1":  # Request a quote
-        update_user_state(user_data['sender'], {
-            'step': 'enter_location_for_quote_ndebele',
-            'user': user.to_dict()
-        })
-        send("Sicela ufake indawo yakho (Idolobha/Itawuni noma ama-GPS coordinates) ukuze siqale.", user_data['sender'], phone_id)
-        return {'step': 'enter_location_for_quote_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-    elif prompt == "2":  # Search Price Using Location
-        update_user_state(user_data['sender'], {
-            'step': 'enter_location_for_quote_ndebele',
-            'user': user.to_dict()
-        })
-        send(
-            "Ukuze sikutholele intengo, sicela ufake indawo yakho (Idolobha/Itawuni noma ama-GPS coordinates):",
-            user_data['sender'], phone_id
-        )
-        return {'step': 'enter_location_for_quote_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-    elif prompt == "3":  # Check Project Status
-        update_user_state(user_data['sender'], {
-            'step': 'check_project_status_menu_ndebele',
-            'user': user.to_dict()
-        })
-        send(
-            "Sicela ukhethe okuthile:\n"
-            "1. Bheka isimo sokubha ibhorehole\n"
-            "2. Bheka isimo sokufakwa kwepompi\n"
-            "3. Khuluma nomuntu\n"
-            "4. Ibhodle elikhulu",
-            user_data['sender'], phone_id
-        )
-        return {'step': 'check_project_status_menu_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-    elif prompt == "4":
-        update_user_state(user_data['sender'], {
-            'step': 'faq_menu_ndebele',
-            'user': user.to_dict()
-        })
-        send(
-            "Sicela ukhethe isigaba semibuzo:\n\n"
-            "1. Imibuzo Evame Ukubuzwa Mayelana Nokubha Ibhorehole\n"
-            "2. Imibuzo Evame Ukubuzwa Mayelana Nokufakwa Kwepompi\n"
-            "3. Buza omunye umbuzo\n"
-            "4. Khuluma nomuntu\n"
-            "5. Ibhodle elikhulu",
-            user_data['sender'], phone_id
-        )
-        return {'step': 'faq_menu_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-    elif prompt == "5":  # Other Services
-        update_user_state(user_data['sender'], {
-            'step': 'other_services_menu_ndebele',
-            'user': user.to_dict()
-        })
-        send(
-            "Wamukelekile kwezinye izinsiza zobhorehole. Yisiphi isevisi oyidingayo?\n"
-            "1. Ukujulisa Ibhorehole\n"
-            "2. Ukuhlanza Ibhorehole\n"
-            "3. Ukukhetha I-PVC Casing Pipe\n"
-            "4. Buyela Ebhodleni Elikhulu",
-            user_data['sender'], phone_id
-        )
-        return {'step': 'other_services_menu_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-        
-    elif prompt == "6":  # Human agent
-        update_user_state(user_data['sender'], {
-            'step': 'human_agent_ndebele',
-            'user': user.to_dict(),
-            'original_prompt': prompt
-        })
-        return human_agent_ndebele(prompt, {
-            'step': 'human_agent_ndebele',
-            'user': user.to_dict(),
-            'sender': user_data['sender']
-        }, phone_id)
-    
-    else:
-        send("Sicela ukhethe okulungile (1-6).", user_data['sender'], phone_id)
-        return {'step': 'main_menu_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
 
 def handle_quote_response_ndebele(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -30870,41 +31392,6 @@ def handle_quote_response_ndebele(prompt, user_data, phone_id):
         return {'step': 'quote_response_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
 
 
-
-def human_agent_ndebele(prompt, user_data, phone_id):
-    customer_number = user_data['sender']
-    
-    # 1. Notify customer immediately
-    send("Ukuxhumanisa nomuntu...", customer_number, phone_id)
-    
-    # 2. Notify agent in background
-    agent_number = "+263719835124"
-    agent_message = f"Isicelo esisha somthengi esivela ku-{customer_number}\nUmlayezo: {prompt}"
-    threading.Thread(target=send, args=(agent_message, agent_number, phone_id)).start()
-    
-    # 3. After 10 seconds, send fallback options
-    def send_fallback():
-        user_data = get_user_state(customer_number)
-        if user_data and user_data.get('step') in ['human_agent_ndebele', 'waiting_for_human_agent_response_ndebele']:
-            send("Uma ungakaxhunyaniswa, ungasifonela ku-+263719835124", customer_number, phone_id)
-            send("Ungathanda:\n1. Buyela ebhodleni elikhulu\n2. Lindela okwengeziwe", customer_number, phone_id)
-            update_user_state(customer_number, {
-                'step': 'human_agent_followup_ndebele',
-                'user': user_data.get('user', {}),
-                'sender': customer_number
-            })
-    
-    threading.Timer(10, send_fallback).start()
-    
-    # 4. Update state to waiting
-    update_user_state(customer_number, {
-        'step': 'waiting_for_human_agent_response_ndebele',
-        'user': user_data.get('user', {}),
-        'sender': customer_number,
-        'waiting_since': time.time()
-    })
-    
-    return {'step': 'waiting_for_human_agent_response_ndebele', 'user': user_data.get('user', {}), 'sender': customer_number}
 
 def handle_enter_location_for_quote_ndebele(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -30954,107 +31441,7 @@ def handle_enter_location_for_quote_ndebele(prompt, user_data, phone_id):
         )
         return {'step': 'select_service_quote_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-def handle_select_service_quote_ndebele(prompt, user_data, phone_id):
-    user = User.from_dict(user_data['user'])
-    location = user.quote_data.get('location')
-    
-    if not location:
-        send("Sicela ufake indawo yakho kuqala ngaphambi kokukhetha isevisi.", user_data['sender'], phone_id)
-        return {'step': 'enter_location_for_quote_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-    service_map = {
-        "1": "Water Survey",
-        "2": "Borehole Drilling",
-        "3": "Pump Installation",
-        "4": "Commercial Hole Drilling",
-        "5": "Borehole Deepening"
-    }
-
-    selected_service = service_map.get(prompt.strip())
-
-    if not selected_service:
-        send("Okungalungile. Sicela uphendule ngo-1, 2, 3, 4 noma 5 ukukhetha isevisi.", user_data['sender'], phone_id)
-        return {'step': 'select_service_quote_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-    user.quote_data['service'] = selected_service
-
-    if selected_service == "Ukufaka ipompi":
-        update_user_state(user_data['sender'], {
-            'step': 'select_pump_option_ndebele',
-            'user': user.to_dict()
-        })
-        message_lines = [f"💧 Izinketho Zokufaka Ipompi:\n"]
-        for key, option in pump_installation_options_ndebele.items():
-            desc = option.get('description', 'No description')
-            message_lines.append(f"{key}. {desc}")
-        send("\n".join(message_lines), user_data['sender'], phone_id)
-        return {'step': 'select_pump_option_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-    pricing_message = get_pricing_for_location_quotes_ndebele(location, selected_service)
-    
-    update_user_state(user_data['sender'], {
-        'step': 'quote_followup_ndebele',
-        'user': user.to_dict()
-    })
-    send(pricing_message, user_data['sender'], phone_id)
-
-    return {
-        'step': 'quote_followup_ndebele',
-        'user': user.to_dict(),
-        'sender': user_data['sender']
-    }
-
-def handle_quote_followup_ndebele(prompt, user_data, phone_id):
-    user = User.from_dict(user_data['user'])
-
-    if prompt.strip() == "1":
-        update_user_state(user_data['sender'], {
-            'step': 'select_service_quote_ndebele',
-            'user': user.to_dict()
-        })
-        send(
-            "Khetha enye isevisi:\n"
-            "1. Ukuhlola amanzi\n"
-            "2. Ukubha ibhorehole\n"
-            "3. Ukufaka ipompi\n"
-            "4. Ukubha imbobo yezohwebo\n"
-            "5. Ukujulisa ibhorehole",
-            user_data['sender'], phone_id
-        )
-        return {'step': 'select_service_quote_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-    elif prompt.strip() == "2":
-        update_user_state(user_data['sender'], {
-            'step': 'main_menu_ndebele',
-            'user': user.to_dict()
-        })
-        send(
-            "Singakusiza njani namuhla?\n\n"
-            "1. Cela isiphakamiso\n"
-            "2. Phanda Intengo Ngokusebenzisa Indawo\n"
-            "3. Bheka Isimo Sephrojekthi\n"
-            "4. Imibuzo Evame Ukubuzwa noma Funda Ngokuqhuba Ibhorehole\n"
-            "5. Eminye Imisebenzi\n"
-            "6. Khuluma Nomuntu\n\n"
-            "Sicela uphendule ngenombolo (umzekeliso: 1)",
-            user_data['sender'], phone_id
-        )
-        return {'step': 'main_menu_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-    elif prompt.strip() == "3":
-        update_user_state(user_data['sender'], {
-            'step': 'collect_offer_details_ndebele',
-            'user': user.to_dict()    
-        })
-        send(
-            "Kulungile! Ungabelana ngentengo yakho engezansi.\n\n",
-            user_data['sender'], phone_id
-        )
-        return {'step': 'collect_offer_details_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-    else:
-        send("Okungalungile. Phendula ngo-1 ukubuza ngenye isevisi noma u-2 ukubuyela ebhodleni elikhulu noma u-3 uma ufuna ukwenza isiphakamiso sentengo.", user_data['sender'], phone_id)
-        return {'step': 'quote_followup_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
 
 def handle_select_pump_option_ndebele(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -32908,6 +33295,10 @@ action_mapping = {
     "enter_location_for_quote_ndebele": handle_enter_location_for_quote_ndebele,
     "select_service_quote_ndebele": handle_select_service_quote_ndebele,
     "select_service_ndebele": handle_select_service_ndebele,
+    "borehole_class_pricing_ndebele": handle_borehole_class_pricing_ndebele,
+    "agent_reply_ndebele": handle_agent_reply_ndebele,
+    "talking_to_customer_ndebele": handle_agent_conversation_ndebele,
+    "agent_available_ndebele": handle_agent_available_ndebele
     "select_pump_option_ndebele": handle_select_pump_option_ndebele,
     "quote_followup_ndebele": handle_quote_followup_ndebele,
     "collect_quote_details_ndebele": handle_collect_quote_details_ndebele,

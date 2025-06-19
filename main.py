@@ -22388,7 +22388,7 @@ def get_pricing_for_location_quotes_shona(location, service_type, pump_option_se
     if service_key == "Pump Installation":
         if pump_option_selected is None:            
             message_lines = [f"💧 Sarudzo dzeKuisa Pombi:\n"]
-            for key, option in pump_installation_options.items():
+            for key, option in pump_installation_options_shona.items():
                 desc = option.get('description', 'Hapana tsananguro')
                 message_lines.append(f"{key}. {desc}")
             return "\n".join(message_lines)
@@ -22538,45 +22538,77 @@ def handle_collect_offer_details_shona(prompt, user_data, phone_id):
 def handle_offer_response_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     quote_id = user.quote_data.get('quote_id')
+    last_message = user_data.get("message", "").strip()  # Capture user-submitted message
+
     if prompt == "1":
-        user.offer_data['status'] = 'accepted'
+        user.offer_data['status'] = 'pending_agent_review'
+
         if quote_id:
             q = redis.get(f"quote:{quote_id}")
             if q:
                 q = json.loads(q)
                 q['offer_data'] = user.offer_data
                 redis.set(f"quote:{quote_id}", json.dumps(q))
-        update_user_state(user_data['sender'], {
-            'step': 'booking_details_shona',
-            'user': user.to_dict()
-        })
-        send(
-            "Mashoko akanaka! Chikumbiro chako chabvumirwa.\n\n"
-            "Ngatitsanangure danho raitevera.\n\n"
-            "Unoda here:\n"
-            "1. Bhuka Ongororo yeSaiti\n"
-            "2. Bhadhara Deposit\n"
-            "3. Simbisa Zuva rekuchera",
-            user_data['sender'], phone_id
-        )
-        return {'step': 'booking_details_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+        # Notify user in Shona
+        send("Tatenda! Tiri kusimbisa chipo chenyu nechikwata chedu. Ndapota mirai apo tiri kuongorora.", user_data['sender'], phone_id)
+
+        # Prepare agent message
+        offer_data = user.offer_data
+        survey_price = float(offer_data.get('survey_price', 0) or 0)
+        drilling_price = float(offer_data.get('drilling_price', 0) or 0)
+        total_price = survey_price + drilling_price
+
+        offer_msg = "\n".join([
+            "📝 Chipo Chakamirira Kubvumidzwa",
+            f"📱 Mutengi: {user_data['sender']}",
+            f"💧 Ongororo yemvura: ${survey_price:.2f}",
+            f"🛠️ Kuchera borehole: ${drilling_price:.2f}",
+            f"💰 Chipo chose: ${total_price:.2f}",
+            f"📄 Mamiriro: {offer_data.get('status', 'N/A')}",
+            f"\n🗒️ Mharidzo yemutengi:\n{last_message}" if last_message else "",
+            "",
+            "Sarudzo dzemumiriri:",
+            "1. Bvuma chipo ✅",
+            "2. Ramba chipo ❌"
+        ])
+        send(offer_msg.strip(), AGENT_NUMBER, phone_id)
+
+        redis.set(f"agent_fallback:{AGENT_NUMBER}", json.dumps({
+            "customer_number": user_data['sender'],
+            "quote_id": quote_id,
+            "state": "awaiting_offer_approval"
+        }))
+
+        return {'step': 'waiting_on_agent_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
     elif prompt == "2":
-        send("Tiri kukubatanidza nemumiriri wevanhu...", user_data['sender'], phone_id)
+        send("Tiri kukubatanidza kune mumiriri wevanhu...", user_data['sender'], phone_id)
+        send("💬 Mutengi ari kuda rubatsiro rwemumiriri.\n📱 Mutengi: {}".format(user_data['sender']), AGENT_NUMBER, phone_id)
         return {'step': 'human_agent_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
     elif prompt == "3":
         update_user_state(user_data['sender'], {
             'step': 'collect_offer_details_shona',
             'user': user.to_dict()
         })
+
         send(
-            "Ndapota tumira chikumbiro chako chakagadziridzwa muchimiro:\n\n"
+            "Ndapota nyorera chipo chako chagadziridzwa uchishandisa chimiro ichi:\n\n"
             "- Ongororo yemvura: $_\n"
-            "- Kuchera chibhorani: $_",
+            "- Kuchera borehole: $_",
             user_data['sender'], phone_id
         )
+
+        send(
+            f"📨 Mutengi ari kugadzirisa chipo chavo.\n📱 Mutengi: {user_data['sender']}\n\n📝 Mharidzo:\n{last_message}",
+            AGENT_NUMBER, phone_id
+        )
+
         return {'step': 'collect_offer_details_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
     else:
-        send("Ndapota sarudza sarudzo inoshanda (1-3).", user_data['sender'], phone_id)
+        send("Ndapota sarudza imwe yesarudzo dziri pakati pe 1 kusvika ku 3.", user_data['sender'], phone_id)
         return {'step': 'offer_response_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
 def get_pricing_for_location_quotes_shona(location, service_type, pump_option_selected=None):
@@ -22784,14 +22816,19 @@ def human_agent_shona(prompt, user_data, phone_id):
 
 def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_state):
     agent_reply = message_text.strip()
-    
+    current_state = agent_state.get("state")
+    quote_key = f"quote:{agent_state.get('quote_id')}"
+    state_key = f"agent_fallback:{AGENT_NUMBER}"
+
+    # 1. Agent chooses to talk to customer
     if agent_reply == "1":
         agent_customer_number = agent_state.get('customer_number')
         timer = fallback_timers_shona.pop(agent_customer_number, None)
         if timer:
             timer.cancel()
-        send("✅ Wave kutaura nemutengi. Bhoti rakamiswa kusvikira watumira '2' kuti udzokere kubhoti.", AGENT_NUMBER, phone_id)
-        send("✅ Wave kubatanidzwa nemumiriri wevanhu. Ndapota mirira mhinduro yavo.", customer_number, phone_id)
+
+        send("✅ Iwe zvino uri kutaura nemutengi. Bhoti yakamiswa kusvikira watumira '2' kudzokera kubhoti.", AGENT_NUMBER, phone_id)
+        send("✅ Iwe zvino wakabatana nemumiriri. Ndapota mirira mhinduro yavo.", customer_number, phone_id)
 
         update_user_state(customer_number, {
             'step': 'talking_to_human_agent_shona',
@@ -22799,19 +22836,52 @@ def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_stat
             'sender': customer_number
         })
 
+    # 2. Agent returns control to bot
     elif agent_reply == "2":
-        send("✅ Bhoti radzoka uye richabatsira mutengi kubva pano.", AGENT_NUMBER, phone_id)
-        send("👋 Wave zvakare neboti redu.", customer_number, phone_id)
+        send("✅ Bhoti yadzoka kuzobatsira mutengi.", AGENT_NUMBER, phone_id)
+        send("👋 Iwe wave kutaura nebhoti redu zvakare.", customer_number, phone_id)
 
         update_user_state(customer_number, {
             'step': 'main_menu_shona',
             'user': get_user_state(customer_number).get('user', {}),
             'sender': customer_number
         })
-        show_main_menu_shona(customer_number, phone_id)
+        show_main_menu(customer_number, phone_id)
 
+    # 3. Agent accepts offer
+    elif current_state == "awaiting_offer_approval" and agent_reply == "3":
+        quote = redis.get(quote_key)
+        if quote:
+            quote = json.loads(quote)
+            quote['offer_data']['status'] = 'agent_accepted'
+            redis.set(quote_key, json.dumps(quote))
+
+            send("✅ Chipo chako chagamuchirwa nechikwata chedu! Ngatitange nhanho inotevera.", customer_number, phone_id)
+            send("👍 Wagadzirisa chipo chemutengi.", AGENT_NUMBER, phone_id)
+
+            update_user_state(customer_number, {"step": "booking_details_shona"})
+            redis.delete(state_key)
+            return
+
+    # 4. Agent declines offer
+    elif current_state == "awaiting_offer_approval" and agent_reply == "4":
+        quote = redis.get(quote_key)
+        if quote:
+            quote = json.loads(quote)
+            quote['offer_data']['status'] = 'agent_declined'
+            redis.set(quote_key, json.dumps(quote))
+
+            send("❌ Chipo chako hachina kugamuchirwa. Ndapota gadziridza chipo chako kana kuti rambira pamitengo yakatarwa.", customer_number, phone_id)
+            send("☑️ Waramba chipo chemutengi.", AGENT_NUMBER, phone_id)
+
+            update_user_state(customer_number, {"step": "offer_response_shona"})
+            redis.delete(state_key)
+            return
+
+    # 5. Any other message — forward to customer
     else:
         send(agent_reply, customer_number, phone_id)
+
 
 def message_handler_shona(prompt, sender, phone_id, message):
     prompt = (prompt or "").strip()
@@ -34656,14 +34726,18 @@ def human_agent_ndebele(prompt, user_data, phone_id):
 
 def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_state):
     agent_reply = message_text.strip()
-    
+    current_state = agent_state.get("state")
+    quote_key = f"quote:{agent_state.get('quote_id')}"
+    state_key = f"agent_fallback:{AGENT_NUMBER}"
+
     if agent_reply == "1":
         agent_customer_number = agent_state.get('customer_number')
         timer = fallback_timers_ndebele.pop(agent_customer_number, None)
         if timer:
             timer.cancel()
-        send("✅ Usuxhumene nekhasimende. I-bhoti imisiwe kuze kuthumele '2' ukuze ubuyele ku-bhoti.", AGENT_NUMBER, phone_id)
-        send("✅ Usuxhumene nomuntu ongumphathi. Sicela ulinde impendulo yakhe.", customer_number, phone_id)
+
+        send("✅ Usuxhumene lomthengi. Ibhothi limisiwe kuze uthumele '2' ukuze ibuye.", AGENT_NUMBER, phone_id)
+        send("✅ Usuxhumene lo agent. Sicela ulinde impendulo yabo.", customer_number, phone_id)
 
         update_user_state(customer_number, {
             'step': 'talking_to_human_agent_ndebele',
@@ -34672,18 +34746,47 @@ def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_st
         })
 
     elif agent_reply == "2":
-        send("✅ I-bhoti ibuyile futhi izosiza ikhasimende kusukela manje.", AGENT_NUMBER, phone_id)
-        send("👋 Usubuya ne-bhoti yethu.", customer_number, phone_id)
+        send("✅ Ibhothi selibuyele ekusizeni umthengi.", AGENT_NUMBER, phone_id)
+        send("👋 Usexhumene futhi le assistant yethu ngokuzenzakalelayo.", customer_number, phone_id)
 
         update_user_state(customer_number, {
             'step': 'main_menu_ndebele',
             'user': get_user_state(customer_number).get('user', {}),
             'sender': customer_number
         })
-        show_main_menu_ndebele(customer_number, phone_id)
+        show_main_menu(customer_number, phone_id)
+
+    elif current_state == "awaiting_offer_approval" and agent_reply == "3":
+        quote = redis.get(quote_key)
+        if quote:
+            quote = json.loads(quote)
+            quote['offer_data']['status'] = 'agent_accepted'
+            redis.set(quote_key, json.dumps(quote))
+
+            send("✅ Isipho sakho sivunyiwe liqembu lethu! Kasihambe esigabeni esilandelayo.", customer_number, phone_id)
+            send("👍 Uvume isipho somthengi.", AGENT_NUMBER, phone_id)
+
+            update_user_state(customer_number, {"step": "booking_details_ndebele"})
+            redis.delete(state_key)
+            return
+
+    elif current_state == "awaiting_offer_approval" and agent_reply == "4":
+        quote = redis.get(quote_key)
+        if quote:
+            quote = json.loads(quote)
+            quote['offer_data']['status'] = 'agent_declined'
+            redis.set(quote_key, json.dumps(quote))
+
+            send("❌ Isipho sakho asivunywanga. Sicela usibuyekeze noma uqhubeke ngemali ebekiwe.", customer_number, phone_id)
+            send("☑️ Uwaliwe isipho somthengi.", AGENT_NUMBER, phone_id)
+
+            update_user_state(customer_number, {"step": "offer_response_ndebele"})
+            redis.delete(state_key)
+            return
 
     else:
         send(agent_reply, customer_number, phone_id)
+
 
 def message_handler_ndebele(prompt, sender, phone_id, message):
     prompt = (prompt or "").strip()
@@ -36711,46 +36814,77 @@ def handle_collect_offer_details_ndebele(prompt, user_data, phone_id):
 def handle_offer_response_ndebele(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     quote_id = user.quote_data.get('quote_id')
+    last_message = user_data.get("message", "").strip()
+
     if prompt == "1":
-        user.offer_data['status'] = 'accepted'
+        user.offer_data['status'] = 'pending_agent_review'
+
         if quote_id:
             q = redis.get(f"quote:{quote_id}")
             if q:
                 q = json.loads(q)
                 q['offer_data'] = user.offer_data
                 redis.set(f"quote:{quote_id}", json.dumps(q))
-        update_user_state(user_data['sender'], {
-            'step': 'booking_details_ndebele',
-            'user': user.to_dict()
-        })
-        send(
-            "Izindaba ezinhle! Isiphakamiso sakho samukelwe.\n\n"
-            "Masigqinise isinyathelo sakho esilandelayo.\n\n"
-            "Ungathanda:\n"
-            "1. Bhalisa Ukuhlolwa Kwendawo\n"
-            "2. Khokha Idiphozithi\n"
-            "3. Qinisekisa Usuku Lokubha",
-            user_data['sender'], phone_id
-        )
-        return {'step': 'booking_details_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
+        send("Siyabonga! Siqinisekisa isipho sakho leqembu lethu. Sicela ulinde.", user_data['sender'], phone_id)
+
+        offer_data = user.offer_data
+        survey_price = float(offer_data.get('survey_price', 0) or 0)
+        drilling_price = float(offer_data.get('drilling_price', 0) or 0)
+        total_price = survey_price + drilling_price
+
+        offer_msg = "\n".join([
+            "📝 Isipho Silindele Ukuvunywa",
+            f"📱 Umthengi: {user_data['sender']}",
+            f"💧 Ukuhlola Amanzi: ${survey_price:.2f}",
+            f"🛠️ Ukugaya iBorehole: ${drilling_price:.2f}",
+            f"💰 Inani Eliphelele: ${total_price:.2f}",
+            f"📄 Isimo: {offer_data.get('status', 'N/A')}",
+            f"\n🗒️ Umlayezo womthengi:\n{last_message}" if last_message else "",
+            "",
+            "Izinketho ze-Agent:",
+            "1. Vuma Isipho ✅",
+            "2. Wala Isipho ❌"
+        ])
+        send(offer_msg.strip(), AGENT_NUMBER, phone_id)
+
+        redis.set(f"agent_fallback:{AGENT_NUMBER}", json.dumps({
+            "customer_number": user_data['sender'],
+            "quote_id": quote_id,
+            "state": "awaiting_offer_approval"
+        }))
+
+        return {'step': 'waiting_on_agent_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
     elif prompt == "2":
-        send("Ukuxhunywa nomuntu siqu...", user_data['sender'], phone_id)
+        send("Sikuxhumanisa lo agent wabantu...", user_data['sender'], phone_id)
+        send("💬 Umthengi ucele ukuxhaswa nguwe.\n📱 Umthengi: {}".format(user_data['sender']), AGENT_NUMBER, phone_id)
         return {'step': 'human_agent_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
     elif prompt == "3":
         update_user_state(user_data['sender'], {
             'step': 'collect_offer_details_ndebele',
             'user': user.to_dict()
         })
+
         send(
-            "Phendula ngesiphakamiso sakho esibuyekeziwe ngefomethi:\n\n"
+            "Sicela uphendule ngezipho ezibuyekeziweyo ngendlela elandelayo:\n\n"
             "- Ukuhlola Amanzi: $_\n"
-            "- Ukubha Ibhorehole: $_",
+            "- Ukugaya iBorehole: $_",
             user_data['sender'], phone_id
         )
+
+        send(
+            f"📨 Umthengi ubuyekeza isipho sabo.\n📱 Umthengi: {user_data['sender']}\n\n📝 Umlayezo:\n{last_message}",
+            AGENT_NUMBER, phone_id
+        )
+
         return {'step': 'collect_offer_details_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
     else:
-        send("Khetha inketho efanele (1-3).", user_data['sender'], phone_id)
+        send("Sicela ukhethe inketho eqondileyo (1-3).", user_data['sender'], phone_id)
         return {'step': 'offer_response_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
 
 def handle_booking_details_ndebele(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])

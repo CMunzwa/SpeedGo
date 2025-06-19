@@ -33168,7 +33168,57 @@ def webhook():
 
             
                     send("⚠️ No active chat. Please wait for a new request.", AGENT_NUMBER, phone_id)
+                    return "OK"                 
+
+                    
+            
+                    if agent_state.get("step") == "agent_reply_shona":
+                        handle_agent_reply_shona(message_text, customer_number, phone_id, agent_state)
+                        
+                        # 🔄 Re-save agent state to ensure customer_number is preserved
+                        agent_state["customer_number"] = customer_number
+                        agent_state["step"] = "talking_to_human_agent_shona"
+                        update_user_state(AGENT_NUMBER, agent_state)
+
+                        return "OK"
+            
+                    if agent_state.get("step") == "talking_to_human_agent_shona":
+                        if message_text.strip() == "2":
+                            # ✅ This is the agent saying "return to bot"
+                            handle_agent_reply_shona("2", customer_number, phone_id, agent_state)
+                        else:
+                            # ✅ Forward any other message to the customer
+                            send(message_text, customer_number, phone_id)
+                        return "OK"
+
+            
+                    send("⚠️ Hapana hurukuro iripo pari zvino. Ndapota mirira chikumbiro chitsva.", AGENT_NUMBER, phone_id)
                     return "OK"
+
+                    if agent_state.get("step") == "agent_reply_ndebele":
+                        handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_state)
+                        
+                        # 🔄 Re-save agent state to ensure customer_number is preserved
+                        agent_state["customer_number"] = customer_number
+                        agent_state["step"] = "talking_to_human_agent_ndebele"
+                        update_user_state(AGENT_NUMBER, agent_state)
+
+                        return "OK"
+            
+                    if agent_state.get("step") == "talking_to_human_agent_ndebele":
+                        if message_text.strip() == "2":
+                            # ✅ This is the agent saying "return to bot"
+                            handle_agent_reply_ndebele("2", customer_number, phone_id, agent_state)
+                        else:
+                            # ✅ Forward any other message to the customer
+                            send(message_text, customer_number, phone_id)
+                        return "OK"
+
+            
+                    send("⚠️ Akulakho okuxoxiswana ngakho okwamanje. Sicela ulinde isicelo esilandelayo.", AGENT_NUMBER, phone_id)
+                    return "OK"
+            
+            
             
                 # Handle normal user messages (only if NOT agent)
 

@@ -10389,7 +10389,7 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
         })
         show_main_menu(customer_number, phone_id)
 
-    elif current_state == "awaiting_offer_approval" and agent_reply == "3":
+    elif agent_reply == "3":
         quote = redis.get(quote_key)
         if quote:
             quote = json.loads(quote)
@@ -10403,7 +10403,7 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
             redis.delete(state_key)
             return
 
-    elif current_state == "awaiting_offer_approval" and agent_reply == "4":
+    elif agent_reply == "4":
         quote = redis.get(quote_key)
         if quote:
             quote = json.loads(quote)
@@ -11043,7 +11043,10 @@ def handle_collect_offer_details(prompt, user_data, phone_id):
 def handle_offer_response(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     quote_id = user.quote_data.get('quote_id')
-    last_message = user_data.get("message", "").strip()
+
+    # Get the last two user messages if available
+    recent_messages = user_data.get("recent_messages", [])[-2:]
+    last_messages_formatted = "\n".join([f"- {msg}" for msg in recent_messages]) if recent_messages else ""
 
     if prompt == "1":
         user.offer_data['status'] = 'pending_agent_review'
@@ -11069,11 +11072,11 @@ def handle_offer_response(prompt, user_data, phone_id):
             f"🛠️ Drilling: ${drilling_price:.2f}",
             f"💰 Total Offer: ${total_price:.2f}",
             f"📄 Status: {offer_data.get('status', 'N/A')}",
-            f"\n🗒️ Customer Message:\n{last_message}" if last_message else "",
+            f"\n🗒️ Customer Messages:\n{last_messages_formatted}" if last_messages_formatted else "",
             "",
             "Agent Options:",
-            "1. Accept Offer ✅",
-            "2. Decline Offer ❌"
+            "3. Accept Offer ✅",
+            "4. Decline Offer ❌"
         ])
         send(offer_msg.strip(), AGENT_NUMBER, phone_id)
 
@@ -11104,7 +11107,7 @@ def handle_offer_response(prompt, user_data, phone_id):
         )
 
         send(
-            f"📨 Customer is revising their offer.\n📱 Customer: {user_data['sender']}\n\n📝 Message:\n{last_message}",
+            f"📨 Customer is revising their offer.\n📱 Customer: {user_data['sender']}\n\n📝 Customer Messages:\n{last_messages_formatted}",
             AGENT_NUMBER, phone_id
         )
 
@@ -22544,7 +22547,10 @@ def handle_collect_offer_details_shona(prompt, user_data, phone_id):
 def handle_offer_response_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     quote_id = user.quote_data.get('quote_id')
-    last_message = user_data.get("message", "").strip()  # Capture user-submitted message
+
+    # Get the last two user messages (assuming they're stored in recent_messages)
+    recent_messages = user_data.get("recent_messages", [])[-2:]
+    last_messages_formatted = "\n".join([f"- {msg}" for msg in recent_messages]) if recent_messages else ""
 
     if prompt == "1":
         user.offer_data['status'] = 'pending_agent_review'
@@ -22572,11 +22578,11 @@ def handle_offer_response_shona(prompt, user_data, phone_id):
             f"🛠️ Kuchera borehole: ${drilling_price:.2f}",
             f"💰 Chipo chose: ${total_price:.2f}",
             f"📄 Mamiriro: {offer_data.get('status', 'N/A')}",
-            f"\n🗒️ Mharidzo yemutengi:\n{last_message}" if last_message else "",
+            f"\n🗒️ Mharidzo dzemutengi:\n{last_messages_formatted}" if last_messages_formatted else "",
             "",
             "Sarudzo dzemumiriri:",
-            "1. Bvuma chipo ✅",
-            "2. Ramba chipo ❌"
+            "3. Bvuma chipo ✅",
+            "4. Ramba chipo ❌"
         ])
         send(offer_msg.strip(), AGENT_NUMBER, phone_id)
 
@@ -22607,7 +22613,7 @@ def handle_offer_response_shona(prompt, user_data, phone_id):
         )
 
         send(
-            f"📨 Mutengi ari kugadzirisa chipo chavo.\n📱 Mutengi: {user_data['sender']}\n\n📝 Mharidzo:\n{last_message}",
+            f"📨 Mutengi ari kugadzirisa chipo chavo.\n📱 Mutengi: {user_data['sender']}\n\n📝 Mharidzo dzemutengi:\n{last_messages_formatted}",
             AGENT_NUMBER, phone_id
         )
 
@@ -22616,6 +22622,7 @@ def handle_offer_response_shona(prompt, user_data, phone_id):
     else:
         send("Ndapota sarudza imwe yesarudzo dziri pakati pe 1 kusvika ku 3.", user_data['sender'], phone_id)
         return {'step': 'offer_response_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
+
 
 def get_pricing_for_location_quotes_shona(location, service_type, pump_option_selected=None):
     location_key = location.strip().lower()
@@ -22855,7 +22862,7 @@ def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_stat
         show_main_menu(customer_number, phone_id)
 
     # 3. Agent accepts offer
-    elif current_state == "awaiting_offer_approval" and agent_reply == "3":
+    elif agent_reply == "3":
         quote = redis.get(quote_key)
         if quote:
             quote = json.loads(quote)
@@ -22870,7 +22877,7 @@ def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_stat
             return
 
     # 4. Agent declines offer
-    elif current_state == "awaiting_offer_approval" and agent_reply == "4":
+    elif agent_reply == "4":
         quote = redis.get(quote_key)
         if quote:
             quote = json.loads(quote)
@@ -34762,7 +34769,7 @@ def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_st
         })
         show_main_menu(customer_number, phone_id)
 
-    elif current_state == "awaiting_offer_approval" and agent_reply == "3":
+    elif  agent_reply == "3":
         quote = redis.get(quote_key)
         if quote:
             quote = json.loads(quote)
@@ -34776,7 +34783,7 @@ def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_st
             redis.delete(state_key)
             return
 
-    elif current_state == "awaiting_offer_approval" and agent_reply == "4":
+    elif agent_reply == "4":
         quote = redis.get(quote_key)
         if quote:
             quote = json.loads(quote)
@@ -36820,7 +36827,10 @@ def handle_collect_offer_details_ndebele(prompt, user_data, phone_id):
 def handle_offer_response_ndebele(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     quote_id = user.quote_data.get('quote_id')
-    last_message = user_data.get("message", "").strip()
+
+    # Fetch and format the last 2 customer messages
+    recent_messages = user_data.get("recent_messages", [])[-2:]
+    last_messages_formatted = "\n".join([f"- {msg}" for msg in recent_messages]) if recent_messages else ""
 
     if prompt == "1":
         user.offer_data['status'] = 'pending_agent_review'
@@ -36846,11 +36856,11 @@ def handle_offer_response_ndebele(prompt, user_data, phone_id):
             f"🛠️ Ukugaya iBorehole: ${drilling_price:.2f}",
             f"💰 Inani Eliphelele: ${total_price:.2f}",
             f"📄 Isimo: {offer_data.get('status', 'N/A')}",
-            f"\n🗒️ Umlayezo womthengi:\n{last_message}" if last_message else "",
+            f"\n🗒️ Imilayezo yomthengi:\n{last_messages_formatted}" if last_messages_formatted else "",
             "",
             "Izinketho ze-Agent:",
-            "1. Vuma Isipho ✅",
-            "2. Wala Isipho ❌"
+            "3. Vuma Isipho ✅",
+            "4. Wala Isipho ❌"
         ])
         send(offer_msg.strip(), AGENT_NUMBER, phone_id)
 
@@ -36881,7 +36891,7 @@ def handle_offer_response_ndebele(prompt, user_data, phone_id):
         )
 
         send(
-            f"📨 Umthengi ubuyekeza isipho sabo.\n📱 Umthengi: {user_data['sender']}\n\n📝 Umlayezo:\n{last_message}",
+            f"📨 Umthengi ubuyekeza isipho sabo.\n📱 Umthengi: {user_data['sender']}\n\n📝 Imilayezo yomthengi:\n{last_messages_formatted}",
             AGENT_NUMBER, phone_id
         )
 
@@ -36890,6 +36900,7 @@ def handle_offer_response_ndebele(prompt, user_data, phone_id):
     else:
         send("Sicela ukhethe inketho eqondileyo (1-3).", user_data['sender'], phone_id)
         return {'step': 'offer_response_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
+
 
 
 def handle_booking_details_ndebele(prompt, user_data, phone_id):

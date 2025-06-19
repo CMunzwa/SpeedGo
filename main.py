@@ -33295,7 +33295,7 @@ action_mapping = {
     "enter_location_for_quote_ndebele": handle_enter_location_for_quote_ndebele,
     "select_service_quote_ndebele": handle_select_service_quote_ndebele,
     "select_service_ndebele": handle_select_service_ndebele,
-    "borehole_class_pricing_ndebele": handle_borehole_class_pricing_ndebele,
+    "borehole_class_pricing_ndebele": handle_mgodi_class_pricing_ndebele,
     "agent_reply_ndebele": handle_agent_reply_ndebele,
     "talking_to_customer_ndebele": handle_agent_conversation_ndebele,
     "agent_available_ndebele": handle_agent_available_ndebele,

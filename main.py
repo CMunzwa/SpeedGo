@@ -20125,9 +20125,9 @@ def message_handler_shona(prompt, sender, phone_id, message):
     update_user_state(sender, next_state)
 
     def get_action_shona(current_state, prompt, user_data, phone_id):
-    prompt = (prompt or "").strip()
-    handler = action_mapping.get(current_state, handle_welcome)
-    return handler(prompt, user_data, phone_id)
+        prompt = (prompt or "").strip()
+        handler = action_mapping.get(current_state, handle_welcome)
+        return handler(prompt, user_data, phone_id)
 
     def show_main_menu_shona(sender, phone_id):
         menu_text = (

@@ -10359,15 +10359,17 @@ def human_agent(prompt, user_data, phone_id):
 
 def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
     agent_reply = message_text.strip()
-    
+    current_state = agent_state.get("state")
+    quote_key = f"quote:{agent_state.get('quote_id')}"
+    state_key = f"agent_fallback:{AGENT_NUMBER}"
+
     if agent_reply == "1":
-         # Cancel fallback timer if exists
         agent_customer_number = agent_state.get('customer_number')
         timer = fallback_timers.pop(agent_customer_number, None)
         if timer:
             timer.cancel()
-        # Agent chooses to talk to customer
-        send("✅ You're now talking to the customer. Bot is paused until you send '2' to return to bot.", AGENT_NUMBER, phone_id)
+
+        send("✅ You are now chatting with the customer. Bot is paused until you send '2' to return control.", AGENT_NUMBER, phone_id)
         send("✅ You are now connected to a human agent. Please wait for their response.", customer_number, phone_id)
 
         update_user_state(customer_number, {
@@ -10377,9 +10379,8 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
         })
 
     elif agent_reply == "2":
-        # Agent returns control to bot
-        send("✅ The bot has resumed and will assist the customer from here.", AGENT_NUMBER, phone_id)
-        send("👋 You're now back with our automated assistant.", customer_number, phone_id)
+        send("✅ The bot has resumed and will assist the customer now.", AGENT_NUMBER, phone_id)
+        send("👋 You are now back with our automated assistant.", customer_number, phone_id)
 
         update_user_state(customer_number, {
             'step': 'main_menu',
@@ -10388,42 +10389,37 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
         })
         show_main_menu(customer_number, phone_id)
 
-    elif current_state == "awaiting_offer_approval":
-        if agent_reply == "3":
-            # Agent accepts offer
+    elif current_state == "awaiting_offer_approval" and agent_reply == "3":
+        quote = redis.get(quote_key)
+        if quote:
+            quote = json.loads(quote)
             quote['offer_data']['status'] = 'agent_accepted'
             redis.set(quote_key, json.dumps(quote))
 
-            # Notify customer
-            send("✅ Your offer has been accepted by our team! Let's proceed to the next step.", customer_number, phone_id)
+            send("✅ Your offer has been accepted by our team! Let’s move on to the next step.", customer_number, phone_id)
+            send("👍 You have accepted the customer's offer.", AGENT_NUMBER, phone_id)
 
-            # Notify agent
-            send("👍 You have accepted the customer's offer.", agent_number, phone_id)
-
-            # Update customer state
             update_user_state(customer_number, {"step": "booking_details"})
             redis.delete(state_key)
             return
 
-        elif agent_reply == "4":
-            # Agent declines offer
+    elif current_state == "awaiting_offer_approval" and agent_reply == "4":
+        quote = redis.get(quote_key)
+        if quote:
+            quote = json.loads(quote)
             quote['offer_data']['status'] = 'agent_declined'
             redis.set(quote_key, json.dumps(quote))
 
-            # Notify customer
-            send("❌ Your offer was declined. Please revise your offer or proceed with the listed prices.", customer_number, phone_id)
+            send("❌ Your offer was declined. Please revise your offer or continue with our standard prices.", customer_number, phone_id)
+            send("☑️ You have declined the customer's offer.", AGENT_NUMBER, phone_id)
 
-            # Notify agent
-            send("☑️ You have declined the customer's offer.", agent_number, phone_id)
-
-            # Revert customer to offer step
             update_user_state(customer_number, {"step": "offer_response"})
             redis.delete(state_key)
             return
 
     else:
-        # Forward other agent messages to the customer directly
         send(agent_reply, customer_number, phone_id)
+
 
 def handle_waiting_for_human_agent_response(message, user_data, phone_id):
     customer_number = user_data['sender']
@@ -11047,9 +11043,9 @@ def handle_collect_offer_details(prompt, user_data, phone_id):
 def handle_offer_response(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     quote_id = user.quote_data.get('quote_id')
+    last_message = user_data.get("message", "").strip()
 
     if prompt == "1":
-        # User accepts offer — send to agent for confirmation
         user.offer_data['status'] = 'pending_agent_review'
 
         if quote_id:
@@ -11059,25 +11055,28 @@ def handle_offer_response(prompt, user_data, phone_id):
                 q['offer_data'] = user.offer_data
                 redis.set(f"quote:{quote_id}", json.dumps(q))
 
-        # Notify user
-        send("Thank you! We’re confirming your offer with our team. Please wait while we verify.", user_data['sender'], phone_id)
+        send("Thank you! We're confirming your offer with our team. Please hold on while we review it.", user_data['sender'], phone_id)
 
-        # Prepare message for agent
         offer_data = user.offer_data
+        survey_price = float(offer_data.get('survey_price', 0) or 0)
+        drilling_price = float(offer_data.get('drilling_price', 0) or 0)
+        total_price = survey_price + drilling_price
+
         offer_msg = "\n".join([
             "📝 Offer Pending Approval",
             f"📱 Customer: {user_data['sender']}",
-            f"💧 Water Survey: ${offer_data.get('survey_price', 'N/A')}",
-            f"🛠️ Drilling: ${offer_data.get('drilling_price', 'N/A')}",
+            f"💧 Water Survey: ${survey_price:.2f}",
+            f"🛠️ Drilling: ${drilling_price:.2f}",
+            f"💰 Total Offer: ${total_price:.2f}",
             f"📄 Status: {offer_data.get('status', 'N/A')}",
+            f"\n🗒️ Customer Message:\n{last_message}" if last_message else "",
             "",
-            "Agent options:",
-            "3. Accept Offer ✅",
-            "4. Decline Offer ❌"
+            "Agent Options:",
+            "1. Accept Offer ✅",
+            "2. Decline Offer ❌"
         ])
-        send(offer_msg, AGENT_NUMBER, phone_id)
+        send(offer_msg.strip(), AGENT_NUMBER, phone_id)
 
-        # Save agent-customer link for follow-up
         redis.set(f"agent_fallback:{AGENT_NUMBER}", json.dumps({
             "customer_number": user_data['sender'],
             "quote_id": quote_id,
@@ -11087,8 +11086,8 @@ def handle_offer_response(prompt, user_data, phone_id):
         return {'step': 'waiting_on_agent', 'user': user.to_dict(), 'sender': user_data['sender']}
 
     elif prompt == "2":
-        send("Connecting you to a human agent...", user_data['sender'], phone_id)
-        send("💬 Customer requests direct agent support.\n📱 Customer: {}".format(user_data['sender']), AGENT_NUMBER, phone_id)
+        send("We’re connecting you to a human agent. Please hold on...", user_data['sender'], phone_id)
+        send("💬 Customer has requested to speak with a human agent.\n📱 Customer: {}".format(user_data['sender']), AGENT_NUMBER, phone_id)
         return {'step': 'human_agent', 'user': user.to_dict(), 'sender': user_data['sender']}
 
     elif prompt == "3":
@@ -11096,12 +11095,19 @@ def handle_offer_response(prompt, user_data, phone_id):
             'step': 'collect_offer_details',
             'user': user.to_dict()
         })
+
         send(
-            "Please reply with your revised offer in the format:\n\n"
+            "Please reply with your revised offer in the format below:\n\n"
             "- Water Survey: $_\n"
             "- Borehole Drilling: $_",
             user_data['sender'], phone_id
         )
+
+        send(
+            f"📨 Customer is revising their offer.\n📱 Customer: {user_data['sender']}\n\n📝 Message:\n{last_message}",
+            AGENT_NUMBER, phone_id
+        )
+
         return {'step': 'collect_offer_details', 'user': user.to_dict(), 'sender': user_data['sender']}
 
     else:

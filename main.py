@@ -37417,10 +37417,17 @@ def webhook():
                         if message_text.strip() == "2":
                             # ✅ This is the agent saying "return to bot"
                             handle_agent_reply("2", customer_number, phone_id, agent_state)
+                        elif message_text.strip() == "3":
+                            # ✅ This is the agent accepting the customer's offer
+                            handle_agent_reply("3", customer_number, phone_id, agent_state)
+                        elif message_text.strip() == "4":
+                            # ❌ This is the agent declining the customer's offer
+                            handle_agent_reply("4", customer_number, phone_id, agent_state)
                         else:
                             # ✅ Forward any other message to the customer
                             send(message_text, customer_number, phone_id)
                         return "OK"
+
 
                     if agent_state.get("step") == "agent_reply_shona":
                         handle_agent_reply_shona(message_text, customer_number, phone_id, agent_state)
@@ -37436,10 +37443,17 @@ def webhook():
                         if message_text.strip() == "2":
                             # ✅ This is the agent saying "return to bot"
                             handle_agent_reply_shona("2", customer_number, phone_id, agent_state)
+                        elif message_text.strip() == "3":
+                            # ✅ This is the agent accepting the customer's offer
+                            handle_agent_reply_shona("3", customer_number, phone_id, agent_state)
+                        elif message_text.strip() == "4":
+                            # ❌ This is the agent declining the customer's offer
+                            handle_agent_reply_shona("4", customer_number, phone_id, agent_state)
                         else:
                             # ✅ Forward any other message to the customer
                             send(message_text, customer_number, phone_id)
                         return "OK"
+
 
             
      
@@ -37457,10 +37471,17 @@ def webhook():
                         if message_text.strip() == "2":
                             # ✅ This is the agent saying "return to bot"
                             handle_agent_reply_ndebele("2", customer_number, phone_id, agent_state)
+                        elif message_text.strip() == "3":
+                            # ✅ This is the agent accepting the customer's offer
+                            handle_agent_reply_ndebele("3", customer_number, phone_id, agent_state)
+                        elif message_text.strip() == "4":
+                            # ❌ This is the agent declining the customer's offer
+                            handle_agent_reply_ndebele("4", customer_number, phone_id, agent_state)
                         else:
                             # ✅ Forward any other message to the customer
                             send(message_text, customer_number, phone_id)
                         return "OK"
+
 
             
                     send("⚠️ No active chat. Please wait for a new request.", AGENT_NUMBER, phone_id)

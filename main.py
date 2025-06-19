@@ -37456,8 +37456,7 @@ def webhook():
 
                         return "OK"
 
-                    update_recent_messages(sender, incoming_message)
-            
+                               
                     if agent_state.get("step") == "talking_to_human_agent":
                         if message_text.strip() == "2":
                             # ✅ This is the agent saying "return to bot"

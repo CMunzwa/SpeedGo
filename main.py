@@ -19861,7 +19861,7 @@ def get_pricing_for_location_quotes_shona(location, service_type, pump_option_se
             return message
 
     # Rest of the function remains the same...
-    loc_data = location_pricing.get(location_key)
+    loc_data = location_pricing_shona.get(location_key)
     if not loc_data:
         return "Ndine urombo, mutengo hausi kuwanikwa munzvimbo iyi."
 

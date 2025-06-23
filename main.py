@@ -22432,17 +22432,148 @@ def handle_main_menu_shona(prompt, user_data, phone_id):
         send("Ndapota sarudza sarudzo inoshanda (1-6).", user_data['sender'], phone_id)
         return {'step': 'main_menu_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-def human_agent_shona(prompt, user_data, phone_id):
+
+def human_agent_shona(prompt: str, user_data: dict, phone_id: str) -> dict:
+    """
+    Inobatanidza mutengi neanowanikwa agent ane ruzivo rwakakwana.
+    """
     customer_number = user_data['sender']
-    
-    # 1. Notify customer immediately
-    send("Tiri kukubatanidza nemumiriri wevanhu...", customer_number, phone_id)
-    
-    # 2. Notify agent in background
-    agent_number = "+263719835124"
-    agent_message = f"Mutengi mutsva kubva ku {customer_number}\nMharidzo: {prompt}"
-    threading.Thread(target=send, args=(agent_message, agent_number, phone_id)).start()
-    
+    result = {'status': 'initiated', 'customer': customer_number}
+
+    try:
+        # 1. Zivisa mutengi
+        active_agents = get_available_agents_count()
+        wait_estimate = calculate_wait_time(active_agents)
+
+        send(
+            f"🚀 Tiri kukubatanidza neanoshanda paSpeedGo...\n"
+            f"⏳ Nguva yekumirira inofungidzirwa: {wait_estimate}\n"
+            f"Nzvimbo yako muhurongwa: #{get_queue_position(customer_number)}",
+            customer_number,
+            phone_id
+        )
+
+        # 2. Vaka mashoko ekuudza agent
+        agent_message = build_agent_alert_message_shona(customer_number, prompt, user_data)
+
+        # 3. Gadzirisa agent aripo
+        assignment_result = assign_to_agent_shona(
+            customer_number=customer_number,
+            message=agent_message,
+            phone_id=phone_id,
+            context=user_data
+        )
+
+        if not assignment_result['success']:
+            send(
+                "Vese vaimirira vanoshanda parizvino vakabatikana. Tichakuzivisai kana umwe awanikwa.",
+                customer_number,
+                phone_id
+            )
+            add_to_waiting_queue(customer_number, prompt, user_data)
+            result.update({'status': 'queued', 'queue_position': get_queue_position(customer_number)})
+            return result
+
+        # 4. Gadzirisa mamiriro
+        update_agent_state(
+            agent_number=assignment_result['agent_number'],
+            new_state={
+                'status': 'in_conversation',
+                'customer': customer_number,
+                'start_time': datetime.now().isoformat(),
+                'context': user_data
+            }
+        )
+
+        update_customer_state(
+            customer_number=customer_number,
+            new_state={
+                'step': 'awaiting_agent_response_shona',
+                'assigned_agent': assignment_result['agent_number'],
+                'waiting_since': datetime.now().isoformat(),
+                'context': user_data
+            }
+        )
+
+        # 5. Nyora kubatana
+        log_agent_connection(
+            customer_number=customer_number,
+            agent_number=assignment_result['agent_number'],
+            initial_message=prompt,
+            context=user_data
+        )
+
+        result.update({
+            'status': 'connected',
+            'agent': assignment_result['agent_number'],
+            'timestamp': datetime.now().isoformat()
+        })
+
+    except Exception as e:
+        logger.error(f"Kubatana neagent kwatadza kuna {customer_number}: {str(e)}")
+        send(
+            "⚠️ Pane dambudziko rehunyanzvi. Edzazve gare gare.",
+            customer_number,
+            phone_id
+        )
+        result.update({'status': 'failed', 'error': str(e)})
+
+    return result
+
+
+def build_agent_alert_message_shona(customer_number: str, prompt: str, user_data: dict) -> str:
+    """Inovaka meseji yeagent ine ruzivo rwakazara."""
+    return (
+        f"🚨 CHIKUMBIRWA CHITSVA CHEMUTENGI 🚨\n\n"
+        f"🔢 Nhamba yeTikiti: {generate_ticket_number()}\n"
+        f"📱 Mutengi: {customer_number}\n"
+        f"📅 Yakagamuchirwa: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
+        f"📝 Meseji: \"{prompt}\"\n\n"
+        f"📋 MASHOKO:\n"
+        f"- Mutauro: {user_data.get('language', 'Shona')}\n"
+        f"- Sevhisi: {user_data.get('quote_data', {}).get('service', 'Hazvina Kutaurwa')}\n"
+        f"- Chikamu chemutengi: {user_data.get('tier', 'Standard')}\n"
+        f"- Zvakamboitika: {user_data.get('previous_issues', [])}\n\n"
+        f"🛎️ SARUDZO DZEKUPINDURA:\n"
+        f"1️⃣ Gamuchira hurukuro\n"
+        f"2️⃣ Rega bot ipindure\n"
+    )
+
+
+def assign_to_agent_shona(customer_number: str, message: str, phone_id: str, context: dict) -> dict:
+    """Inotsvaga uye inogovera agent aripo."""
+    agent = find_best_available_agent_shona(context)
+
+    if not agent:
+        return {'success': False, 'reason': 'no_available_agents'}
+
+    try:
+        send(message, agent, phone_id)
+        return {
+            'success': True,
+            'agent_number': agent,
+            'timestamp': datetime.now().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Kutumira meseji kune agent {agent} kwatadza: {str(e)}")
+        return {'success': False, 'reason': 'notification_failed'}
+
+
+def find_best_available_agent_shona(context: dict) -> str:
+    """Inodzosa agent anonyatsokodzera aripo."""
+    available_agents = [
+        number for number in AGENT_NUMBER
+        if get_agent_state(number).get('status') == 'available'
+    ]
+
+    if not available_agents:
+        return None
+
+    return min(
+        available_agents,
+        key=lambda x: get_agent_state(x).get('last_assigned', '1970-01-01')
+    )
+
     # 3. After 10 seconds, send fallback options
     def send_fallback_shona():
         user_data = get_user_state(customer_number)
@@ -34808,36 +34939,147 @@ def handle_mgodi_class_pricing_ndebele(prompt, user_data, phone_id):
         )
         return {'step': 'quote_followup_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}  
 
-def human_agent_ndebele(prompt, user_data, phone_id):
+def human_agent_ndebele(prompt: str, user_data: dict, phone_id: str) -> dict:
+    """
+    Ixhumanisa ikhasimende lomsebenzi okhona lothatha izicelo.
+    """
     customer_number = user_data['sender']
+    result = {'status': 'initiated', 'customer': customer_number}
 
-    # 1. Notify customer
-    send("Kuxhumanisa nommeleli wabantu...", customer_number, phone_id)
+    try:
+        # 1. Yazisa ikhasimende
+        active_agents = get_available_agents_count()
+        wait_estimate = calculate_wait_time(active_agents)
 
-    # 2. Notify agent
-    agent_message = (
-        f"👋 Isicelo esisha ku-WhatsApp\n\n"
-        f"📱 Umthengi: {customer_number}\n"
-        f"📩 Umlayezo: \"{prompt}\"\n\n"
-        f"Phendula nge:\n"
-        f"1 - Khuluma nomthengi\n"
-        f"2 - Buyela kubhothi"
+        send(
+            f"🚀 Sikhuluma lokuxhumanisa lawe lomsebenzi ophilayo...\n"
+            f"⏳ Isikhathi sokulinda esilinganisiweyo: {wait_estimate}\n"
+            f"Inombolo yakho ohlwini: #{get_queue_position(customer_number)}",
+            customer_number,
+            phone_id
+        )
+
+        # 2. Yakha umlayezo oya kumsebenzi
+        agent_message = build_agent_alert_message_ndebele(customer_number, prompt, user_data)
+
+        # 3. Thumela kumsebenzi okhona
+        assignment_result = assign_to_agent_ndebele(
+            customer_number=customer_number,
+            message=agent_message,
+            phone_id=phone_id,
+            context=user_data
+        )
+
+        if not assignment_result['success']:
+            send(
+                "Bonke abasebenzi bathwele amaphini okwamanje. Sizakwazisa uma omunye esevulekile.",
+                customer_number,
+                phone_id
+            )
+            add_to_waiting_queue(customer_number, prompt, user_data)
+            result.update({'status': 'queued', 'queue_position': get_queue_position(customer_number)})
+            return result
+
+        # 4. Buyekeza isimo
+        update_agent_state(
+            agent_number=assignment_result['agent_number'],
+            new_state={
+                'status': 'in_conversation',
+                'customer': customer_number,
+                'start_time': datetime.now().isoformat(),
+                'context': user_data
+            }
+        )
+
+        update_customer_state(
+            customer_number=customer_number,
+            new_state={
+                'step': 'awaiting_agent_response_ndebele',
+                'assigned_agent': assignment_result['agent_number'],
+                'waiting_since': datetime.now().isoformat(),
+                'context': user_data
+            }
+        )
+
+        # 5. Layisha i-log yokuxhumana
+        log_agent_connection(
+            customer_number=customer_number,
+            agent_number=assignment_result['agent_number'],
+            initial_message=prompt,
+            context=user_data
+        )
+
+        result.update({
+            'status': 'connected',
+            'agent': assignment_result['agent_number'],
+            'timestamp': datetime.now().isoformat()
+        })
+
+    except Exception as e:
+        logger.error(f"Ukuxhumana kumsebenzi kwehlulekile ku {customer_number}: {str(e)}")
+        send(
+            "⚠️ Sikhangelana lobunzima kobuchwepheshe. Sicela uphinde uzame ngemva kwesikhathi.",
+            customer_number,
+            phone_id
+        )
+        result.update({'status': 'failed', 'error': str(e)})
+
+    return result
+
+
+def build_agent_alert_message_ndebele(customer_number: str, prompt: str, user_data: dict) -> str:
+    """Yakha umlayezo oqukethe imininingwane yekhasimende yomsebenzi."""
+    return (
+        f"🚨 ISICELO ESISHA SEKHASIMENDE 🚨\n\n"
+        f"🔢 Inombolo yeTikiti: {generate_ticket_number()}\n"
+        f"📱 Ikhasimende: {customer_number}\n"
+        f"📅 Samukelwe ngo: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
+        f"📝 Umlayezo: \"{prompt}\"\n\n"
+        f"📋 IMINININGWANE:\n"
+        f"- Ulimi: {user_data.get('language', 'Ndebele')}\n"
+        f"- Insiza: {user_data.get('quote_data', {}).get('service', 'Akukhanyi')}\n"
+        f"- Ibanga leKhasimende: {user_data.get('tier', 'Standard')}\n"
+        f"- Izinkinga zangaphambilini: {user_data.get('previous_issues', [])}\n\n"
+        f"🛎️ OKWENZEKAYO:\n"
+        f"1️⃣ Yamukela ingxoxo\n"
+        f"2️⃣ Vumela i-bot iphendule\n"
     )
-    send(agent_message, AGENT_NUMBER, phone_id) 
-    
-    update_user_state(AGENT_NUMBER, {
-        'step': 'agent_reply_ndebele',
-        'customer_number': customer_number,
-        'phone_id': phone_id
-    })
 
-    # Update customer's state (waiting for agent)
-    update_user_state(customer_number, {
-        'step': 'waiting_for_human_agent_response_ndebele',
-        'user': user_data.get('user', {}),
-        'sender': customer_number,
-        'waiting_since': time.time()
-    })
+
+def assign_to_agent_ndebele(customer_number: str, message: str, phone_id: str, context: dict) -> dict:
+    """Thumela umlayezo kumsebenzi okhona."""
+    agent = find_best_available_agent_ndebele(context)
+
+    if not agent:
+        return {'success': False, 'reason': 'no_available_agents'}
+
+    try:
+        send(message, agent, phone_id)
+        return {
+            'success': True,
+            'agent_number': agent,
+            'timestamp': datetime.now().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Ukwehluleka ukuthumela kumsebenzi {agent}: {str(e)}")
+        return {'success': False, 'reason': 'notification_failed'}
+
+
+def find_best_available_agent_ndebele(context: dict) -> str:
+    """Thola umsebenzi ohle kakhulu okhona."""
+    available_agents = [
+        number for number in AGENT_NUMBER
+        if get_agent_state(number).get('status') == 'available'
+    ]
+
+    if not available_agents:
+        return None
+
+    return min(
+        available_agents,
+        key=lambda x: get_agent_state(x).get('last_assigned', '1970-01-01')
+    )
+
     
     # 3. Schedule fallback
     def send_fallback_ndebele():

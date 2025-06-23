@@ -24,7 +24,12 @@ phone_id = os.environ.get("PHONE_ID")
 gen_api = os.environ.get("GEN_API")
 owner_phone = os.environ.get("OWNER_PHONE")
 GOOGLE_MAPS_API_KEY = "AlzaSyCXDMMhg7FzP|ElKmrlkv1TqtD3HgHwW50"
-AGENT_NUMBER = "+263779562095"
+AGENT_NUMBER = [
+    "+263779562095",
+    "+263779469216",  
+    "+263785913291",
+    "+263719835124"
+]
 
 # Upstash Redis setup
 redis = Redis(
@@ -10308,43 +10313,155 @@ def update_recent_messages(sender, new_message):
     })
 
 
-def human_agent(prompt, user_data, phone_id):
+def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
+    """
+    Connects a customer to an available human agent with context
+    Args:
+        prompt: Customer's message/request
+        user_data: Customer's current state and data
+        phone_id: WhatsApp phone ID for messaging
+    Returns:
+        dict: Operation status and metadata
+    """
     customer_number = user_data['sender']
-
-    # 1. Notify customer
-    send("Connecting you to a human agent...", customer_number, phone_id)
-
+    result = {'status': 'initiated', 'customer': customer_number}
     
-    # 2. Notify agent
-    agent_message = (
-        f"🚨 New Customer Assistance Request 🚨\n\n"
+    try:
+        # 1. Notify customer with estimated wait time
+        active_agents = get_available_agents_count()
+        wait_estimate = calculate_wait_time(active_agents)
+        
+        send(
+            f"🚀 Connecting you to a human agent...\n"
+            f"⏳ Estimated wait time: {wait_estimate}\n"
+            f"Your position in queue: #{get_queue_position(customer_number)}",
+            customer_number,
+            phone_id
+        )
+
+        # 2. Prepare rich agent notification with conversation context
+        agent_message = build_agent_alert_message(customer_number, prompt, user_data)
+        
+        # 3. Assign to best available agent
+        assignment_result = assign_to_agent(
+            customer_number=customer_number,
+            message=agent_message,
+            phone_id=phone_id,
+            context=user_data
+        )
+        
+        if not assignment_result['success']:
+            # Handle case when no agents available
+            send(
+                "All our agents are currently busy. We'll notify you when one becomes available.",
+                customer_number,
+                phone_id
+            )
+            add_to_waiting_queue(customer_number, prompt, user_data)
+            result.update({'status': 'queued', 'queue_position': get_queue_position(customer_number)})
+            return result
+
+        # 4. Update states
+        update_agent_state(
+            agent_number=assignment_result['agent_number'],
+            new_state={
+                'status': 'in_conversation',
+                'customer': customer_number,
+                'start_time': datetime.now().isoformat(),
+                'context': user_data
+            }
+        )
+
+        update_customer_state(
+            customer_number=customer_number,
+            new_state={
+                'step': 'awaiting_agent_response',
+                'assigned_agent': assignment_result['agent_number'],
+                'waiting_since': datetime.now().isoformat(),
+                'context': user_data
+            }
+        )
+
+        # 5. Log the connection
+        log_agent_connection(
+            customer_number=customer_number,
+            agent_number=assignment_result['agent_number'],
+            initial_message=prompt,
+            context=user_data
+        )
+
+        result.update({
+            'status': 'connected',
+            'agent': assignment_result['agent_number'],
+            'timestamp': datetime.now().isoformat()
+        })
+
+    except Exception as e:
+        logger.error(f"Agent connection failed for {customer_number}: {str(e)}")
+        send(
+            "⚠️ We're experiencing technical difficulties. Please try again later.",
+            customer_number,
+            phone_id
+        )
+        result.update({'status': 'failed', 'error': str(e)})
+    
+    return result
+
+
+# Helper functions
+def build_agent_alert_message(customer_number: str, prompt: str, user_data: dict) -> str:
+    """Builds the formatted message for agents"""
+    return (
+        f"🚨 NEW CUSTOMER REQUEST 🚨\n\n"
+        f"🔢 Ticket #: {generate_ticket_number()}\n"
         f"📱 Customer: {customer_number}\n"
-        f"📅 Time: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
-        f"📩 Initial Message: \"{prompt}\"\n\n"
-        f"Current Conversation Context:\n"
-        f"- Language: {user_data.get('user', {}).get('language', 'English')}\n"
-        f"- Last Service: {user_data.get('user', {}).get('quote_data', {}).get('service', 'Not specified')}\n\n"
-        f"Reply with:\n"
-        f"1 - Talk to customer\n"
-        f"2 - Back to bot"
+        f"📅 Received: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
+        f"📝 Message: \"{prompt}\"\n\n"
+        f"📋 CONTEXT:\n"
+        f"- Language: {user_data.get('language', 'English')}\n"
+        f"- Service: {user_data.get('quote_data', {}).get('service', 'N/A')}\n"
+        f"- Customer Tier: {user_data.get('tier', 'Standard')}\n"
+        f"- Previous Issues: {user_data.get('previous_issues', [])\n\n"
+        f"🛎️ RESPONSE OPTIONS:\n"
+        f"1️⃣ Accept conversation\n"
+        f"2️⃣ Bot can handle this\n"
     )
-    send(agent_message, AGENT_NUMBER, phone_id) 
-    
-    update_user_state(AGENT_NUMBER, {
-        'step': 'agent_reply',
-        'customer_number': customer_number,  # Track which customer they're handling
-        'phone_id': phone_id
-    })
 
-    # Update customer's state (waiting for agent)
-    update_user_state(customer_number, {
-        'step': 'waiting_for_human_agent_response',
-        'user': user_data.get('user', {}),
-        'sender': customer_number,
-        'waiting_since': time.time()
-    })
+def assign_to_agent(customer_number: str, message: str, phone_id: str, context: dict) -> dict:
+    """Finds and assigns an available agent"""
+    agent = find_best_available_agent(context)
     
+    if not agent:
+        return {'success': False, 'reason': 'no_available_agents'}
+    
+    try:
+        # Send message to agent
+        send(message, agent, phone_id)
+        
+        return {
+            'success': True,
+            'agent_number': agent,
+            'timestamp': datetime.now().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Failed to notify agent {agent}: {str(e)}")
+        return {'success': False, 'reason': 'notification_failed'}
 
+def find_best_available_agent(context: dict) -> str:
+    """Finds the most appropriate available agent"""
+    # Implement your selection logic (round-robin, skill-based, etc.)
+    # Example simple round-robin:
+    available_agents = [num for num in AGENT_NUMBER 
+                       if get_agent_state(num).get('status') == 'available']
+    
+    if not available_agents:
+        return None
+        
+    # Get least recently assigned agent
+    return min(available_agents, 
+              key=lambda x: get_agent_state(x).get('last_assigned', '1970-01-01'))
+
+    
 
     # 3. Schedule fallback
     def send_fallback():

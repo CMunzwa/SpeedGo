@@ -10313,24 +10313,19 @@ def update_recent_messages(sender, new_message):
     })
 
 
+
 def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
     """
-    Connects a customer to an available human agent with context
-    Args:
-        prompt: Customer's message/request
-        user_data: Customer's current state and data
-        phone_id: WhatsApp phone ID for messaging
-    Returns:
-        dict: Operation status and metadata
+    Connects a customer to an available human agent with context.
     """
     customer_number = user_data['sender']
     result = {'status': 'initiated', 'customer': customer_number}
-    
+
     try:
-        # 1. Notify customer with estimated wait time
+        # 1. Notify customer
         active_agents = get_available_agents_count()
         wait_estimate = calculate_wait_time(active_agents)
-        
+
         send(
             f"🚀 Connecting you to a human agent...\n"
             f"⏳ Estimated wait time: {wait_estimate}\n"
@@ -10339,19 +10334,18 @@ def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
             phone_id
         )
 
-        # 2. Prepare rich agent notification with conversation context
+        # 2. Build agent alert message
         agent_message = build_agent_alert_message(customer_number, prompt, user_data)
-        
-        # 3. Assign to best available agent
+
+        # 3. Assign to an agent
         assignment_result = assign_to_agent(
             customer_number=customer_number,
             message=agent_message,
             phone_id=phone_id,
             context=user_data
         )
-        
+
         if not assignment_result['success']:
-            # Handle case when no agents available
             send(
                 "All our agents are currently busy. We'll notify you when one becomes available.",
                 customer_number,
@@ -10361,7 +10355,7 @@ def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
             result.update({'status': 'queued', 'queue_position': get_queue_position(customer_number)})
             return result
 
-        # 4. Update states
+        # 4. Update state
         update_agent_state(
             agent_number=assignment_result['agent_number'],
             new_state={
@@ -10382,7 +10376,7 @@ def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
             }
         )
 
-        # 5. Log the connection
+        # 5. Log connection
         log_agent_connection(
             customer_number=customer_number,
             agent_number=assignment_result['agent_number'],
@@ -10404,13 +10398,12 @@ def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
             phone_id
         )
         result.update({'status': 'failed', 'error': str(e)})
-    
+
     return result
 
 
-# Helper functions
 def build_agent_alert_message(customer_number: str, prompt: str, user_data: dict) -> str:
-    """Builds the formatted message for agents"""
+    """Builds the formatted message for agents."""
     return (
         f"🚨 NEW CUSTOMER REQUEST 🚨\n\n"
         f"🔢 Ticket #: {generate_ticket_number()}\n"
@@ -10421,23 +10414,22 @@ def build_agent_alert_message(customer_number: str, prompt: str, user_data: dict
         f"- Language: {user_data.get('language', 'English')}\n"
         f"- Service: {user_data.get('quote_data', {}).get('service', 'N/A')}\n"
         f"- Customer Tier: {user_data.get('tier', 'Standard')}\n"
-        f"- Previous Issues: {user_data.get('previous_issues', [])\n\n"
+        f"- Previous Issues: {user_data.get('previous_issues', [])}\n\n"
         f"🛎️ RESPONSE OPTIONS:\n"
         f"1️⃣ Accept conversation\n"
         f"2️⃣ Bot can handle this\n"
     )
 
+
 def assign_to_agent(customer_number: str, message: str, phone_id: str, context: dict) -> dict:
-    """Finds and assigns an available agent"""
+    """Finds and assigns an available agent."""
     agent = find_best_available_agent(context)
-    
+
     if not agent:
         return {'success': False, 'reason': 'no_available_agents'}
-    
+
     try:
-        # Send message to agent
         send(message, agent, phone_id)
-        
         return {
             'success': True,
             'agent_number': agent,
@@ -10447,19 +10439,21 @@ def assign_to_agent(customer_number: str, message: str, phone_id: str, context: 
         logger.error(f"Failed to notify agent {agent}: {str(e)}")
         return {'success': False, 'reason': 'notification_failed'}
 
+
 def find_best_available_agent(context: dict) -> str:
-    """Finds the most appropriate available agent"""
-    # Implement your selection logic (round-robin, skill-based, etc.)
-    # Example simple round-robin:
-    available_agents = [num for num in AGENT_NUMBER 
-                       if get_agent_state(num).get('status') == 'available']
-    
+    """Returns the most suitable available agent."""
+    available_agents = [
+        number for number in AGENT_NUMBER
+        if get_agent_state(number).get('status') == 'available'
+    ]
+
     if not available_agents:
         return None
-        
-    # Get least recently assigned agent
-    return min(available_agents, 
-              key=lambda x: get_agent_state(x).get('last_assigned', '1970-01-01'))
+
+    return min(
+        available_agents,
+        key=lambda x: get_agent_state(x).get('last_assigned', '1970-01-01')
+    )
 
     
 

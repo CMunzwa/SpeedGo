@@ -14,8 +14,6 @@ import time
 
 logging.basicConfig(level=logging.INFO)
 fallback_timers = {}
-fallback_timers_shona = {}
-fallback_timers_ndebele = {}
 
 
 # Environment variables
@@ -24,12 +22,7 @@ phone_id = os.environ.get("PHONE_ID")
 gen_api = os.environ.get("GEN_API")
 owner_phone = os.environ.get("OWNER_PHONE")
 GOOGLE_MAPS_API_KEY = "AlzaSyCXDMMhg7FzP|ElKmrlkv1TqtD3HgHwW50"
-AGENT_NUMBER = [
-    "+263779562095",
-    "+263779469216",  
-    "+263785913291",
-    "+263719835124"
-]
+AGENT_NUMBER = "+263719835124"
 
 # Upstash Redis setup
 redis = Redis(
@@ -73,7 +66,7 @@ def get_user_state(phone_number):
         return json.loads(state)
     return state
 
-def update_user_state(phone_number, updates, ttl_seconds=3600):
+def update_user_state(phone_number, updates, ttl_seconds=60):
     updates['phone_number'] = phone_number
     if 'sender' not in updates:
         updates['sender'] = phone_number
@@ -211,1368 +204,6 @@ location_pricing = {
         "Commercial Hole Drilling": 80,
         "Borehole Deepening": 30
     },
-    
-    "ada_middle_sabi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bachi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "badza": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bangwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "batanai": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bhefurai": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "biriri": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bumha_(shinja_rs)": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chabika": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chakowa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "changazi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "charandura": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chasiyatende": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chayamiti": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "checheche": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chechingwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chemuzangari": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chengwena": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibavahlengwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibunji": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibuwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibwedziva": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chigwikwi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikombedzi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikore": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikukwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikwakwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chinyaduma": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chinyuni": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chipinge": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chiramba": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chisumbanje": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chisungo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chitenderano": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chitepo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chitsa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chivero": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chizhou": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chizvirizvi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "dikitiki": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "doroi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "dumisani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "dzidzela": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gonakudzingwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gonarezhou": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gora": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gumira": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "guune": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "hikwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "hondoyapera": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "jersey": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "kudzanga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "kuvhirimara": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "machona": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "madamombe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "madhuku": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "madzivadondo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "magcobafuthi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mahenye": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "makambe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "makhulela": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "malanswazi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mambale": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maninji": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "manyanga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "manyuseni": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "manzvire": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maongere": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maose": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mapiravana": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mapungwana": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "marihuru": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "marula": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "masendu": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mashayamombe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "masonga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "matjingwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "matsveru": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maware": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mazihuru": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mbuyanehanda": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mhakwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mhandarume": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mhende": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mkwasine": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mphoengs": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mukamba": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mukuwini": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "munaka": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mupinga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "murombedzi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "musani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mushandirapamwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "musirizwi_a": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "musoropamwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mutandahwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "muzite": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "natane": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ndolwane": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "neruvanga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngaone": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngezi_c": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngezi_d": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngorima": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nherera": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nherera_a": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyagadza": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyahonde": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyamukunga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyamweda": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyangambe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyanyadzi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyaringire": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyele": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "raditladi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "rudo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "rupise": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "rwizi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sabi_valley_ica": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sangulube": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sansukwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sengwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "shinja": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "small_dell_estate": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "somnene": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "takawira": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tamandayi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tatonga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tjankwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tokwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tongogara": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tshovani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "turaizvombo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tuzuka": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "twananani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "xini": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-
     "bindura": {
         "Water Survey": 150,
         "Borehole Drilling": {
@@ -10297,165 +8928,43 @@ def handle_main_menu(prompt, user_data, phone_id):
         send("Please select a valid option (1-6).", user_data['sender'], phone_id)
         return {'step': 'main_menu', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-def update_recent_messages(sender, new_message):
-    state = get_user_state(sender)
-    user_data = state.get('user', {})
-    messages = state.get('recent_messages', [])
-    
-    # Append new message and keep only last 5
-    messages.append(new_message.strip())
-    messages = messages[-5:]
+def human_agent(prompt, user_data, phone_id):
+    customer_number = user_data['sender']
 
-    update_user_state(sender, {
-        'user': user_data,
-        'recent_messages': messages,
-        'sender': sender
+    # 1. Notify customer
+    send("Connecting you to a human agent...", customer_number, phone_id)
+
+    
+    # 2. Notify agent
+    agent_message = (
+        f"🚨 New Customer Assistance Request 🚨\n\n"
+        f"📱 Customer: {customer_number}\n"
+        f"📅 Time: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
+        f"📩 Initial Message: \"{prompt}\"\n\n"
+        f"Current Conversation Context:\n"
+        f"- Language: {user_data.get('user', {}).get('language', 'English')}\n"
+        f"- Last Service: {user_data.get('user', {}).get('quote_data', {}).get('service', 'Not specified')}\n\n"
+        f"Reply with:\n"
+        f"1 - Talk to customer\n"
+        f"2 - Back to bot"
+    )
+    send(agent_message, AGENT_NUMBER, phone_id) 
+    
+    update_user_state(AGENT_NUMBER, {
+        'step': 'agent_reply',
+        'customer_number': customer_number,  # Track which customer they're handling
+        'phone_id': phone_id
     })
 
-
-
-def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
-    """
-    Connects a customer to an available human agent with context.
-    """
-    customer_number = user_data['sender']
-    result = {'status': 'initiated', 'customer': customer_number}
-
-    try:
-        # 1. Notify customer
-        active_agents = get_available_agents_count()
-        wait_estimate = calculate_wait_time(active_agents)
-
-        send(
-            f"🚀 Connecting you to a human agent...\n"
-            f"⏳ Estimated wait time: {wait_estimate}\n"
-            f"Your position in queue: #{get_queue_position(customer_number)}",
-            customer_number,
-            phone_id
-        )
-
-        # 2. Build agent alert message
-        agent_message = build_agent_alert_message(customer_number, prompt, user_data)
-
-        # 3. Assign to an agent
-        assignment_result = assign_to_agent(
-            customer_number=customer_number,
-            message=agent_message,
-            phone_id=phone_id,
-            context=user_data
-        )
-
-        if not assignment_result['success']:
-            send(
-                "All our agents are currently busy. We'll notify you when one becomes available.",
-                customer_number,
-                phone_id
-            )
-            add_to_waiting_queue(customer_number, prompt, user_data)
-            result.update({'status': 'queued', 'queue_position': get_queue_position(customer_number)})
-            return result
-
-        # 4. Update state
-        update_agent_state(
-            agent_number=assignment_result['agent_number'],
-            new_state={
-                'status': 'in_conversation',
-                'customer': customer_number,
-                'start_time': datetime.now().isoformat(),
-                'context': user_data
-            }
-        )
-
-        update_customer_state(
-            customer_number=customer_number,
-            new_state={
-                'step': 'awaiting_agent_response',
-                'assigned_agent': assignment_result['agent_number'],
-                'waiting_since': datetime.now().isoformat(),
-                'context': user_data
-            }
-        )
-
-        # 5. Log connection
-        log_agent_connection(
-            customer_number=customer_number,
-            agent_number=assignment_result['agent_number'],
-            initial_message=prompt,
-            context=user_data
-        )
-
-        result.update({
-            'status': 'connected',
-            'agent': assignment_result['agent_number'],
-            'timestamp': datetime.now().isoformat()
-        })
-
-    except Exception as e:
-        logger.error(f"Agent connection failed for {customer_number}: {str(e)}")
-        send(
-            "⚠️ We're experiencing technical difficulties. Please try again later.",
-            customer_number,
-            phone_id
-        )
-        result.update({'status': 'failed', 'error': str(e)})
-
-    return result
-
-
-def build_agent_alert_message(customer_number: str, prompt: str, user_data: dict) -> str:
-    """Builds the formatted message for agents."""
-    return (
-        f"🚨 NEW CUSTOMER REQUEST 🚨\n\n"
-        f"🔢 Ticket #: {generate_ticket_number()}\n"
-        f"📱 Customer: {customer_number}\n"
-        f"📅 Received: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
-        f"📝 Message: \"{prompt}\"\n\n"
-        f"📋 CONTEXT:\n"
-        f"- Language: {user_data.get('language', 'English')}\n"
-        f"- Service: {user_data.get('quote_data', {}).get('service', 'N/A')}\n"
-        f"- Customer Tier: {user_data.get('tier', 'Standard')}\n"
-        f"- Previous Issues: {user_data.get('previous_issues', [])}\n\n"
-        f"🛎️ RESPONSE OPTIONS:\n"
-        f"1️⃣ Accept conversation\n"
-        f"2️⃣ Bot can handle this\n"
-    )
-
-
-def assign_to_agent(customer_number: str, message: str, phone_id: str, context: dict) -> dict:
-    """Finds and assigns an available agent."""
-    agent = find_best_available_agent(context)
-
-    if not agent:
-        return {'success': False, 'reason': 'no_available_agents'}
-
-    try:
-        send(message, agent, phone_id)
-        return {
-            'success': True,
-            'agent_number': agent,
-            'timestamp': datetime.now().isoformat()
-        }
-    except Exception as e:
-        logger.error(f"Failed to notify agent {agent}: {str(e)}")
-        return {'success': False, 'reason': 'notification_failed'}
-
-
-def find_best_available_agent(context: dict) -> str:
-    """Returns the most suitable available agent."""
-    available_agents = [
-        number for number in AGENT_NUMBER
-        if get_agent_state(number).get('status') == 'available'
-    ]
-
-    if not available_agents:
-        return None
-
-    return min(
-        available_agents,
-        key=lambda x: get_agent_state(x).get('last_assigned', '1970-01-01')
-    )
-
+    # Update customer's state (waiting for agent)
+    update_user_state(customer_number, {
+        'step': 'waiting_for_human_agent_response',
+        'user': user_data.get('user', {}),
+        'sender': customer_number,
+        'waiting_since': time.time()
+    })
     
+
 
     # 3. Schedule fallback
     def send_fallback():
@@ -10486,17 +8995,15 @@ def find_best_available_agent(context: dict) -> str:
 
 def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
     agent_reply = message_text.strip()
-    current_state = agent_state.get("state")
-    quote_key = f"quote:{agent_state.get('quote_id')}"
-    state_key = f"agent_fallback:{AGENT_NUMBER}"
-
+    
     if agent_reply == "1":
+         # Cancel fallback timer if exists
         agent_customer_number = agent_state.get('customer_number')
         timer = fallback_timers.pop(agent_customer_number, None)
         if timer:
             timer.cancel()
-
-        send("✅ You are now chatting with the customer. Bot is paused until you send '2' to return control.", AGENT_NUMBER, phone_id)
+        # Agent chooses to talk to customer
+        send("✅ You're now talking to the customer. Bot is paused until you send '2' to return to bot.", AGENT_NUMBER, phone_id)
         send("✅ You are now connected to a human agent. Please wait for their response.", customer_number, phone_id)
 
         update_user_state(customer_number, {
@@ -10506,8 +9013,9 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
         })
 
     elif agent_reply == "2":
-        send("✅ The bot has resumed and will assist the customer now.", AGENT_NUMBER, phone_id)
-        send("👋 You are now back with our automated assistant.", customer_number, phone_id)
+        # Agent returns control to bot
+        send("✅ The bot has resumed and will assist the customer from here.", AGENT_NUMBER, phone_id)
+        send("👋 You're now back with our automated assistant.", customer_number, phone_id)
 
         update_user_state(customer_number, {
             'step': 'main_menu',
@@ -10516,37 +9024,42 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
         })
         show_main_menu(customer_number, phone_id)
 
-    elif agent_reply == "3":
-        quote = redis.get(quote_key)
-        if quote:
-            quote = json.loads(quote)
+    elif current_state == "awaiting_offer_approval":
+        if agent_reply == "3":
+            # Agent accepts offer
             quote['offer_data']['status'] = 'agent_accepted'
             redis.set(quote_key, json.dumps(quote))
 
-            send("✅ Your offer has been accepted by our team! Let’s move on to the next step.", customer_number, phone_id)
-            send("👍 You have accepted the customer's offer.", AGENT_NUMBER, phone_id)
+            # Notify customer
+            send("✅ Your offer has been accepted by our team! Let's proceed to the next step.", customer_number, phone_id)
 
+            # Notify agent
+            send("👍 You have accepted the customer's offer.", agent_number, phone_id)
+
+            # Update customer state
             update_user_state(customer_number, {"step": "booking_details"})
             redis.delete(state_key)
             return
 
-    elif agent_reply == "4":
-        quote = redis.get(quote_key)
-        if quote:
-            quote = json.loads(quote)
+        elif agent_reply == "4":
+            # Agent declines offer
             quote['offer_data']['status'] = 'agent_declined'
             redis.set(quote_key, json.dumps(quote))
 
-            send("❌ Your offer was declined. Please revise your offer or continue with our standard prices.", customer_number, phone_id)
-            send("☑️ You have declined the customer's offer.", AGENT_NUMBER, phone_id)
+            # Notify customer
+            send("❌ Your offer was declined. Please revise your offer or proceed with the listed prices.", customer_number, phone_id)
 
+            # Notify agent
+            send("☑️ You have declined the customer's offer.", agent_number, phone_id)
+
+            # Revert customer to offer step
             update_user_state(customer_number, {"step": "offer_response"})
             redis.delete(state_key)
             return
 
     else:
+        # Forward other agent messages to the customer directly
         send(agent_reply, customer_number, phone_id)
-
 
 def handle_waiting_for_human_agent_response(message, user_data, phone_id):
     customer_number = user_data['sender']
@@ -10861,6 +9374,7 @@ def custom_question_followup(prompt, user_data, phone_id):
         return {'step': 'custom_question_followup', 'user': user.to_dict(), 'sender': user_data['sender']}
 
 
+
 def faq_borehole(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
 
@@ -11166,16 +9680,12 @@ def handle_collect_offer_details(prompt, user_data, phone_id):
     )
     return {'step': 'offer_response', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-
 def handle_offer_response(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     quote_id = user.quote_data.get('quote_id')
 
-    # Get the last two user messages if available
-    recent_messages = user_data.get("recent_messages", [])[-2:]
-    last_messages_formatted = "\n".join([f"- {msg}" for msg in recent_messages]) if recent_messages else ""
-
     if prompt == "1":
+        # User accepts offer — send to agent for confirmation
         user.offer_data['status'] = 'pending_agent_review'
 
         if quote_id:
@@ -11185,28 +9695,25 @@ def handle_offer_response(prompt, user_data, phone_id):
                 q['offer_data'] = user.offer_data
                 redis.set(f"quote:{quote_id}", json.dumps(q))
 
-        send("Thank you! We're confirming your offer with our team. Please hold on while we review it.", user_data['sender'], phone_id)
+        # Notify user
+        send("Thank you! We’re confirming your offer with our team. Please wait while we verify.", user_data['sender'], phone_id)
 
+        # Prepare message for agent
         offer_data = user.offer_data
-        survey_price = float(offer_data.get('survey_price', 0) or 0)
-        drilling_price = float(offer_data.get('drilling_price', 0) or 0)
-        total_price = survey_price + drilling_price
-
         offer_msg = "\n".join([
             "📝 Offer Pending Approval",
             f"📱 Customer: {user_data['sender']}",
-            f"💧 Water Survey: ${survey_price:.2f}",
-            f"🛠️ Drilling: ${drilling_price:.2f}",
-            f"💰 Total Offer: ${total_price:.2f}",
+            f"💧 Water Survey: ${offer_data.get('survey_price', 'N/A')}",
+            f"🛠️ Drilling: ${offer_data.get('drilling_price', 'N/A')}",
             f"📄 Status: {offer_data.get('status', 'N/A')}",
-            f"\n🗒️ Customer Messages:\n{last_messages_formatted}" if last_messages_formatted else "",
             "",
-            "Agent Options:",
+            "Agent options:",
             "3. Accept Offer ✅",
             "4. Decline Offer ❌"
         ])
-        send(offer_msg.strip(), AGENT_NUMBER, phone_id)
+        send(offer_msg, AGENT_NUMBER, phone_id)
 
+        # Save agent-customer link for follow-up
         redis.set(f"agent_fallback:{AGENT_NUMBER}", json.dumps({
             "customer_number": user_data['sender'],
             "quote_id": quote_id,
@@ -11216,8 +9723,8 @@ def handle_offer_response(prompt, user_data, phone_id):
         return {'step': 'waiting_on_agent', 'user': user.to_dict(), 'sender': user_data['sender']}
 
     elif prompt == "2":
-        send("We’re connecting you to a human agent. Please hold on...", user_data['sender'], phone_id)
-        send("💬 Customer has requested to speak with a human agent.\n📱 Customer: {}".format(user_data['sender']), AGENT_NUMBER, phone_id)
+        send("Connecting you to a human agent...", user_data['sender'], phone_id)
+        send("💬 Customer requests direct agent support.\n📱 Customer: {}".format(user_data['sender']), AGENT_NUMBER, phone_id)
         return {'step': 'human_agent', 'user': user.to_dict(), 'sender': user_data['sender']}
 
     elif prompt == "3":
@@ -11225,19 +9732,12 @@ def handle_offer_response(prompt, user_data, phone_id):
             'step': 'collect_offer_details',
             'user': user.to_dict()
         })
-
         send(
-            "Please reply with your revised offer in the format below:\n\n"
+            "Please reply with your revised offer in the format:\n\n"
             "- Water Survey: $_\n"
             "- Borehole Drilling: $_",
             user_data['sender'], phone_id
         )
-
-        send(
-            f"📨 Customer is revising their offer.\n📱 Customer: {user_data['sender']}\n\n📝 Customer Messages:\n{last_messages_formatted}",
-            AGENT_NUMBER, phone_id
-        )
-
         return {'step': 'collect_offer_details', 'user': user.to_dict(), 'sender': user_data['sender']}
 
     else:
@@ -12207,1368 +10707,6 @@ location_pricing_shona = {
         "Commercial Hole Drilling": 80,
         "Borehole Deepening": 30
     },
-    
-    "ada_middle_sabi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bachi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "badza": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bangwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "batanai": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bhefurai": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "biriri": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bumha_(shinja_rs)": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chabika": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chakowa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "changazi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "charandura": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chasiyatende": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chayamiti": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "checheche": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chechingwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chemuzangari": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chengwena": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibavahlengwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibunji": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibuwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibwedziva": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chigwikwi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikombedzi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikore": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikukwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikwakwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chinyaduma": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chinyuni": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chipinge": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chiramba": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chisumbanje": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chisungo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chitenderano": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chitepo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chitsa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chivero": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chizhou": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chizvirizvi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "dikitiki": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "doroi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "dumisani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "dzidzela": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gonakudzingwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gonarezhou": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gora": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gumira": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "guune": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "hikwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "hondoyapera": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "jersey": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "kudzanga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "kuvhirimara": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "machona": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "madamombe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "madhuku": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "madzivadondo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "magcobafuthi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mahenye": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "makambe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "makhulela": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "malanswazi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mambale": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maninji": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "manyanga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "manyuseni": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "manzvire": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maongere": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maose": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mapiravana": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mapungwana": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "marihuru": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "marula": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "masendu": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mashayamombe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "masonga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "matjingwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "matsveru": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maware": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mazihuru": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mbuyanehanda": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mhakwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mhandarume": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mhende": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mkwasine": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mphoengs": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mukamba": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mukuwini": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "munaka": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mupinga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "murombedzi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "musani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mushandirapamwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "musirizwi_a": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "musoropamwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mutandahwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "muzite": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "natane": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ndolwane": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "neruvanga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngaone": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngezi_c": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngezi_d": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngorima": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nherera": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nherera_a": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyagadza": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyahonde": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyamukunga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyamweda": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyangambe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyanyadzi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyaringire": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyele": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "raditladi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "rudo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "rupise": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "rwizi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sabi_valley_ica": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sangulube": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sansukwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sengwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "shinja": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "small_dell_estate": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "somnene": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "takawira": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tamandayi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tatonga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tjankwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tokwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tongogara": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tshovani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "turaizvombo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tuzuka": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "twananani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "xini": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-
     "bubi": {
         "Water Survey": 150,
         "Borehole Drilling": {
@@ -22432,148 +19570,17 @@ def handle_main_menu_shona(prompt, user_data, phone_id):
         send("Ndapota sarudza sarudzo inoshanda (1-6).", user_data['sender'], phone_id)
         return {'step': 'main_menu_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-
-def human_agent_shona(prompt: str, user_data: dict, phone_id: str) -> dict:
-    """
-    Inobatanidza mutengi neanowanikwa agent ane ruzivo rwakakwana.
-    """
+def human_agent_shona(prompt, user_data, phone_id):
     customer_number = user_data['sender']
-    result = {'status': 'initiated', 'customer': customer_number}
-
-    try:
-        # 1. Zivisa mutengi
-        active_agents = get_available_agents_count()
-        wait_estimate = calculate_wait_time(active_agents)
-
-        send(
-            f"🚀 Tiri kukubatanidza neanoshanda paSpeedGo...\n"
-            f"⏳ Nguva yekumirira inofungidzirwa: {wait_estimate}\n"
-            f"Nzvimbo yako muhurongwa: #{get_queue_position(customer_number)}",
-            customer_number,
-            phone_id
-        )
-
-        # 2. Vaka mashoko ekuudza agent
-        agent_message = build_agent_alert_message_shona(customer_number, prompt, user_data)
-
-        # 3. Gadzirisa agent aripo
-        assignment_result = assign_to_agent_shona(
-            customer_number=customer_number,
-            message=agent_message,
-            phone_id=phone_id,
-            context=user_data
-        )
-
-        if not assignment_result['success']:
-            send(
-                "Vese vaimirira vanoshanda parizvino vakabatikana. Tichakuzivisai kana umwe awanikwa.",
-                customer_number,
-                phone_id
-            )
-            add_to_waiting_queue(customer_number, prompt, user_data)
-            result.update({'status': 'queued', 'queue_position': get_queue_position(customer_number)})
-            return result
-
-        # 4. Gadzirisa mamiriro
-        update_agent_state(
-            agent_number=assignment_result['agent_number'],
-            new_state={
-                'status': 'in_conversation',
-                'customer': customer_number,
-                'start_time': datetime.now().isoformat(),
-                'context': user_data
-            }
-        )
-
-        update_customer_state(
-            customer_number=customer_number,
-            new_state={
-                'step': 'awaiting_agent_response_shona',
-                'assigned_agent': assignment_result['agent_number'],
-                'waiting_since': datetime.now().isoformat(),
-                'context': user_data
-            }
-        )
-
-        # 5. Nyora kubatana
-        log_agent_connection(
-            customer_number=customer_number,
-            agent_number=assignment_result['agent_number'],
-            initial_message=prompt,
-            context=user_data
-        )
-
-        result.update({
-            'status': 'connected',
-            'agent': assignment_result['agent_number'],
-            'timestamp': datetime.now().isoformat()
-        })
-
-    except Exception as e:
-        logger.error(f"Kubatana neagent kwatadza kuna {customer_number}: {str(e)}")
-        send(
-            "⚠️ Pane dambudziko rehunyanzvi. Edzazve gare gare.",
-            customer_number,
-            phone_id
-        )
-        result.update({'status': 'failed', 'error': str(e)})
-
-    return result
-
-
-def build_agent_alert_message_shona(customer_number: str, prompt: str, user_data: dict) -> str:
-    """Inovaka meseji yeagent ine ruzivo rwakazara."""
-    return (
-        f"🚨 CHIKUMBIRWA CHITSVA CHEMUTENGI 🚨\n\n"
-        f"🔢 Nhamba yeTikiti: {generate_ticket_number()}\n"
-        f"📱 Mutengi: {customer_number}\n"
-        f"📅 Yakagamuchirwa: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
-        f"📝 Meseji: \"{prompt}\"\n\n"
-        f"📋 MASHOKO:\n"
-        f"- Mutauro: {user_data.get('language', 'Shona')}\n"
-        f"- Sevhisi: {user_data.get('quote_data', {}).get('service', 'Hazvina Kutaurwa')}\n"
-        f"- Chikamu chemutengi: {user_data.get('tier', 'Standard')}\n"
-        f"- Zvakamboitika: {user_data.get('previous_issues', [])}\n\n"
-        f"🛎️ SARUDZO DZEKUPINDURA:\n"
-        f"1️⃣ Gamuchira hurukuro\n"
-        f"2️⃣ Rega bot ipindure\n"
-    )
-
-
-def assign_to_agent_shona(customer_number: str, message: str, phone_id: str, context: dict) -> dict:
-    """Inotsvaga uye inogovera agent aripo."""
-    agent = find_best_available_agent_shona(context)
-
-    if not agent:
-        return {'success': False, 'reason': 'no_available_agents'}
-
-    try:
-        send(message, agent, phone_id)
-        return {
-            'success': True,
-            'agent_number': agent,
-            'timestamp': datetime.now().isoformat()
-        }
-    except Exception as e:
-        logger.error(f"Kutumira meseji kune agent {agent} kwatadza: {str(e)}")
-        return {'success': False, 'reason': 'notification_failed'}
-
-
-def find_best_available_agent_shona(context: dict) -> str:
-    """Inodzosa agent anonyatsokodzera aripo."""
-    available_agents = [
-        number for number in AGENT_NUMBER
-        if get_agent_state(number).get('status') == 'available'
-    ]
-
-    if not available_agents:
-        return None
-
-    return min(
-        available_agents,
-        key=lambda x: get_agent_state(x).get('last_assigned', '1970-01-01')
-    )
-
+    
+    # 1. Notify customer immediately
+    send("Tiri kukubatanidza nemumiriri wevanhu...", customer_number, phone_id)
+    
+    # 2. Notify agent in background
+    agent_number = "+263719835124"
+    agent_message = f"Mutengi mutsva kubva ku {customer_number}\nMharidzo: {prompt}"
+    threading.Thread(target=send, args=(agent_message, agent_number, phone_id)).start()
+    
     # 3. After 10 seconds, send fallback options
     def send_fallback_shona():
         user_data = get_user_state(customer_number)
@@ -22586,7 +19593,7 @@ def find_best_available_agent_shona(context: dict) -> str:
                 'sender': customer_number
             })
     
-    threading.Timer(10, send_fallback_shona).start()
+    threading.Timer(10, send_fallback).start()
     
     # 4. Update state to waiting
     update_user_state(customer_number, {
@@ -22655,7 +19662,7 @@ def get_pricing_for_location_quotes_shona(location, service_type, pump_option_se
     if service_key == "Pump Installation":
         if pump_option_selected is None:            
             message_lines = [f"💧 Sarudzo dzeKuisa Pombi:\n"]
-            for key, option in pump_installation_options_shona.items():
+            for key, option in pump_installation_options.items():
                 desc = option.get('description', 'Hapana tsananguro')
                 message_lines.append(f"{key}. {desc}")
             return "\n".join(message_lines)
@@ -22805,82 +19812,46 @@ def handle_collect_offer_details_shona(prompt, user_data, phone_id):
 def handle_offer_response_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     quote_id = user.quote_data.get('quote_id')
-
-    # Get the last two user messages (assuming they're stored in recent_messages)
-    recent_messages = user_data.get("recent_messages", [])[-2:]
-    last_messages_formatted = "\n".join([f"- {msg}" for msg in recent_messages]) if recent_messages else ""
-
     if prompt == "1":
-        user.offer_data['status'] = 'pending_agent_review'
-
+        user.offer_data['status'] = 'accepted'
         if quote_id:
             q = redis.get(f"quote:{quote_id}")
             if q:
                 q = json.loads(q)
                 q['offer_data'] = user.offer_data
                 redis.set(f"quote:{quote_id}", json.dumps(q))
-
-        # Notify user in Shona
-        send("Tatenda! Tiri kusimbisa chipo chenyu nechikwata chedu. Ndapota mirai apo tiri kuongorora.", user_data['sender'], phone_id)
-
-        # Prepare agent message
-        offer_data = user.offer_data
-        survey_price = float(offer_data.get('survey_price', 0) or 0)
-        drilling_price = float(offer_data.get('drilling_price', 0) or 0)
-        total_price = survey_price + drilling_price
-
-        offer_msg = "\n".join([
-            "📝 Chipo Chakamirira Kubvumidzwa",
-            f"📱 Mutengi: {user_data['sender']}",
-            f"💧 Ongororo yemvura: ${survey_price:.2f}",
-            f"🛠️ Kuchera borehole: ${drilling_price:.2f}",
-            f"💰 Chipo chose: ${total_price:.2f}",
-            f"📄 Mamiriro: {offer_data.get('status', 'N/A')}",
-            f"\n🗒️ Mharidzo dzemutengi:\n{last_messages_formatted}" if last_messages_formatted else "",
-            "",
-            "Sarudzo dzemumiriri:",
-            "3. Bvuma chipo ✅",
-            "4. Ramba chipo ❌"
-        ])
-        send(offer_msg.strip(), AGENT_NUMBER, phone_id)
-
-        redis.set(f"agent_fallback:{AGENT_NUMBER}", json.dumps({
-            "customer_number": user_data['sender'],
-            "quote_id": quote_id,
-            "state": "awaiting_offer_approval"
-        }))
-
-        return {'step': 'waiting_on_agent_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
-
+        update_user_state(user_data['sender'], {
+            'step': 'booking_details_shona',
+            'user': user.to_dict()
+        })
+        send(
+            "Mashoko akanaka! Chikumbiro chako chabvumirwa.\n\n"
+            "Ngatitsanangure danho raitevera.\n\n"
+            "Unoda here:\n"
+            "1. Bhuka Ongororo yeSaiti\n"
+            "2. Bhadhara Deposit\n"
+            "3. Simbisa Zuva rekuchera",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'booking_details_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
     elif prompt == "2":
-        send("Tiri kukubatanidza kune mumiriri wevanhu...", user_data['sender'], phone_id)
-        send("💬 Mutengi ari kuda rubatsiro rwemumiriri.\n📱 Mutengi: {}".format(user_data['sender']), AGENT_NUMBER, phone_id)
+        send("Tiri kukubatanidza nemumiriri wevanhu...", user_data['sender'], phone_id)
         return {'step': 'human_agent_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
-
     elif prompt == "3":
         update_user_state(user_data['sender'], {
             'step': 'collect_offer_details_shona',
             'user': user.to_dict()
         })
-
         send(
-            "Ndapota nyorera chipo chako chagadziridzwa uchishandisa chimiro ichi:\n\n"
+            "Ndapota tumira chikumbiro chako chakagadziridzwa muchimiro:\n\n"
             "- Ongororo yemvura: $_\n"
-            "- Kuchera borehole: $_",
+            "- Kuchera chibhorani: $_",
             user_data['sender'], phone_id
         )
-
-        send(
-            f"📨 Mutengi ari kugadzirisa chipo chavo.\n📱 Mutengi: {user_data['sender']}\n\n📝 Mharidzo dzemutengi:\n{last_messages_formatted}",
-            AGENT_NUMBER, phone_id
-        )
-
         return {'step': 'collect_offer_details_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
-
     else:
-        send("Ndapota sarudza imwe yesarudzo dziri pakati pe 1 kusvika ku 3.", user_data['sender'], phone_id)
+        send("Ndapota sarudza sarudzo inoshanda (1-3).", user_data['sender'], phone_id)
         return {'step': 'offer_response_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
-
 
 def get_pricing_for_location_quotes_shona(location, service_type, pump_option_selected=None):
     location_key = location.strip().lower()
@@ -23085,21 +20056,41 @@ def human_agent_shona(prompt, user_data, phone_id):
         'waiting_since': time.time()
     })
 
+    # 3. Schedule fallback
+    def send_fallback_shona():
+        user_data = get_user_state(customer_number)
+        if user_data and user_data.get('step') == 'waiting_for_human_agent_response_shona':
+            send("Kana usati wabatanidzwa, unogona kutifonera pa v+263779562095 kana +263779469216", customer_number, phone_id)
+            send("Unoda here:\n1. Kudzokera kumenu huru\n2. Kuramba wakamirira", customer_number, phone_id)
+            update_user_state(customer_number, {
+                'step': 'human_agent_followup_shona',
+                'user': user_data.get('user', {}),
+                'sender': customer_number
+            })
+
+    fallback_timer = threading.Timer(90, send_fallback)
+    fallback_timer.start()
+
+    # 4. Update customer state
+    update_user_state(customer_number, {
+        'step': 'waiting_for_human_agent_response_shona',
+        'user': user_data.get('user', {}),
+        'sender': customer_number,
+        'waiting_since': time.time()
+    })
+
+    return {'step': 'waiting_for_human_agent_response_shona', 'user': user_data.get('user', {}), 'sender': customer_number}
+
 def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_state):
     agent_reply = message_text.strip()
-    current_state = agent_state.get("state")
-    quote_key = f"quote:{agent_state.get('quote_id')}"
-    state_key = f"agent_fallback:{AGENT_NUMBER}"
-
-    # 1. Agent chooses to talk to customer
+    
     if agent_reply == "1":
         agent_customer_number = agent_state.get('customer_number')
-        timer = fallback_timers_shona.pop(agent_customer_number, None)
+        timer = fallback_timers.pop(agent_customer_number, None)
         if timer:
             timer.cancel()
-
-        send("✅ Iwe zvino uri kutaura nemutengi. Bhoti yakamiswa kusvikira watumira '2' kudzokera kubhoti.", AGENT_NUMBER, phone_id)
-        send("✅ Iwe zvino wakabatana nemumiriri. Ndapota mirira mhinduro yavo.", customer_number, phone_id)
+        send("✅ Wave kutaura nemutengi. Bhoti rakamiswa kusvikira watumira '2' kuti udzokere kubhoti.", AGENT_NUMBER, phone_id)
+        send("✅ Wave kubatanidzwa nemumiriri wevanhu. Ndapota mirira mhinduro yavo.", customer_number, phone_id)
 
         update_user_state(customer_number, {
             'step': 'talking_to_human_agent_shona',
@@ -23107,52 +20098,19 @@ def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_stat
             'sender': customer_number
         })
 
-    # 2. Agent returns control to bot
     elif agent_reply == "2":
-        send("✅ Bhoti yadzoka kuzobatsira mutengi.", AGENT_NUMBER, phone_id)
-        send("👋 Iwe wave kutaura nebhoti redu zvakare.", customer_number, phone_id)
+        send("✅ Bhoti radzoka uye richabatsira mutengi kubva pano.", AGENT_NUMBER, phone_id)
+        send("👋 Wave zvakare neboti redu.", customer_number, phone_id)
 
         update_user_state(customer_number, {
             'step': 'main_menu_shona',
             'user': get_user_state(customer_number).get('user', {}),
             'sender': customer_number
         })
-        show_main_menu(customer_number, phone_id)
+        show_main_menu_shona(customer_number, phone_id)
 
-    # 3. Agent accepts offer
-    elif agent_reply == "3":
-        quote = redis.get(quote_key)
-        if quote:
-            quote = json.loads(quote)
-            quote['offer_data']['status'] = 'agent_accepted'
-            redis.set(quote_key, json.dumps(quote))
-
-            send("✅ Chipo chako chagamuchirwa nechikwata chedu! Ngatitange nhanho inotevera.", customer_number, phone_id)
-            send("👍 Wagadzirisa chipo chemutengi.", AGENT_NUMBER, phone_id)
-
-            update_user_state(customer_number, {"step": "booking_details_shona"})
-            redis.delete(state_key)
-            return
-
-    # 4. Agent declines offer
-    elif agent_reply == "4":
-        quote = redis.get(quote_key)
-        if quote:
-            quote = json.loads(quote)
-            quote['offer_data']['status'] = 'agent_declined'
-            redis.set(quote_key, json.dumps(quote))
-
-            send("❌ Chipo chako hachina kugamuchirwa. Ndapota gadziridza chipo chako kana kuti rambira pamitengo yakatarwa.", customer_number, phone_id)
-            send("☑️ Waramba chipo chemutengi.", AGENT_NUMBER, phone_id)
-
-            update_user_state(customer_number, {"step": "offer_response_shona"})
-            redis.delete(state_key)
-            return
-
-    # 5. Any other message — forward to customer
     else:
         send(agent_reply, customer_number, phone_id)
-
 
 def message_handler_shona(prompt, sender, phone_id, message):
     prompt = (prompt or "").strip()
@@ -24352,6 +21310,47 @@ def handle_select_service_shona(prompt, user_data, phone_id):
         return {'step': 'select_service_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
 
+def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_state):
+    prompt = message_text.strip() if isinstance(message_text, str) else ""
+    customer_number = agent_state.get('customer_number')
+
+    if not customer_number:
+        send("⚠️ Kukanganisa: Hapana mutengi akabatana. Ndapota mirira chikumbiro chitsva.", sender, phone_id)
+        update_user_state(sender, {'step': 'agent_available_shona'})
+        return
+
+    if prompt == '1':
+        send("✅ Wava kutaura nemutengi. Tumira '2' kudzokera kubot.", sender, phone_id)
+        send("✅ Wabatanidzwa neanhu. Ndapota mirira mhinduro yavo.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'talking_to_human_agent_shona',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+        update_user_state(sender, {
+            'step': 'talking_to_customer_shona',
+            'customer_number': customer_number,
+            'phone_id': phone_id,
+            'started_at': time.time()
+        })
+
+    elif prompt == '2':
+        send("✅ Wadzorera mutengi kubot.", sender, phone_id)
+        send("👋 Wava kutaura neanobatsira otomatiki.", customer_number, phone_id)
+
+        update_user_state(customer_number, {
+            'step': 'main_menu_shona',
+            'user': get_user_state(customer_number).get('user', {}),
+            'sender': customer_number
+        })
+        update_user_state(sender, {'step': 'agent_available_shona'})
+        show_main_menu(customer_number, phone_id)
+
+    else:
+        send("⚠️ Ndapota pindura ne:\n\
+        1 - Taura nemutengi\n\
+        2 - Dzokera kubot", sender, phone_id)
 
 def handle_agent_conversation_shona(prompt, sender, phone_id, message, agent_state):
     customer_number = agent_state.get('customer_number')
@@ -24746,22 +21745,6 @@ def handle_collect_quote_details_shona(prompt, user_data, phone_id):
         )
         return {'step': 'collect_quote_details_shona', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-def handle_waiting_for_human_agent_response_shona(message, user_data, phone_id):
-    customer_number = user_data['sender']
-    step = user_data.get('step', '')
-
-    # Kana mushandisi ari mukutaurirana nemumiriri (kugamuchira kana kutumira)
-    if step in ['waiting_for_human_agent_response_shona', 'talking_to_human_agent_shona']:
-        if step == 'waiting_for_human_agent_response_shona':
-            send("💬 Uchiri kubatana nemumiriri. Ndapota mirira kuti apindure.", customer_number, phone_id)
-        elif step == 'talking_to_human_agent_shona':
-            # Tumira meseji yemutengi kumuagent
-            send(f"👤 Mutengi anoti:\n{message}", AGENT_NUMBER, phone_id)
-        return True  # Dzivirira bot kubva pakuita default flow
-
-    return False  # Rambai mberi nebot's normal flow
-
-
 def quote_response_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     user.quote_data['details'] = prompt.strip()
@@ -24952,1368 +21935,6 @@ location_pricing_ndebele = {
         "Commercial Hole Drilling": 80,
         "Borehole Deepening": 30
     },
-    
-    "ada_middle_sabi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bachi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "badza": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bangwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "batanai": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bhefurai": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "biriri": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "bumha_(shinja_rs)": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chabika": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chakowa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "changazi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "charandura": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chasiyatende": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chayamiti": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "checheche": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chechingwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chemuzangari": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chengwena": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibavahlengwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibunji": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibuwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chibwedziva": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chigwikwi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikombedzi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikore": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikukwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chikwakwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chinyaduma": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chinyuni": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chipinge": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chiramba": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chisumbanje": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chisungo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chitenderano": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chitepo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chitsa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chivero": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chizhou": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "chizvirizvi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "dikitiki": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "doroi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "dumisani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "dzidzela": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gonakudzingwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gonarezhou": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gora": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "gumira": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "guune": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "hikwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "hondoyapera": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "jersey": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "kudzanga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "kuvhirimara": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "machona": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "madamombe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "madhuku": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "madzivadondo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "magcobafuthi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mahenye": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "makambe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "makhulela": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "malanswazi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mambale": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maninji": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "manyanga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "manyuseni": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "manzvire": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maongere": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maose": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mapiravana": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mapungwana": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "marihuru": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "marula": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "masendu": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mashayamombe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "masonga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "matjingwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "matsveru": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "maware": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mazihuru": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mbuyanehanda": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mhakwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mhandarume": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mhende": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mkwasine": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mphoengs": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mukamba": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mukuwini": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "munaka": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mupinga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "murombedzi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "musani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mushandirapamwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "musirizwi_a": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "musoropamwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "mutandahwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "muzite": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "natane": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ndolwane": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "neruvanga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngaone": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngezi_c": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngezi_d": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "ngorima": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nherera": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nherera_a": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyagadza": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyahonde": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyamukunga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyamweda": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyangambe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyanyadzi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyaringire": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "nyele": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "raditladi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "rudo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "rupise": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "rwizi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sabi_valley_ica": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sangulube": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sansukwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "sengwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "shinja": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "small_dell_estate": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "somnene": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "takawira": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tamandayi": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tatonga": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tjankwa": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tokwe": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tongogara": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tshovani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "turaizvombo": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "tuzuka": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "twananani": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-    "xini": {
-        "Water Survey": 150,
-        "Borehole Drilling": {
-            "class 6": 1150,
-            "class 9": 1293.75,
-            "class 10": 1437.5
-        },
-        "Commercial Hole Drilling": 80,
-        "Borehole Deepening": 30
-    },
-
     "binga": {
         "Water Survey": 150,
         "Borehole Drilling": {
@@ -34939,147 +30560,36 @@ def handle_mgodi_class_pricing_ndebele(prompt, user_data, phone_id):
         )
         return {'step': 'quote_followup_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}  
 
-def human_agent_ndebele(prompt: str, user_data: dict, phone_id: str) -> dict:
-    """
-    Ixhumanisa ikhasimende lomsebenzi okhona lothatha izicelo.
-    """
+def human_agent_ndebele(prompt, user_data, phone_id):
     customer_number = user_data['sender']
-    result = {'status': 'initiated', 'customer': customer_number}
 
-    try:
-        # 1. Yazisa ikhasimende
-        active_agents = get_available_agents_count()
-        wait_estimate = calculate_wait_time(active_agents)
+    # 1. Notify customer
+    send("Kuxhumanisa nommeleli wabantu...", customer_number, phone_id)
 
-        send(
-            f"🚀 Sikhuluma lokuxhumanisa lawe lomsebenzi ophilayo...\n"
-            f"⏳ Isikhathi sokulinda esilinganisiweyo: {wait_estimate}\n"
-            f"Inombolo yakho ohlwini: #{get_queue_position(customer_number)}",
-            customer_number,
-            phone_id
-        )
-
-        # 2. Yakha umlayezo oya kumsebenzi
-        agent_message = build_agent_alert_message_ndebele(customer_number, prompt, user_data)
-
-        # 3. Thumela kumsebenzi okhona
-        assignment_result = assign_to_agent_ndebele(
-            customer_number=customer_number,
-            message=agent_message,
-            phone_id=phone_id,
-            context=user_data
-        )
-
-        if not assignment_result['success']:
-            send(
-                "Bonke abasebenzi bathwele amaphini okwamanje. Sizakwazisa uma omunye esevulekile.",
-                customer_number,
-                phone_id
-            )
-            add_to_waiting_queue(customer_number, prompt, user_data)
-            result.update({'status': 'queued', 'queue_position': get_queue_position(customer_number)})
-            return result
-
-        # 4. Buyekeza isimo
-        update_agent_state(
-            agent_number=assignment_result['agent_number'],
-            new_state={
-                'status': 'in_conversation',
-                'customer': customer_number,
-                'start_time': datetime.now().isoformat(),
-                'context': user_data
-            }
-        )
-
-        update_customer_state(
-            customer_number=customer_number,
-            new_state={
-                'step': 'awaiting_agent_response_ndebele',
-                'assigned_agent': assignment_result['agent_number'],
-                'waiting_since': datetime.now().isoformat(),
-                'context': user_data
-            }
-        )
-
-        # 5. Layisha i-log yokuxhumana
-        log_agent_connection(
-            customer_number=customer_number,
-            agent_number=assignment_result['agent_number'],
-            initial_message=prompt,
-            context=user_data
-        )
-
-        result.update({
-            'status': 'connected',
-            'agent': assignment_result['agent_number'],
-            'timestamp': datetime.now().isoformat()
-        })
-
-    except Exception as e:
-        logger.error(f"Ukuxhumana kumsebenzi kwehlulekile ku {customer_number}: {str(e)}")
-        send(
-            "⚠️ Sikhangelana lobunzima kobuchwepheshe. Sicela uphinde uzame ngemva kwesikhathi.",
-            customer_number,
-            phone_id
-        )
-        result.update({'status': 'failed', 'error': str(e)})
-
-    return result
-
-
-def build_agent_alert_message_ndebele(customer_number: str, prompt: str, user_data: dict) -> str:
-    """Yakha umlayezo oqukethe imininingwane yekhasimende yomsebenzi."""
-    return (
-        f"🚨 ISICELO ESISHA SEKHASIMENDE 🚨\n\n"
-        f"🔢 Inombolo yeTikiti: {generate_ticket_number()}\n"
-        f"📱 Ikhasimende: {customer_number}\n"
-        f"📅 Samukelwe ngo: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
-        f"📝 Umlayezo: \"{prompt}\"\n\n"
-        f"📋 IMINININGWANE:\n"
-        f"- Ulimi: {user_data.get('language', 'Ndebele')}\n"
-        f"- Insiza: {user_data.get('quote_data', {}).get('service', 'Akukhanyi')}\n"
-        f"- Ibanga leKhasimende: {user_data.get('tier', 'Standard')}\n"
-        f"- Izinkinga zangaphambilini: {user_data.get('previous_issues', [])}\n\n"
-        f"🛎️ OKWENZEKAYO:\n"
-        f"1️⃣ Yamukela ingxoxo\n"
-        f"2️⃣ Vumela i-bot iphendule\n"
+    # 2. Notify agent
+    agent_message = (
+        f"👋 Isicelo esisha ku-WhatsApp\n\n"
+        f"📱 Umthengi: {customer_number}\n"
+        f"📩 Umlayezo: \"{prompt}\"\n\n"
+        f"Phendula nge:\n"
+        f"1 - Khuluma nomthengi\n"
+        f"2 - Buyela kubhothi"
     )
+    send(agent_message, AGENT_NUMBER, phone_id) 
+    
+    update_user_state(AGENT_NUMBER, {
+        'step': 'agent_reply_ndebele',
+        'customer_number': customer_number,
+        'phone_id': phone_id
+    })
 
-
-def assign_to_agent_ndebele(customer_number: str, message: str, phone_id: str, context: dict) -> dict:
-    """Thumela umlayezo kumsebenzi okhona."""
-    agent = find_best_available_agent_ndebele(context)
-
-    if not agent:
-        return {'success': False, 'reason': 'no_available_agents'}
-
-    try:
-        send(message, agent, phone_id)
-        return {
-            'success': True,
-            'agent_number': agent,
-            'timestamp': datetime.now().isoformat()
-        }
-    except Exception as e:
-        logger.error(f"Ukwehluleka ukuthumela kumsebenzi {agent}: {str(e)}")
-        return {'success': False, 'reason': 'notification_failed'}
-
-
-def find_best_available_agent_ndebele(context: dict) -> str:
-    """Thola umsebenzi ohle kakhulu okhona."""
-    available_agents = [
-        number for number in AGENT_NUMBER
-        if get_agent_state(number).get('status') == 'available'
-    ]
-
-    if not available_agents:
-        return None
-
-    return min(
-        available_agents,
-        key=lambda x: get_agent_state(x).get('last_assigned', '1970-01-01')
-    )
-
+    # Update customer's state (waiting for agent)
+    update_user_state(customer_number, {
+        'step': 'waiting_for_human_agent_response_ndebele',
+        'user': user_data.get('user', {}),
+        'sender': customer_number,
+        'waiting_since': time.time()
+    })
     
     # 3. Schedule fallback
     def send_fallback_ndebele():
@@ -35093,8 +30603,8 @@ def find_best_available_agent_ndebele(context: dict) -> str:
                 'sender': customer_number
             })
     
-    fallback_timer_ndebele = threading.Timer(90, send_fallback_ndebele)
-    fallback_timer_ndebele.start()
+    fallback_ndebele_timer = threading.Timer(90, send_fallback_ndebele)
+    fallback_ndebele_timer.start()
     
     # 4. Vuselela isimo sekhasimende
     update_user_state(customer_number, {
@@ -35108,18 +30618,14 @@ def find_best_available_agent_ndebele(context: dict) -> str:
 
 def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_state):
     agent_reply = message_text.strip()
-    current_state = agent_state.get("state")
-    quote_key = f"quote:{agent_state.get('quote_id')}"
-    state_key = f"agent_fallback:{AGENT_NUMBER}"
-
+    
     if agent_reply == "1":
         agent_customer_number = agent_state.get('customer_number')
-        timer = fallback_timers_ndebele.pop(agent_customer_number, None)
+        timer = fallback_ndebele_timers.pop(agent_customer_number, None)
         if timer:
             timer.cancel()
-
-        send("✅ Usuxhumene lomthengi. Ibhothi limisiwe kuze uthumele '2' ukuze ibuye.", AGENT_NUMBER, phone_id)
-        send("✅ Usuxhumene lo agent. Sicela ulinde impendulo yabo.", customer_number, phone_id)
+        send("✅ Usuxhumene nekhasimende. I-bhoti imisiwe kuze kuthumele '2' ukuze ubuyele ku-bhoti.", AGENT_NUMBER, phone_id)
+        send("✅ Usuxhumene nomuntu ongumphathi. Sicela ulinde impendulo yakhe.", customer_number, phone_id)
 
         update_user_state(customer_number, {
             'step': 'talking_to_human_agent_ndebele',
@@ -35128,47 +30634,18 @@ def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_st
         })
 
     elif agent_reply == "2":
-        send("✅ Ibhothi selibuyele ekusizeni umthengi.", AGENT_NUMBER, phone_id)
-        send("👋 Usexhumene futhi le assistant yethu ngokuzenzakalelayo.", customer_number, phone_id)
+        send("✅ I-bhoti ibuyile futhi izosiza ikhasimende kusukela manje.", AGENT_NUMBER, phone_id)
+        send("👋 Usubuya ne-bhoti yethu.", customer_number, phone_id)
 
         update_user_state(customer_number, {
             'step': 'main_menu_ndebele',
             'user': get_user_state(customer_number).get('user', {}),
             'sender': customer_number
         })
-        show_main_menu(customer_number, phone_id)
-
-    elif  agent_reply == "3":
-        quote = redis.get(quote_key)
-        if quote:
-            quote = json.loads(quote)
-            quote['offer_data']['status'] = 'agent_accepted'
-            redis.set(quote_key, json.dumps(quote))
-
-            send("✅ Isipho sakho sivunyiwe liqembu lethu! Kasihambe esigabeni esilandelayo.", customer_number, phone_id)
-            send("👍 Uvume isipho somthengi.", AGENT_NUMBER, phone_id)
-
-            update_user_state(customer_number, {"step": "booking_details_ndebele"})
-            redis.delete(state_key)
-            return
-
-    elif agent_reply == "4":
-        quote = redis.get(quote_key)
-        if quote:
-            quote = json.loads(quote)
-            quote['offer_data']['status'] = 'agent_declined'
-            redis.set(quote_key, json.dumps(quote))
-
-            send("❌ Isipho sakho asivunywanga. Sicela usibuyekeze noma uqhubeke ngemali ebekiwe.", customer_number, phone_id)
-            send("☑️ Uwaliwe isipho somthengi.", AGENT_NUMBER, phone_id)
-
-            update_user_state(customer_number, {"step": "offer_response_ndebele"})
-            redis.delete(state_key)
-            return
+        show_main_menu_ndebele(customer_number, phone_id)
 
     else:
         send(agent_reply, customer_number, phone_id)
-
 
 def message_handler_ndebele(prompt, sender, phone_id, message):
     prompt = (prompt or "").strip()
@@ -36506,20 +31983,6 @@ def handle_deepening_booking_confirm_ndebele(prompt, user_data, phone_id):
         send("Sicela ukhethe inketho efanele (1 noma 2).", user_data['sender'], phone_id)
         return {'step': 'deepening_booking_confirm_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-def handle_waiting_for_human_agent_response_ndebele(message, user_data, phone_id):
-    customer_number = user_data['sender']
-    step = user_data.get('step', '')
-
-    # Uma umsebenzisi ese agent mode (ukulinda noma ukuxoxa)
-    if step in ['waiting_for_human_agent_response_ndebele', 'talking_to_human_agent_ndebele']:
-        if step == 'waiting_for_human_agent_response_ndebele':
-            send("💬 Usaxhumene lomeluleki. Sicela ulinde impendulo yakhe.", customer_number, phone_id)
-        elif step == 'talking_to_human_agent_ndebele':
-            # Thumela umlayezo womsebenzisi kumeluleki
-            send(f"👤 Umthengi uthi:\n{message}", AGENT_NUMBER, phone_id)
-        return True  # Vimba i-bot ukuthi iqhubeke ne-default flow
-
-    return False  # Qhubeka ne-normal flow ye-bot
 
 
 def faq_borehole_ndebele(prompt, user_data, phone_id):
@@ -37196,81 +32659,46 @@ def handle_collect_offer_details_ndebele(prompt, user_data, phone_id):
 def handle_offer_response_ndebele(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
     quote_id = user.quote_data.get('quote_id')
-
-    # Fetch and format the last 2 customer messages
-    recent_messages = user_data.get("recent_messages", [])[-2:]
-    last_messages_formatted = "\n".join([f"- {msg}" for msg in recent_messages]) if recent_messages else ""
-
     if prompt == "1":
-        user.offer_data['status'] = 'pending_agent_review'
-
+        user.offer_data['status'] = 'accepted'
         if quote_id:
             q = redis.get(f"quote:{quote_id}")
             if q:
                 q = json.loads(q)
                 q['offer_data'] = user.offer_data
                 redis.set(f"quote:{quote_id}", json.dumps(q))
-
-        send("Siyabonga! Siqinisekisa isipho sakho leqembu lethu. Sicela ulinde.", user_data['sender'], phone_id)
-
-        offer_data = user.offer_data
-        survey_price = float(offer_data.get('survey_price', 0) or 0)
-        drilling_price = float(offer_data.get('drilling_price', 0) or 0)
-        total_price = survey_price + drilling_price
-
-        offer_msg = "\n".join([
-            "📝 Isipho Silindele Ukuvunywa",
-            f"📱 Umthengi: {user_data['sender']}",
-            f"💧 Ukuhlola Amanzi: ${survey_price:.2f}",
-            f"🛠️ Ukugaya iBorehole: ${drilling_price:.2f}",
-            f"💰 Inani Eliphelele: ${total_price:.2f}",
-            f"📄 Isimo: {offer_data.get('status', 'N/A')}",
-            f"\n🗒️ Imilayezo yomthengi:\n{last_messages_formatted}" if last_messages_formatted else "",
-            "",
-            "Izinketho ze-Agent:",
-            "3. Vuma Isipho ✅",
-            "4. Wala Isipho ❌"
-        ])
-        send(offer_msg.strip(), AGENT_NUMBER, phone_id)
-
-        redis.set(f"agent_fallback:{AGENT_NUMBER}", json.dumps({
-            "customer_number": user_data['sender'],
-            "quote_id": quote_id,
-            "state": "awaiting_offer_approval"
-        }))
-
-        return {'step': 'waiting_on_agent_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
+        update_user_state(user_data['sender'], {
+            'step': 'booking_details_ndebele',
+            'user': user.to_dict()
+        })
+        send(
+            "Izindaba ezinhle! Isiphakamiso sakho samukelwe.\n\n"
+            "Masigqinise isinyathelo sakho esilandelayo.\n\n"
+            "Ungathanda:\n"
+            "1. Bhalisa Ukuhlolwa Kwendawo\n"
+            "2. Khokha Idiphozithi\n"
+            "3. Qinisekisa Usuku Lokubha",
+            user_data['sender'], phone_id
+        )
+        return {'step': 'booking_details_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
     elif prompt == "2":
-        send("Sikuxhumanisa lo agent wabantu...", user_data['sender'], phone_id)
-        send("💬 Umthengi ucele ukuxhaswa nguwe.\n📱 Umthengi: {}".format(user_data['sender']), AGENT_NUMBER, phone_id)
+        send("Ukuxhunywa nomuntu siqu...", user_data['sender'], phone_id)
         return {'step': 'human_agent_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
     elif prompt == "3":
         update_user_state(user_data['sender'], {
             'step': 'collect_offer_details_ndebele',
             'user': user.to_dict()
         })
-
         send(
-            "Sicela uphendule ngezipho ezibuyekeziweyo ngendlela elandelayo:\n\n"
+            "Phendula ngesiphakamiso sakho esibuyekeziwe ngefomethi:\n\n"
             "- Ukuhlola Amanzi: $_\n"
-            "- Ukugaya iBorehole: $_",
+            "- Ukubha Ibhorehole: $_",
             user_data['sender'], phone_id
         )
-
-        send(
-            f"📨 Umthengi ubuyekeza isipho sabo.\n📱 Umthengi: {user_data['sender']}\n\n📝 Imilayezo yomthengi:\n{last_messages_formatted}",
-            AGENT_NUMBER, phone_id
-        )
-
         return {'step': 'collect_offer_details_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
     else:
-        send("Sicela ukhethe inketho eqondileyo (1-3).", user_data['sender'], phone_id)
+        send("Khetha inketho efanele (1-3).", user_data['sender'], phone_id)
         return {'step': 'offer_response_ndebele', 'user': user.to_dict(), 'sender': user_data['sender']}
-
-
 
 def handle_booking_details_ndebele(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
@@ -37766,8 +33194,7 @@ def webhook():
                 from_number = message.get("from")
                 msg_type = message.get("type")
                 message_text = message.get("text", {}).get("body", "").strip()
-
-                
+            
                 # Handle agent messages
                 if from_number.endswith(AGENT_NUMBER.replace("+", "")):
                     agent_state = get_user_state(AGENT_NUMBER)
@@ -37793,83 +33220,20 @@ def webhook():
                         update_user_state(AGENT_NUMBER, agent_state)
 
                         return "OK"
-
-                               
+            
                     if agent_state.get("step") == "talking_to_human_agent":
                         if message_text.strip() == "2":
                             # ✅ This is the agent saying "return to bot"
                             handle_agent_reply("2", customer_number, phone_id, agent_state)
-                        elif message_text.strip() == "3":
-                            # ✅ This is the agent accepting the customer's offer
-                            handle_agent_reply("3", customer_number, phone_id, agent_state)
-                        elif message_text.strip() == "4":
-                            # ❌ This is the agent declining the customer's offer
-                            handle_agent_reply("4", customer_number, phone_id, agent_state)
                         else:
                             # ✅ Forward any other message to the customer
                             send(message_text, customer_number, phone_id)
                         return "OK"
-
-
-                    if agent_state.get("step") == "agent_reply_shona":
-                        handle_agent_reply_shona(message_text, customer_number, phone_id, agent_state)
-                        
-                        # 🔄 Re-save agent state to ensure customer_number is preserved
-                        agent_state["customer_number"] = customer_number
-                        agent_state["step"] = "talking_to_human_agent_shona"
-                        update_user_state(AGENT_NUMBER, agent_state)
-
-                        return "OK"
-            
-                    if agent_state.get("step") == "talking_to_human_agent_shona":
-                        if message_text.strip() == "2":
-                            # ✅ This is the agent saying "return to bot"
-                            handle_agent_reply_shona("2", customer_number, phone_id, agent_state)
-                        elif message_text.strip() == "3":
-                            # ✅ This is the agent accepting the customer's offer
-                            handle_agent_reply_shona("3", customer_number, phone_id, agent_state)
-                        elif message_text.strip() == "4":
-                            # ❌ This is the agent declining the customer's offer
-                            handle_agent_reply_shona("4", customer_number, phone_id, agent_state)
-                        else:
-                            # ✅ Forward any other message to the customer
-                            send(message_text, customer_number, phone_id)
-                        return "OK"
-
-
-            
-     
-                    if agent_state.get("step") == "agent_reply_ndebele":
-                        handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_state)
-                        
-                        # 🔄 Re-save agent state to ensure customer_number is preserved
-                        agent_state["customer_number"] = customer_number
-                        agent_state["step"] = "talking_to_human_agent_ndebele"
-                        update_user_state(AGENT_NUMBER, agent_state)
-
-                        return "OK"
-            
-                    if agent_state.get("step") == "talking_to_human_agent_ndebele":
-                        if message_text.strip() == "2":
-                            # ✅ This is the agent saying "return to bot"
-                            handle_agent_reply_ndebele("2", customer_number, phone_id, agent_state)
-                        elif message_text.strip() == "3":
-                            # ✅ This is the agent accepting the customer's offer
-                            handle_agent_reply_ndebele("3", customer_number, phone_id, agent_state)
-                        elif message_text.strip() == "4":
-                            # ❌ This is the agent declining the customer's offer
-                            handle_agent_reply_ndebele("4", customer_number, phone_id, agent_state)
-                        else:
-                            # ✅ Forward any other message to the customer
-                            send(message_text, customer_number, phone_id)
-                        return "OK"
-
 
             
                     send("⚠️ No active chat. Please wait for a new request.", AGENT_NUMBER, phone_id)
-                    return "OK"                 
-
-                            
+                    return "OK"
+            
                 # Handle normal user messages (only if NOT agent)
 
                 user_data = get_user_state(from_number)

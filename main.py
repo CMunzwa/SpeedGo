@@ -19590,8 +19590,7 @@ def human_agent_shona(prompt, user_data, phone_id):
     # 1. Notify customer immediately
     send("Tiri kukubatanidza nemumiriri wevanhu...", customer_number, phone_id)
     
-    # 2. Notify agent in background
-    agent_number = "+263719835124"
+    # 2. Notify agent in background 
     agent_message = f"Mutengi mutsva kubva ku {customer_number}\nMharidzo: {prompt}"
     threading.Thread(target=send, args=(agent_message, agent_number, phone_id)).start()
     

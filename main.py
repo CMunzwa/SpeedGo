@@ -10312,6 +10312,13 @@ def update_recent_messages(sender, new_message):
         'sender': sender
     })
 
+def get_available_agents_count():
+    count = 0
+    for number in AGENT_NUMBER:
+        state = get_agent_state(number)
+        if state.get("status") == "available":
+            count += 1
+    return count
 
 
 def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:

@@ -22,8 +22,7 @@ phone_id = os.environ.get("PHONE_ID")
 gen_api = os.environ.get("GEN_API")
 owner_phone = os.environ.get("OWNER_PHONE")
 GOOGLE_MAPS_API_KEY = "AlzaSyCXDMMhg7FzP|ElKmrlkv1TqtD3HgHwW50"
-AGENT_NUMBERS = ["+263719835124", "+263772210415"]
-
+AGENT_NUMBER = "+263779562095"
 
 # Upstash Redis setup
 redis = Redis(
@@ -8929,11 +8928,6 @@ def handle_main_menu(prompt, user_data, phone_id):
         send("Please select a valid option (1-6).", user_data['sender'], phone_id)
         return {'step': 'main_menu', 'user': user.to_dict(), 'sender': user_data['sender']}
 
-
-def select_random_agent():
-    return random.choice(AGENT_NUMBERS)
-
-
 def human_agent(prompt, user_data, phone_id):
     customer_number = user_data['sender']
 
@@ -8954,8 +8948,7 @@ def human_agent(prompt, user_data, phone_id):
         f"1 - Talk to customer\n"
         f"2 - Back to bot"
     )
-    AGENT_NUMBER = select_random_agent()
-    send(agent_message, select_random_agent(), phone_id) 
+    send(agent_message, AGENT_NUMBER, phone_id) 
     
     update_user_state(AGENT_NUMBER, {
         'step': 'agent_reply',
@@ -9010,8 +9003,7 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
         if timer:
             timer.cancel()
         # Agent chooses to talk to customer
-        AGENT_NUMBER = select_random_agent()
-        send("✅ You're now talking to the customer. Bot is paused until you send '2' to return to bot.", select_random_agent(), phone_id)
+        send("✅ You're now talking to the customer. Bot is paused until you send '2' to return to bot.", AGENT_NUMBER, phone_id)
         send("✅ You are now connected to a human agent. Please wait for their response.", customer_number, phone_id)
 
         update_user_state(customer_number, {
@@ -9022,8 +9014,7 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
 
     elif agent_reply == "2":
         # Agent returns control to bot
-        AGENT_NUMBER = select_random_agent()
-        send("✅ The bot has resumed and will assist the customer from here.", select_random_agent(), phone_id)
+        send("✅ The bot has resumed and will assist the customer from here.", AGENT_NUMBER, phone_id)
         send("👋 You're now back with our automated assistant.", customer_number, phone_id)
 
         update_user_state(customer_number, {
@@ -9043,8 +9034,7 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
             send("✅ Your offer has been accepted by our team! Let's proceed to the next step.", customer_number, phone_id)
 
             # Notify agent
-            AGENT_NUMBER = select_random_agent()
-            send("👍 You have accepted the customer's offer.", select_random_agent(), phone_id)
+            send("👍 You have accepted the customer's offer.", agent_number, phone_id)
 
             # Update customer state
             update_user_state(customer_number, {"step": "booking_details"})
@@ -9060,8 +9050,7 @@ def handle_agent_reply(message_text, customer_number, phone_id, agent_state):
             send("❌ Your offer was declined. Please revise your offer or proceed with the listed prices.", customer_number, phone_id)
 
             # Notify agent
-            AGENT_NUMBER = select_random_agent()
-            send("☑️ You have declined the customer's offer.", select_random_agent(), phone_id)
+            send("☑️ You have declined the customer's offer.", agent_number, phone_id)
 
             # Revert customer to offer step
             update_user_state(customer_number, {"step": "offer_response"})
@@ -9082,8 +9071,7 @@ def handle_waiting_for_human_agent_response(message, user_data, phone_id):
             send("💬 You're still connected to a human agent. Please wait for them to respond.", customer_number, phone_id)
         elif step == 'talking_to_human_agent':
             # Forward customer message to the agent
-            AGENT_NUMBER = select_random_agent()
-            send(f"👤 Customer says:\n{message}", select_random_agent(), phone_id)
+            send(f"👤 Customer says:\n{message}", AGENT_NUMBER, phone_id)
         return True  # Suppress bot's default flow
 
     return False  # Continue with bot's normal flow
@@ -9723,8 +9711,7 @@ def handle_offer_response(prompt, user_data, phone_id):
             "3. Accept Offer ✅",
             "4. Decline Offer ❌"
         ])
-        AGENT_NUMBER = select_random_agent()
-        send(offer_msg, select_random_agent(), phone_id)
+        send(offer_msg, AGENT_NUMBER, phone_id)
 
         # Save agent-customer link for follow-up
         redis.set(f"agent_fallback:{AGENT_NUMBER}", json.dumps({
@@ -9736,9 +9723,8 @@ def handle_offer_response(prompt, user_data, phone_id):
         return {'step': 'waiting_on_agent', 'user': user.to_dict(), 'sender': user_data['sender']}
 
     elif prompt == "2":
-        AGENT_NUMBER = select_random_agent()
         send("Connecting you to a human agent...", user_data['sender'], phone_id)
-        send("💬 Customer requests direct agent support.\n📱 Customer: {}".format(user_data['sender']), select_random_agent(), phone_id)
+        send("💬 Customer requests direct agent support.\n📱 Customer: {}".format(user_data['sender']), AGENT_NUMBER, phone_id)
         return {'step': 'human_agent', 'user': user.to_dict(), 'sender': user_data['sender']}
 
     elif prompt == "3":
@@ -10544,7 +10530,7 @@ def forward_message_to_agent(message_text, user_data, phone_id):
     agent_number = AGENT_NUMBER
     customer_number = user_data['sender']
     
-    send(f"💬 Customer ({customer_number}): {message_text}", select_random_agent(), phone_id)
+    send(f"💬 Customer ({customer_number}): {message_text}", agent_number, phone_id)
 
 
 def handle_quote_followup(prompt, user_data, phone_id):
@@ -19590,9 +19576,10 @@ def human_agent_shona(prompt, user_data, phone_id):
     # 1. Notify customer immediately
     send("Tiri kukubatanidza nemumiriri wevanhu...", customer_number, phone_id)
     
-    # 2. Notify agent in background 
+    # 2. Notify agent in background
+    agent_number = "+263719835124"
     agent_message = f"Mutengi mutsva kubva ku {customer_number}\nMharidzo: {prompt}"
-    threading.Thread(target=send, args=(agent_message, select_random_agent(), phone_id)).start()
+    threading.Thread(target=send, args=(agent_message, agent_number, phone_id)).start()
     
     # 3. After 10 seconds, send fallback options
     def send_fallback_shona():
@@ -20053,7 +20040,7 @@ def human_agent_shona(prompt, user_data, phone_id):
         f"1 - Taura nemutengi\n"
         f"2 - Dzokera kubhoti"
     )
-    send(agent_message, select_random_agent(), phone_id) 
+    send(agent_message, AGENT_NUMBER, phone_id) 
     
     update_user_state(AGENT_NUMBER, {
         'step': 'agent_reply_shona',
@@ -20102,7 +20089,7 @@ def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_stat
         timer = fallback_timers.pop(agent_customer_number, None)
         if timer:
             timer.cancel()
-        send("✅ Wave kutaura nemutengi. Bhoti rakamiswa kusvikira watumira '2' kuti udzokere kubhoti.", select_random_agent(), phone_id)
+        send("✅ Wave kutaura nemutengi. Bhoti rakamiswa kusvikira watumira '2' kuti udzokere kubhoti.", AGENT_NUMBER, phone_id)
         send("✅ Wave kubatanidzwa nemumiriri wevanhu. Ndapota mirira mhinduro yavo.", customer_number, phone_id)
 
         update_user_state(customer_number, {
@@ -20112,7 +20099,7 @@ def handle_agent_reply_shona(message_text, customer_number, phone_id, agent_stat
         })
 
     elif agent_reply == "2":
-        send("✅ Bhoti radzoka uye richabatsira mutengi kubva pano.", select_random_agent(), phone_id)
+        send("✅ Bhoti radzoka uye richabatsira mutengi kubva pano.", AGENT_NUMBER, phone_id)
         send("👋 Wave zvakare neboti redu.", customer_number, phone_id)
 
         update_user_state(customer_number, {
@@ -20323,7 +20310,7 @@ def forward_message_to_agent_shona(prompt, user_data, phone_id):
         f"\"{prompt}\"\n\n"
         f"Pindura nemutengi nekunyora meseji yako kana kudzvanya '2' kudzokera kubhoti"
     )
-    send(agent_message, select_random_agent(), phone_id)
+    send(agent_message, AGENT_NUMBER, phone_id)
     
     # Keep customer in same state
     return {'step': 'talking_to_human_agent_shona', 'user': user_data.get('user', {}), 'sender': customer_number}
@@ -20991,13 +20978,13 @@ def custom_question_shona(prompt, user_data, phone_id):
 
 
 
-def notify_agent_shona(customer_number, prompt, select_random_agent(), phone_id):
+def notify_agent_shona(customer_number, prompt, agent_number, phone_id):
     agent_message = (
         f"👋 Chikumbiro chitsva chevatengi paWhatsApp\n\n"
         f"📱 Nhamba: {customer_number}\n"
         f"📩 Mharidzo: \"{prompt}\""
     )
-    send(agent_message, select_random_agent(), phone_id)
+    send(agent_message, agent_number, phone_id)
 
 
 
@@ -30588,7 +30575,7 @@ def human_agent_ndebele(prompt, user_data, phone_id):
         f"1 - Khuluma nomthengi\n"
         f"2 - Buyela kubhothi"
     )
-    send(agent_message, select_random_agent(), phone_id) 
+    send(agent_message, AGENT_NUMBER, phone_id) 
     
     update_user_state(AGENT_NUMBER, {
         'step': 'agent_reply_ndebele',
@@ -30637,7 +30624,7 @@ def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_st
         timer = fallback_ndebele_timers.pop(agent_customer_number, None)
         if timer:
             timer.cancel()
-        send("✅ Usuxhumene nekhasimende. I-bhoti imisiwe kuze kuthumele '2' ukuze ubuyele ku-bhoti.", select_random_agent(), phone_id)
+        send("✅ Usuxhumene nekhasimende. I-bhoti imisiwe kuze kuthumele '2' ukuze ubuyele ku-bhoti.", AGENT_NUMBER, phone_id)
         send("✅ Usuxhumene nomuntu ongumphathi. Sicela ulinde impendulo yakhe.", customer_number, phone_id)
 
         update_user_state(customer_number, {
@@ -30647,7 +30634,7 @@ def handle_agent_reply_ndebele(message_text, customer_number, phone_id, agent_st
         })
 
     elif agent_reply == "2":
-        send("✅ I-bhoti ibuyile futhi izosiza ikhasimende kusukela manje.", select_random_agent(), phone_id)
+        send("✅ I-bhoti ibuyile futhi izosiza ikhasimende kusukela manje.", AGENT_NUMBER, phone_id)
         send("👋 Usubuya ne-bhoti yethu.", customer_number, phone_id)
 
         update_user_state(customer_number, {
@@ -30968,7 +30955,7 @@ def forward_message_to_agent_ndebele(prompt, user_data, phone_id):
         f"\"{prompt}\"\n\n"
         f"Phendula ukhasimende ngokuthumela umlayezo noma uchofoze '2' ukuze ubuyele kubhoti"
     )
-    send(agent_message, select_random_agent(), phone_id)
+    send(agent_message, AGENT_NUMBER, phone_id)
     
     # Keep customer in same state
     return {'step': 'talking_to_human_agent_ndebele', 'user': user_data.get('user', {}), 'sender': customer_number}
@@ -31079,7 +31066,7 @@ def human_agent_ndebele(prompt, user_data, phone_id):
         f"1 - Khuluma nekhasimende\n"
         f"2 - Buyela kubhoti"
     )
-    send(agent_message, select_random_agent(), phone_id)
+    send(agent_message, AGENT_NUMBER, phone_id)
 
     update_user_state(AGENT_NUMBER, {
         'step': 'agent_reply_ndebele',
@@ -33214,7 +33201,7 @@ def webhook():
                     customer_number = agent_state.get("customer_number")
             
                     if not customer_number:
-                        send("⚠️ No customer to reply to. Wait for a new request.", select_random_agent(), phone_id)
+                        send("⚠️ No customer to reply to. Wait for a new request.", AGENT_NUMBER, phone_id)
                         return "OK"
 
                         # Always re-store the agent state with the customer_number to ensure it's not lost
@@ -33244,7 +33231,7 @@ def webhook():
                         return "OK"
 
             
-                    send("⚠️ No active chat. Please wait for a new request.", select_random_agent(), phone_id)
+                    send("⚠️ No active chat. Please wait for a new request.", AGENT_NUMBER, phone_id)
                     return "OK"
             
                 # Handle normal user messages (only if NOT agent)

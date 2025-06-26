@@ -37769,7 +37769,7 @@ def webhook():
 
                 
                 # Handle agent messages
-                if from_number.endswith(AGENT_NUMBER.replace("+", "")):
+                if any(from_number.endswith(agent.replace("+", "")) for agent in AGENT_NUMBER):
                     agent_state = get_user_state(AGENT_NUMBER)
                     customer_number = agent_state.get("customer_number")
             

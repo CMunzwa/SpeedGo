@@ -13,6 +13,8 @@ import time
 
 
 logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 fallback_timers = {}
 fallback_timers_shona = {}
 fallback_timers_ndebele = {}

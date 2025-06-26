@@ -10323,20 +10323,17 @@ def get_available_agents_count():
 
 def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
     """
-    Connects a customer to an available human agent with context.
+    Connects a customer to any human agent (ignores availability).
     """
     customer_number = user_data['sender']
     result = {'status': 'initiated', 'customer': customer_number}
 
     try:
-        # 1. Notify customer
-        active_agents = get_available_agents_count()
-        wait_estimate = calculate_wait_time(active_agents)
-
+        # 1. Notify customer (no need to calculate available agents anymore)
+        wait_estimate = "less than 5 minutes"  # static estimate or you can remove this
         send(
             f"🚀 Connecting you to a human agent...\n"
-            f"⏳ Estimated wait time: {wait_estimate}\n"
-            f"Your position in queue: #{get_queue_position(customer_number)}",
+            f"⏳ Estimated wait time: {wait_estimate}",
             customer_number,
             phone_id
         )
@@ -10344,8 +10341,8 @@ def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
         # 2. Build agent alert message
         agent_message = build_agent_alert_message(customer_number, prompt, user_data)
 
-        # 3. Assign to an agent
-        assignment_result = assign_to_agent(
+        # 3. Assign message to the next agent (round-robin or first in list)
+        assignment_result = assign_to_any_agent(
             customer_number=customer_number,
             message=agent_message,
             phone_id=phone_id,
@@ -10354,15 +10351,14 @@ def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
 
         if not assignment_result['success']:
             send(
-                "All our agents are currently busy. We'll notify you when one becomes available.",
+                "All our agents are currently unreachable. We'll notify you once they respond.",
                 customer_number,
                 phone_id
             )
-            add_to_waiting_queue(customer_number, prompt, user_data)
-            result.update({'status': 'queued', 'queue_position': get_queue_position(customer_number)})
+            result.update({'status': 'failed_to_deliver', 'error': assignment_result['reason']})
             return result
 
-        # 4. Update state
+        # 4. Update conversation state
         update_agent_state(
             agent_number=assignment_result['agent_number'],
             new_state={
@@ -10383,7 +10379,7 @@ def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
             }
         )
 
-        # 5. Log connection
+        # 5. Log conversation
         log_agent_connection(
             customer_number=customer_number,
             agent_number=assignment_result['agent_number'],
@@ -10400,13 +10396,32 @@ def human_agent(prompt: str, user_data: dict, phone_id: str) -> dict:
     except Exception as e:
         logger.error(f"Agent connection failed for {customer_number}: {str(e)}")
         send(
-            "⚠️ We're experiencing technical difficulties. Please try again later.",
+            "⚠️ We're experiencing technical issues. Please try again shortly.",
             customer_number,
             phone_id
         )
         result.update({'status': 'failed', 'error': str(e)})
 
     return result
+
+
+def assign_to_any_agent(customer_number: str, message: str, phone_id: str, context: dict) -> dict:
+    """
+    Assigns to the first agent from AGENT_NUMBER list regardless of availability.
+    """
+    for agent in AGENT_NUMBER:
+        try:
+            send(message, agent, phone_id)
+            return {
+                'success': True,
+                'agent_number': agent,
+                'timestamp': datetime.now().isoformat()
+            }
+        except Exception as e:
+            logger.error(f"Failed to send message to agent {agent}: {str(e)}")
+            continue
+
+    return {'success': False, 'reason': 'no_agents_responded'}
 
 
 def build_agent_alert_message(customer_number: str, prompt: str, user_data: dict) -> str:

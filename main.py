@@ -159,6 +159,744 @@ def reverse_geocode_location(gps_coords):
     elif -20.19 < lat < -19.82 and 31.41 < lng < 31.78:  # Adjusted for Nyika Growth Point (latitude ~-20.01)
         return "Nyika Growth Point"
 
+    elif -20.53 < lat < -20.16 and 28.93 < lng < 29.30:  # Bulilimamangwe (latitude ~-20.35)
+        return "Bulilimamangwe"
+    elif -18.15 < lat < -17.78 and 30.14 < lng < 30.51:  # Chegutu 
+        return "Chegutu"
+    elif -19.83 < lat < -19.46 and 32.86 < lng < 33.23:  # Chimanimani town (latitude ~-19.65)
+        return "Chimanimani town"
+    elif -20.21 < lat < -19.84 and 32.62 < lng < 32.99:  # Chipinge town (latitude ~-20.03)
+        return "Chipinge town"
+    elif -21.05 < lat < -20.68 and 31.66 < lng < 32.03:  # Chiredzi town (latitude ~-20.87)
+        return "Chiredzi town"
+    elif -19.28 < lat < -18.91 and 30.52 < lng < 30.89:  # Mvuma town (latitude ~-19.10)
+        return "Mvuma town"
+    elif -19.81 < lat < -19.44 and 30.74 < lng < 31.11:  # Chirumhanzu (latitude ~-19.63)
+        return "Chirumhanzu"
+    elif -20.10 < lat < -19.73 and 30.89 < lng < 31.26:  # Chivi (latitude ~-19.92)
+        return "Chivi"
+    elif -18.02 < lat < -17.65 and 31.03 < lng < 31.40:  # Chitungwiza suburbs (latitude ~-17.84)
+        return "Chitungwiza"
+    elif -18.22 < lat < -17.85 and 28.92 < lng < 29.29:  # Gokwe centre (latitude ~-18.04)
+        return "Gokwe"
+    elif -17.83 < lat < -17.46 and 31.24 < lng < 31.61:  # Goromonzi (latitude ~-17.65)
+        return "Goromonzi"
+    elif -16.66 < lat < -16.29 and 30.68 < lng < 31.05:  # Guruve Centre/town (latitude ~-16.48)
+        return "Guruve town"
+    elif -19.86 < lat < -19.49 and 29.36 < lng < 29.73:  # Insiza (latitude ~-19.68)
+        return "Insiza"
+    elif -18.36 < lat < -17.99 and 29.86 < lng < 30.23:  # Kadoma town (latitude ~-18.18)
+        return "Kadoma town"
+    elif -16.54 < lat < -16.17 and 28.76 < lng < 29.13:  # Kariba District (latitude ~-16.36)
+        return "Kariba District"
+    elif -18.94 < lat < -18.57 and 29.79 < lng < 30.16:  # Kwekwe town (latitude ~-18.76)
+        return "Kwekwe town"
+    elif -19.05 < lat < -18.68 and 29.76 < lng < 30.13:  # Redcliff town (latitude ~-18.87)
+        return "Redcliff town"
+    elif -18.96 < lat < -18.59 and 27.76 < lng < 28.13:  # Lupane town (latitude ~-18.78)
+        return "Lupane"
+    elif -18.15 < lat < -17.78 and 30.48 < lng < 30.85:  # Makonde District (latitude ~-17.97)
+        return "Makonde District"
+    elif -18.72 < lat < -18.35 and 32.11 < lng < 32.48:  # Headlands (latitude ~-18.54)
+        return "Headlands"
+    elif -18.15 < lat < -17.78 and 31.85 < lng < 32.22:  # Macheke (latitude ~-17.97)
+        return "Macheke"
+    elif -19.05 < lat < -18.68 and 30.89 < lng < 31.26:  # Chivhu (latitude ~-18.87)
+        return "Chivhu"
+    elif -18.21 < lat < -17.84 and 31.54 < lng < 31.91:  # Marondera (latitude ~-18.03)
+        return "Marondera"
+    elif -17.68 < lat < -17.31 and 31.78 < lng < 32.15:  # Murehwa town (latitude ~-17.50)
+        return "Murehwa"
+    elif -18.99 < lat < -18.62 and 32.64 < lng < 33.01:  # Mutare city/town (latitude ~-18.81)
+        return "Mutare"
+    elif -18.64 < lat < -18.27 and 32.85 < lng < 33.22:  # Mutasa (latitude ~-18.46)
+        return "Mutasa"
+    elif -17.47 < lat < -17.10 and 32.20 < lng < 32.57:  # Mutoko town (latitude ~-17.29)
+        return "Mutoko town"
+    elif -16.45 < lat < -16.08 and 30.40 < lng < 30.77:  # Muzarabani centre (latitude ~-16.27)
+        return "Muzarabani"
+    elif -21.07 < lat < -20.70 and 30.71 < lng < 31.08:  # Mwenezi 
+        return "Mwenezi"
+    elif -18.98 < lat < -18.61 and 28.50 < lng < 28.87:  # Nkayi
+        return "Nkayi"
+    elif -18.24 < lat < -17.87 and 32.73 < lng < 33.10:  # Nyanga town (latitude ~-18.06)
+        return "Nyanga"
+    elif -16.78 < lat < -16.41 and 32.35 < lng < 32.72:  # Rushinga centre (latitude ~-16.60)
+        return "Rushinga"
+    elif -18.24 < lat < -17.88 and 30.99 < lng < 31.35:  # Seke (latitude ~-18.06, longitude ~31.17)
+        return "Seke"
+    elif -17.28 < lat < -16.92 and 31.41 < lng < 31.77:  # Shamva (latitude ~-17.10, longitude ~31.59)
+        return "Shamva"
+    elif -19.64 < lat < -19.28 and 29.99 < lng < 30.35:  # Shurugwi (latitude ~-19.46, longitude ~30.17)
+        return "Shurugwi"
+    elif -20.05 < lat < -19.69 and 28.39 < lng < 28.75:  # Umguza (latitude ~-19.87, longitude ~28.57)
+        return "Umguza"
+    elif -20.31 < lat < -19.95 and 28.82 < lng < 29.18:  # Umzingwane (latitude ~-20.13, longitude ~29.00)
+        return "Umzingwane"
+    elif -17.76 < lat < -17.40 and 30.21 < lng < 30.57:  # Zvimba (latitude ~-17.58, longitude ~30.39)
+        return "Zvimba"
+    elif -20.25 < lat < -19.89 and 30.00 < lng < 30.36:  # Zvishavane (latitude ~-20.07, longitude ~30.18)
+        return "Zvishavane"
+    elif -22.28 < lat < -21.92 and 29.92 < lng < 30.28:  # Beitbridge (latitude ~-22.10, longitude ~30.10)
+        return "Beitbridge"
+    elif -21.53 < lat < -21.17 and 31.96 < lng < 32.32:  # Chipise (latitude ~-21.35, longitude ~32.14)
+        return "Chipise"
+    elif -22.02 < lat < -21.66 and 30.62 < lng < 30.98:  # Dendele (latitude ~-21.84, longitude ~30.80)
+        return "Dendele"
+    elif -21.95 < lat < -21.59 and 30.87 < lng < 31.23:  # Dite (latitude ~-21.77, longitude ~31.05)
+        return "Dite"
+    elif -21.46 < lat < -21.10 and 30.68 < lng < 31.04:  # Machuchuta (latitude ~-21.28, longitude ~30.86)
+        return "Machuchuta"
+    elif -22.18 < lat < -21.82 and 30.47 < lng < 30.83:  # Maramani (latitude ~-22.00, longitude ~30.65)
+        return "Maramani"
+    elif -22.32 < lat < -21.96 and 30.98 < lng < 31.34:  # Masera (latitude ~-22.14, longitude ~31.16)
+        return "Masera"
+    elif -22.20 < lat < -21.84 and 30.21 < lng < 30.57:  # Mtetengwe (latitude ~-22.02, longitude ~30.39)
+        return "Mtetengwe"
+    elif -21.66 < lat < -21.30 and 31.11 < lng < 31.47:  # Siyoka (latitude ~-21.48, longitude ~31.29)
+        return "Siyoka"
+    elif -20.33 < lat < -19.97 and 31.91 < lng < 32.27:  # Baradzanwa (approx -20.15, 32.09)
+        return "Baradzanwa"
+    elif -20.14 < lat < -19.78 and 31.99 < lng < 32.35:  # Bikita (approx -19.96, 32.17)
+        return "Bikita"
+    elif -19.76 < lat < -19.40 and 30.42 < lng < 30.78:  # Boora (approx -19.58, 30.60)
+        return "Boora"
+    elif -20.19 < lat < -19.83 and 31.49 < lng < 31.85:  # Chigumisirwa (approx -20.01, 31.67)
+        return "Chigumisirwa"
+    elif -21.25 < lat < -20.89 and 31.62 < lng < 31.98:  # Chikuku (approx -21.07, 31.80)
+        return "Chikuku"
+    elif -20.45 < lat < -20.09 and 30.49 < lng < 30.85:  # Chikukutu (approx -20.27, 30.67)
+        return "Chikukutu"
+    elif -17.89 < lat < -17.53 and 30.96 < lng < 31.32:  # Chiremwaremwa (approx -17.71, 31.14)
+        return "Chiremwaremwa"
+    elif -20.21 < lat < -19.85 and 31.98 < lng < 32.34:  # Chirorwe (approx -20.03, 32.16)
+        return "Chirorwe"
+    elif -19.81 < lat < -19.45 and 30.81 < lng < 31.17:  # Devure (approx -19.63, 30.99)
+        return "Devure"
+    elif -20.39 < lat < -20.03 and 31.52 < lng < 31.88:  # Mungezi (approx -20.21, 31.70)
+        return "Mungezi"
+    elif -20.03 < lat < -19.67 and 31.61 < lng < 31.97:  # Mupamande (approx -19.85, 31.79)
+        return "Mupamande"
+    elif -19.49 < lat < -19.13 and 31.56 < lng < 31.92:  # Murwira (approx -19.31, 31.74)
+        return "Murwira"
+    elif -20.17 < lat < -19.81 and 31.76 < lng < 32.12:  # Museti (approx -19.99, 31.94)
+        return "Museti"
+    elif -19.62 < lat < -19.26 and 30.37 < lng < 30.73:  # Mutikizizi (approx -19.44, 30.55)
+        return "Mutikizizi"
+    elif -20.25 < lat < -19.89 and 31.76 < lng < 32.12:  # Negovano (approx -20.07, 31.94)
+        return "Negovano"
+    elif -20.01 < lat < -19.65 and 31.65 < lng < 32.01:  # Nyahunda (approx -19.83, 31.83)
+        return "Nyahunda"
+    elif -19.98 < lat < -19.62 and 31.71 < lng < 32.07:  # Nyarushiri (approx -19.80, 31.89)
+        return "Nyarushiri"
+    elif -19.81 < lat < -19.45 and 30.81 < lng < 31.17:  # Devure Ranch (same as Devure)
+        return "Devure Ranch"
+    elif -20.18 < lat < -19.82 and 30.70 < lng < 31.06:  # Gangare (approx -20.00, 30.88)
+        return "Gangare"
+    elif -20.01 < lat < -19.65 and 31.28 < lng < 31.64:  # Magocha (approx -19.83, 31.46)
+        return "Magocha"
+    elif -20.23 < lat < -19.87 and 31.89 < lng < 32.25:  # Marozva (approx -20.05, 32.07)
+        return "Marozva"
+    elif -21.19 < lat < -20.83 and 31.75 < lng < 32.11:  # Mashoko (approx -21.01, 31.93)
+        return "Mashoko"
+    elif -20.42 < lat < -20.06 and 30.45 < lng < 30.81:  # Matsvange (approx -20.24, 30.63)
+        return "Matsvange"
+    elif -22.04 < lat < -21.68 and 30.04 < lng < 30.40:  # Mazungunye (approx -21.86, 30.22)
+        return "Mazungunye"
+    elif -20.21 < lat < -19.85 and 31.38 < lng < 31.74:  # Mukore (approx -20.03, 31.56)
+        return "Mukore"
+    elif -19.78 < lat < -19.42 and 31.42 < lng < 31.78:  # Chiveso (approx -19.60, 31.60)
+        return "Chiveso"
+    elif -20.31 < lat < -19.95 and 32.14 < lng < 32.50:  # Dindinyongwe (approx -20.13, 32.32)
+        return "Dindinyongwe"
+    elif -19.92 < lat < -19.56 and 31.53 < lng < 31.89:  # Gudza (approx -19.74, 31.71)
+        return "Gudza"
+    elif -20.25 < lat < -19.89 and 30.79 < lng < 31.15:  # Guwa (approx -20.07, 30.97)
+        return "Guwa"
+    elif -20.33 < lat < -19.97 and 31.77 < lng < 32.13:  # Mhumhurwi (approx -20.15, 31.95)
+        return "Mhumhurwi"
+    elif -20.12 < lat < -19.76 and 31.60 < lng < 31.96:  # Muchapondwa (approx -19.94, 31.78)
+        return "Muchapondwa"
+    elif -20.07 < lat < -19.71 and 31.63 < lng < 31.99:  # Muonwe (approx -19.89, 31.81)
+        return "Muonwe"
+    elif -19.85 < lat < -19.49 and 31.57 < lng < 31.93:  # Mupandira (approx -19.67, 31.75)
+        return "Mupandira"
+    elif -19.62 < lat < -19.26 and 31.35 < lng < 31.71:  # Mutowa (approx -19.44, 31.53)
+        return "Mutowa"
+    elif -20.22 < lat < -19.86 and 28.50 < lng < 28.86:  # Nyava (approx -20.04, 28.68)
+        return "Nyava"
+    elif -17.89 < lat < -17.53 and 27.35 < lng < 27.71:  # Chete National Park (approx -17.71, 27.53)
+        return "Chete National Park"
+    elif -18.32 < lat < -17.96 and 26.44 < lng < 26.80:  # Chinonge (approx -18.14, 26.62)
+        return "Chinonge"
+    elif -18.19 < lat < -17.83 and 27.32 < lng < 27.68:  # Chunga (approx -18.01, 27.50)
+        return "Chunga"
+    elif -17.95 < lat < -17.59 and 27.28 < lng < 27.64:  # Dobola (approx -17.77, 27.46)
+        return "Dobola"
+    elif -17.62 < lat < -17.26 and 27.41 < lng < 27.77:  # Kabuba (approx -17.44, 27.59)
+        return "Kabuba"
+    elif -17.83 < lat < -17.47 and 27.12 < lng < 27.48:  # Kariangwe (approx -17.65, 27.30)
+        return "Kariangwe"
+    elif -17.78 < lat < -17.42 and 27.35 < lng < 27.71:  # Kalungwizi (approx -17.60, 27.53)
+        return "Kalungwizi"
+    elif -17.91 < lat < -17.55 and 27.18 < lng < 27.54:  # Lubimbi (approx -17.73, 27.36)
+        return "Lubimbi"
+    elif -17.84 < lat < -17.48 and 27.24 < lng < 27.60:  # Lubu (approx -17.66, 27.42)
+        return "Lubu"
+    elif -17.71 < lat < -17.35 and 27.45 < lng < 27.81:  # Lunga (approx -17.53, 27.63)
+        return "Lunga"
+    elif -17.62 < lat < -17.26 and 27.30 < lng < 27.66:  # Siachilaba (approx -17.44, 27.48)
+        return "Siachilaba"
+    elif -17.75 < lat < -17.39 and 27.21 < lng < 27.57:  # Sianzyundu (approx -17.57, 27.39)
+        return "Sianzyundu"
+    elif -17.68 < lat < -17.32 and 27.38 < lng < 27.74:  # Sikalenge (approx -17.50, 27.56)
+        return "Sikalenge"
+    elif -17.59 < lat < -17.23 and 27.42 < lng < 27.78:  # Simatelele (approx -17.41, 27.60)
+        return "Simatelele"
+    elif -17.81 < lat < -17.45 and 27.33 < lng < 27.69:  # Sinamagonde (approx -17.63, 27.51)
+        return "Sinamagonde"
+    elif -17.88 < lat < -17.52 and 27.25 < lng < 27.61:  # Sinampande-Nagangala (approx -17.70, 27.43)
+        return "Sinampande-Nagangala"
+    elif -17.72 < lat < -17.36 and 27.29 < lng < 27.65:  # Sinansengwe (approx -17.54, 27.47)
+        return "Sinansengwe"
+    elif -17.67 < lat < -17.31 and 27.40 < lng < 27.76:  # Tinde (approx -17.49, 27.58)
+        return "Tinde"
+    elif -17.74 < lat < -17.38 and 27.47 < lng < 27.83:  # Manjolo (approx -17.56, 27.65)
+        return "Manjolo"
+    elif -17.91 < lat < -17.55 and 27.39 < lng < 27.75:  # Muchesu (approx -17.73, 27.57)
+        return "Muchesu"
+    elif -17.82 < lat < -17.46 and 27.31 < lng < 27.67:  # Nabusenga (approx -17.64, 27.49)
+        return "Nabusenga"
+    elif -17.93 < lat < -17.57 and 27.22 < lng < 27.58:  # National Park (approx -17.75, 27.40)
+        return "National Park"
+    elif -17.77 < lat < -17.41 and 27.36 < lng < 27.72:  # Nsenga (approx -17.59, 27.54)
+        return "Nsenga"
+    elif -17.69 < lat < -17.33 and 27.43 < lng < 27.79:  # Pashu (approx -17.51, 27.61)
+        return "Pashu"
+    elif -17.85 < lat < -17.49 and 27.26 < lng < 27.62:  # Saba-lubanda (approx -17.67, 27.44)
+        return "Saba-lubanda"
+    elif -19.68 < lat < -19.32 and 28.85 < lng < 29.21:  # Inyathi (approx -19.50, 29.03)
+        return "Inyathi"
+    elif -20.05 < lat < -19.69 and 28.50 < lng < 28.86:  # Nkosikazi (approx -19.87, 28.68)
+        return "Nkosikazi"
+    elif -20.31 < lat < -19.95 and 32.14 < lng < 32.50:  # Betera (approx -20.13, 32.32)
+        return "Betera"
+    elif -20.22 < lat < -19.86 and 31.89 < lng < 32.25:  # Chapwanya (approx -20.04, 32.07)
+        return "Chapwanya"
+    # Northern and Eastern Regions
+    elif -16.85 < lat < -16.49 and 31.58 < lng < 31.94:  # Chikuwa
+        return "Chikuwa"
+    elif -17.35 < lat < -16.99 and 31.75 < lng < 32.11:  # Chimutsa East
+        return "Chimutsa East"
+    elif -17.38 < lat < -17.02 and 31.82 < lng < 32.18:  # Chitsunge
+        return "Chitsunge"
+    elif -17.36 < lat < -17.00 and 31.55 < lng < 31.91:  # Chiweshe
+        return "Chiweshe"
+    elif -18.72 < lat < -18.36 and 32.13 < lng < 32.49:  # Murambinda
+        return "Murambinda"
+    # Mashonaland Region
+    elif -17.89 < lat < -17.53 and 30.96 < lng < 31.32:  # Mudzamiri/Chiremwaremwa
+        return "Mudzamiri"
+    elif -19.78 < lat < -19.42 and 32.21 < lng < 32.57:  # Chimombe
+        return "Chimombe"
+    elif -18.52 < lat < -18.16 and 32.12 < lng < 32.48:  # Chirozva
+        return "Chirozva"
+    elif -19.15 < lat < -18.79 and 31.55 < lng < 31.91:  # Makumbe
+        return "Makumbe"
+    # Masvingo Region
+    elif -20.12 < lat < -19.76 and 32.45 < lng < 32.81:  # Garamwera
+        return "Garamwera"
+    elif -20.22 < lat < -19.86 and 31.75 < lng < 32.11:  # Makuvise
+        return "Makuvise"
+    elif -20.33 < lat < -19.97 and 31.77 < lng < 32.13:  # Marume/Mhumhurwi
+        return "Marume"
+    elif -20.03 < lat < -19.67 and 31.61 < lng < 31.97:  # Mupamande/Mutiusinazita
+        return "Mupamande"
+    elif -20.25 < lat < -19.89 and 31.76 < lng < 32.12:  # Negovano/Raditladi/Nechavava
+        return "Negovano"
+    # Matabeleland Region
+    elif -20.63 < lat < -20.27 and 28.53 < lng < 28.89:  # Empandeni
+        return "Empandeni"
+    elif -20.27 < lat < -19.91 and 28.62 < lng < 28.98:  # Figtree
+        return "Figtree"
+    elif -21.59 < lat < -21.23 and 29.29 < lng < 29.65:  # Dombodema
+        return "Dombodema"
+    elif -21.61 < lat < -21.25 and 29.34 < lng < 29.70:  # Bambadzi
+        return "Bambadzi"
+    elif -22.25 < lat < -21.89 and 29.35 < lng < 29.71:  # Mombeyarara
+        return "Mombeyarara"
+    elif -22.18 < lat < -21.82 and 30.47 < lng < 30.83:  # Mphoengs/Maramani
+        return "Mphoengs"
+    # Midlands Region
+    elif -19.62 < lat < -19.26 and 31.35 < lng < 31.71:  # Mudinzwa/Mutowa
+        return "Mudinzwa"
+    elif -19.81 < lat < -19.45 and 30.81 < lng < 31.17:  # Devure/Munyira
+        return "Devure"
+    elif -20.45 < lat < -20.09 and 30.49 < lng < 30.85:  # Mabvuregudo/Chikukutu
+        return "Mabvuregudo"
+    elif -20.42 < lat < -20.06 and 30.45 < lng < 30.81:  # Hingwe/Matsvange
+        return "Hingwe"
+    # Manicaland Region
+    elif -18.32 < lat < -17.96 and 26.44 < lng < 26.80:  # Chinonge
+        return "Chinonge"
+    elif -18.19 < lat < -17.83 and 27.32 < lng < 27.68:  # Chunga
+        return "Chunga"
+    elif -17.95 < lat < -17.59 and 27.28 < lng < 27.64:  # Dobola
+        return "Dobola"
+    elif -17.62 < lat < -17.26 and 27.41 < lng < 27.77:  # Kabuba
+        return "Kabuba"
+    # Consolidated Western Zimbabwe
+    elif -17.83 < lat < -17.47 and 27.12 < lng < 27.48:  # Kariangwe
+        return "Kariangwe"
+    elif -17.78 < lat < -17.42 and 27.35 < lng < 27.71:  # Kalungwizi
+        return "Kalungwizi"
+    elif -17.91 < lat < -17.55 and 27.18 < lng < 27.54:  # Lubimbi
+        return "Lubimbi"
+    elif -17.84 < lat < -17.48 and 27.24 < lng < 27.60:  # Lubu
+        return "Lubu"       
+    # Masvingo/Manicaland Region
+    elif -21.25 < lat < -20.89 and 31.62 < lng < 31.98:  # Sansukwe
+        return "Sansukwe"
+    elif -20.45 < lat < -20.09 and 32.15 < lng < 32.51:  # Somnene
+        return "Somnene"
+    elif -21.18 < lat < -20.82 and 31.75 < lng < 32.11:  # Tjankwa
+        return "Tjankwa"
+    elif -17.86 < lat < -17.50 and 30.60 < lng < 30.96:  # Chivero
+        return "Chivero"
+    elif -20.22 < lat < -19.86 and 31.89 < lng < 32.25:  # Gora/Mashayamombe
+        return "Gora"
+    elif -17.76 < lat < -17.40 and 30.80 < lng < 31.16:  # Nherera
+        return "Nherera"
+    elif -18.32 < lat < -17.96 and 32.12 < lng < 32.48:  # Nyamweda
+        return "Nyamweda"
+    elif -17.95 < lat < -17.59 and 31.25 < lng < 31.61:  # Rwizi
+        return "Rwizi"
+    elif -17.58 < lat < -17.22 and 30.65 < lng < 31.01:  # Murombedzi
+        return "Murombedzi"
+    elif -19.15 < lat < -18.79 and 30.55 < lng < 30.91:  # Ngezi
+        return "Ngezi"
+    # Eastern Highlands
+    elif -19.78 < lat < -19.42 and 32.65 < lng < 33.01:  # Biriri
+        return "Biriri"
+    elif -20.12 < lat < -19.76 and 32.75 < lng < 33.11:  # Bumha
+        return "Bumha"
+    elif -19.92 < lat < -19.56 and 32.53 < lng < 32.89:  # Chabika
+        return "Chabika"
+    elif -20.05 < lat < -19.69 and 32.62 < lng < 32.98:  # Chakowa
+        return "Chakowa"
+    elif -19.85 < lat < -19.49 and 32.58 < lng < 32.94:  # Changazi
+        return "Changazi"
+    elif -20.18 < lat < -19.82 and 32.70 < lng < 33.06:  # Chayamiti
+        return "Chayamiti"
+    elif -19.68 < lat < -19.32 and 32.85 < lng < 33.21:  # Chikukwa/Ngorima
+        return "Chikukwa"
+    elif -20.22 < lat < -19.86 and 32.68 < lng < 33.04:  # Nyahonde
+        return "Nyahonde"
+    elif -19.72 < lat < -19.36 and 32.72 < lng < 33.08:  # Nyanyadzi
+        return "Nyanyadzi"
+    elif -20.15 < lat < -19.79 and 32.65 < lng < 33.01:  # Rupise
+        return "Rupise"
+    elif -19.82 < lat < -19.46 and 32.60 < lng < 32.96:  # Shinja
+        return "Shinja"
+    # Chipinge/Chiredzi Area
+    elif -20.28 < lat < -19.92 and 32.18 < lng < 32.54:  # Chiramba
+        return "Chiramba"
+    elif -21.35 < lat < -20.99 and 31.96 < lng < 32.32:  # Guune
+        return "Guune"
+    elif -20.42 < lat < -20.06 and 32.25 < lng < 32.61:  # Kudzanga
+        return "Kudzanga"
+    elif -21.15 < lat < -20.79 and 31.85 < lng < 32.21:  # Manyuseni
+        return "Manyuseni"
+    elif -20.38 < lat < -20.02 and 32.22 < lng < 32.58:  # Mhakwe
+        return "Mhakwe"
+    elif -21.25 < lat < -20.89 and 32.02 < lng < 32.38:  # Mhandarume
+        return "Mhandarume"
+    elif -20.52 < lat < -20.16 and 32.35 < lng < 32.71:  # Chisumbanje
+        return "Chisumbanje"
+    elif -20.45 < lat < -20.09 and 32.28 < lng < 32.64:  # Chipinge
+        return "Chipinge"
+    elif -21.18 < lat < -20.82 and 31.92 < lng < 32.28:  # Chikore
+        return "Chikore"
+    elif -20.35 < lat < -19.99 and 32.30 < lng < 32.66:  # Doroi
+        return "Doroi"
+    # Lowveld/Southeastern Zimbabwe
+    elif -21.65 < lat < -21.29 and 31.95 < lng < 32.31:  # Chibwedziva
+        return "Chibwedziva"
+    elif -22.15 < lat < -21.79 and 30.95 < lng < 31.31:  # Chikombedzi
+        return "Chikombedzi"
+    elif -21.85 < lat < -21.49 and 31.85 < lng < 32.21:  # Gonakudzingwa
+        return "Gonakudzingwa"
+    elif -21.55 < lat < -21.19 and 31.88 < lng < 32.24:  # Mkwasine
+        return "Mkwasine"
+    elif -22.05 < lat < -21.69 and 31.45 < lng < 31.81:  # Tshovani
+        return "Tshovani"
+    elif -21.75 < lat < -21.39 and 31.65 < lng < 32.01:  # Sengwe
+        return "Sengwe"
+    # Midlands/Mashonaland
+    elif -18.45 < lat < -18.09 and 29.85 < lng < 30.21:  # Charandura
+        return "Charandura"
+    elif -17.95 < lat < -17.59 and 30.25 < lng < 30.61:  # Chengwena
+        return "Chengwena"
+    elif -17.82 < lat < -17.46 and 30.35 < lng < 30.71:  # Chinyuni
+        return "Chinyuni"
+    elif -18.15 < lat < -17.79 and 29.95 < lng < 30.31:  # Mapiravana
+        return "Mapiravana"
+    elif -17.65 < lat < -17.29 and 30.45 < lng < 30.81:  # Maware
+        return "Maware"
+    # Mashonaland Central/East
+    elif -17.25 < lat < -16.89 and 31.75 < lng < 32.11:  # Mhende
+        return "Mhende"
+    elif -17.35 < lat < -16.99 and 31.65 < lng < 32.01:  # Musoropamwe
+        return "Musoropamwe"
+    elif -18.45 < lat < -18.09 and 31.95 < lng < 32.31:  # Takawira/Takawira Resett
+        return "Takawira"
+    elif -17.82 < lat < -17.46 and 31.25 < lng < 31.61:  # Tatonga
+        return "Tatonga"
+    elif -19.15 < lat < -18.79 and 31.35 < lng < 31.71:  # Tokwe
+        return "Tokwe"
+    # Masvingo Province
+    elif -20.12 < lat < -19.76 and 30.85 < lng < 31.21:  # Bachi
+        return "Bachi"
+    elif -19.85 < lat < -19.49 and 31.15 < lng < 31.51:  # Badza
+        return "Badza"
+    elif -20.25 < lat < -19.89 and 30.95 < lng < 31.31:  # Batanai
+        return "Batanai"
+    elif -20.18 < lat < -19.82 and 31.05 < lng < 31.41:  # Chasiyatende
+        return "Chasiyatende"
+    elif -19.92 < lat < -19.56 and 31.25 < lng < 31.61:  # Chemuzangari
+        return "Chemuzangari"
+    # Manicaland
+    elif -18.72 < lat < -18.36 and 32.45 < lng < 32.81:  # Chigwikwi
+        return "Chigwikwi"
+    elif -19.35 < lat < -18.99 and 32.15 < lng < 32.51:  # Chitenderano
+        return "Chitenderano"
+    elif -20.05 < lat < -19.69 and 32.35 < lng < 32.71:  # Kuvhirimara
+        return "Kuvhirimara"
+    elif -19.65 < lat < -19.29 and 31.75 < lng < 32.11:  # Madamombe
+        return "Madamombe"
+    # Midlands
+    elif -19.15 < lat < -18.79 and 29.95 < lng < 30.31:  # Chireya
+        return "Chireya"
+    elif -18.95 < lat < -18.59 and 29.85 < lng < 30.21:  # Goredema
+        return "Goredema"
+    elif -19.05 < lat < -18.69 and 29.75 < lng < 30.11:  # Gumunyu
+        return "Gumunyu"
+    elif -18.85 < lat < -18.49 and 30.05 < lng < 30.41:  # Makore
+        return "Makore"
+    # Matabeleland
+    elif -20.65 < lat < -20.29 and 28.85 < lng < 29.21:  # Nembudziya
+        return "Nembudziya"
+    elif -20.55 < lat < -20.19 and 28.75 < lng < 29.11:  # Nora Rs
+        return "Nora Rs"
+    elif -20.45 < lat < -20.09 and 29.05 < lng < 29.41:  # Nyaurungwe Rs
+        return "Nyaurungwe Rs"
+    # Consolidated Special Cases
+    elif -21.15 < lat < -20.79 and 30.95 < lng < 31.31:  # Chinyika
+        return "Chinyika"
+    elif -19.75 < lat < -19.39 and 31.45 < lng < 31.81:  # Gutu/Gutu South
+        return "Gutu"
+    elif -20.85 < lat < -20.49 and 30.25 < lng < 30.61:  # Mawanga
+        return "Mawanga"
+    elif -21.05 < lat < -20.69 and 30.35 < lng < 30.71:  # Munyawiri
+        return "Munyawiri"
+    elif -19.81 < lat < -19.45 and 30.81 < lng < 31.17:  # Devure
+        return "Devure"
+    # Remaining Unique Locations
+    elif -17.55 < lat < -17.19 and 30.45 < lng < 30.81:  # Jinjika
+        return "Jinjika"
+    elif -18.25 < lat < -17.89 and 29.95 < lng < 30.31:  # Chimombe
+        return "Chimombe"
+    elif -19.35 < lat < -18.99 and 30.65 < lng < 31.01:  # Chihambakwe
+        return "Chihambakwe"
+    elif -20.15 < lat < -19.79 and 31.25 < lng < 31.61:  # Chikwanda
+        return "Chikwanda"
+    # Matabeleland Region
+    elif -19.85 < lat < -19.49 and 28.25 < lng < 28.61:  # Kubiku
+        return "Kubiku"
+    elif -20.15 < lat < -19.79 and 29.95 < lng < 30.31:  # Magombedze
+        return "Magombedze"
+    elif -20.05 < lat < -19.69 and 29.85 < lng < 30.21:  # Majada
+        return "Majada"
+    elif -18.85 < lat < -18.49 and 30.05 < lng < 30.41:  # Makore
+        return "Makore"
+    elif -19.25 < lat < -18.89 and 29.75 < lng < 30.11:  # Makudo
+        return "Makudo"
+    # Masvingo Region
+    elif -20.35 < lat < -19.99 and 31.25 < lng < 31.61:  # Mataruse
+        return "Mataruse"
+    elif -20.45 < lat < -20.09 and 31.35 < lng < 31.71:  # Matizha
+        return "Matizha"
+    elif -20.55 < lat < -20.19 and 31.45 < lng < 31.81:  # Mawere
+        return "Mawere"
+    elif -20.25 < lat < -19.89 and 31.55 < lng < 31.91:  # Mazuru
+        return "Mazuru"
+    # Midlands Region
+    elif -19.15 < lat < -18.79 and 29.65 < lng < 30.01:  # Mukaro
+        return "Mukaro"
+    elif -19.05 < lat < -18.69 and 29.55 < lng < 29.91:  # Munjanga
+        return "Munjanga"
+    elif -18.95 < lat < -18.59 and 29.45 < lng < 29.81:  # Munyaradzi
+        return "Munyaradzi"
+    # Manicaland Region
+    elif -18.75 < lat < -18.39 and 32.25 < lng < 32.61:  # Mupandawana
+        return "Mupandawana"
+    elif -18.65 < lat < -18.29 and 32.15 < lng < 32.51:  # Mushayavanhu
+        return "Mushayavanhu"
+    elif -18.55 < lat < -18.19 and 32.05 < lng < 32.41:  # Mutema
+        return "Mutema"
+    # Special Cases
+    elif -21.05 < lat < -20.69 and 29.25 < lng < 29.61:  # Dete
+        return "Dete"
+    elif -20.95 < lat < -20.59 and 29.15 < lng < 29.51:  # Jambezi
+        return "Jambezi"
+    elif -18.35 < lat < -17.99 and 29.85 < lng < 30.21:  # Karoi
+        return "Karoi"
+    elif -16.75 < lat < -16.39 and 28.85 < lng < 29.21:  # Chundu
+        return "Chundu"
+    # Consolidated Areas
+    elif -19.81 < lat < -19.45 and 30.81 < lng < 31.17:  # Devure (repeated)
+        return "Devure"
+    elif -20.65 < lat < -20.29 and 28.85 < lng < 29.21:  # Nembudziya (repeated)
+        return "Nembudziya"
+    elif -20.55 < lat < -20.19 and 28.75 < lng < 29.11:  # Nora Rs (repeated)
+        return "Nora Rs"
+    # Remaining Unique Locations
+    elif -19.35 < lat < -18.99 and 30.45 < lng < 30.81:  # Gwaranyemba
+        return "Gwaranyemba"
+    elif -19.45 < lat < -19.09 and 30.35 < lng < 30.71:  # Gungwe
+        return "Gungwe"
+    elif -20.75 < lat < -20.39 and 29.05 < lng < 29.41:  # Hwali
+        return "Hwali"
+    elif -21.15 < lat < -20.79 and 29.95 < lng < 30.31:  # Kafusi
+        return "Kafusi"
+    # Mashonaland West Region
+    elif -16.85 < lat < -16.49 and 30.15 < lng < 30.51:  # Makwarimba
+        return "Makwarimba"
+    elif -17.05 < lat < -16.69 and 30.25 < lng < 30.61:  # Goto
+        return "Goto"
+    elif -17.15 < lat < -16.79 and 30.35 < lng < 30.71:  # Dendenyore
+        return "Dendenyore"
+    elif -17.25 < lat < -16.89 and 30.45 < lng < 30.81:  # Avoca
+        return "Avoca"
+    # Mashonaland Central Region
+    elif -16.95 < lat < -16.59 and 31.05 < lng < 31.41:  # Chegutu
+        return "Chegutu"
+    elif -16.85 < lat < -16.49 and 31.15 < lng < 31.51:  # Chenjiri S Scale
+        return "Chenjiri S Scale"
+    elif -16.75 < lat < -16.39 and 31.25 < lng < 31.61:  # Muzvezve
+        return "Muzvezve"
+    elif -16.65 < lat < -16.29 and 31.35 < lng < 31.71:  # Ngezi National Parks
+        return "Ngezi National Parks"
+    # Matabeleland North Region
+    elif -18.25 < lat < -17.89 and 26.85 < lng < 27.21:  # Bumi Hills
+        return "Bumi Hills"
+    elif -18.35 < lat < -17.99 and 26.95 < lng < 27.31:  # Chalala
+        return "Chalala"
+    elif -18.45 < lat < -18.09 and 27.05 < lng < 27.41:  # Charara Safaris
+        return "Charara Safaris"
+    # Midlands Region
+    elif -19.15 < lat < -18.79 and 29.65 < lng < 30.01:  # Gweru Area
+        return "Gweru Area"
+    elif -19.25 < lat < -18.89 and 29.75 < lng < 30.11:  # Silobela
+        return "Silobela"
+    elif -19.35 < lat < -18.99 and 29.85 < lng < 30.21:  # Zhombe Central
+        return "Zhombe Central"
+    # Manicaland Region
+    elif -18.75 < lat < -18.39 and 32.85 < lng < 33.21:  # Chitomborwizi
+        return "Chitomborwizi"
+    elif -18.85 < lat < -18.49 and 32.95 < lng < 33.31:  # Doma
+        return "Doma"
+    elif -18.95 < lat < -18.59 and 33.05 < lng < 33.41:  # Magonde
+        return "Magonde"
+    # Special Cases and Consolidated Areas
+    elif -17.55 < lat < -17.19 and 30.95 < lng < 31.31:  # Batanai (consolidated)
+        return "Batanai"
+    elif -19.81 < lat < -19.45 and 30.81 < lng < 31.17:  # Empress Mine
+        return "Empress Mine"
+    elif -20.65 < lat < -20.29 and 28.85 < lng < 29.21:  # Matusadonha Safaris
+        return "Matusadonha Safaris"
+    # Remaining Unique Locations
+    elif -20.75 < lat < -20.39 and 29.95 < lng < 30.31:  # Hurungwe Safaris B
+        return "Hurungwe Safaris B"
+    elif -21.05 < lat < -20.69 and 30.15 < lng < 30.51:  # Kanyati
+        return "Kanyati"
+    elif -21.15 < lat < -20.79 and 30.25 < lng < 30.61:  # Musambakaruma
+        return "Musambakaruma"
+    elif -21.25 < lat < -20.89 and 30.35 < lng < 30.71:  # Negande
+        return "Negande"
+    # Masvingo Province
+    elif -20.25 < lat < -19.89 and 31.45 < lng < 31.81:  # Nyahangare
+        return "Nyahangare"
+    elif -20.15 < lat < -19.79 and 31.55 < lng < 31.91:  # Nyahonwe
+        return "Nyahonwe"
+    elif -20.05 < lat < -19.69 and 31.65 < lng < 32.01:  # Nyamagura
+        return "Nyamagura"
+    elif -19.95 < lat < -19.59 and 31.75 < lng < 32.11:  # Nyamatanda
+        return "Nyamatanda"
+    elif -19.85 < lat < -19.49 and 31.85 < lng < 32.21:  # Nyamidzi
+        return "Nyamidzi"
+    # Manicaland Province
+    elif -18.75 < lat < -18.39 and 32.45 < lng < 32.81:  # Pasipanodya
+        return "Pasipanodya"
+    elif -18.65 < lat < -18.29 and 32.55 < lng < 32.91:  # Rongwe
+        return "Rongwe"
+    elif -18.55 < lat < -18.19 and 32.65 < lng < 33.01:  # Ruombwe
+        return "Ruombwe"
+    elif -18.45 < lat < -18.09 and 32.75 < lng < 33.11:  # Sangano
+        return "Sangano"
+    # Midlands Province
+    elif -19.15 < lat < -18.79 and 29.95 < lng < 30.31:  # Charumbira
+        return "Charumbira"
+    elif -19.25 < lat < -18.89 and 30.05 < lng < 30.41:  # Chatikobo
+        return "Chatikobo"
+    elif -19.35 < lat < -18.99 and 30.15 < lng < 30.51:  # Chikwanda
+        return "Chikwanda"
+    elif -19.45 < lat < -19.09 and 30.25 < lng < 30.61:  # Dowa
+        return "Dowa"
+    # Matabeleland South
+    elif -20.75 < lat < -20.39 and 28.95 < lng < 29.31:  # Guwa
+        return "Guwa"
+    elif -20.85 < lat < -20.49 and 29.05 < lng < 29.41:  # Inyoni Rs
+        return "Inyoni Rs"
+    elif -20.95 < lat < -20.59 and 29.15 < lng < 29.51:  # Machitenda
+        return "Machitenda"
+    # Mashonaland East
+    elif -17.55 < lat < -17.19 and 31.85 < lng < 32.21:  # Marirangwe
+        return "Marirangwe"
+    elif -17.65 < lat < -17.29 and 31.95 < lng < 32.31:  # Mhara
+        return "Mhara"
+    elif -17.75 < lat < -17.39 and 32.05 < lng < 32.41:  # Mshagashe
+        return "Mshagashe"
+    # Special Cases
+    elif -19.81 < lat < -19.45 and 30.81 < lng < 31.17:  # Mushandike
+        return "Mushandike"
+    elif -20.65 < lat < -20.29 and 28.85 < lng < 29.21:  # Tokwane
+        return "Tokwane"
+    elif -20.55 < lat < -20.19 and 28.75 < lng < 29.11:  # Zimuto
+        return "Zimuto"
+    # Consolidated Areas
+    elif -19.35 < lat < -18.99 and 30.45 < lng < 30.81:  # Mberengwa
+        return "Mberengwa"
+    elif -20.25 < lat < -19.89 and 31.25 < lng < 31.61:  # Masvingo
+        return "Masvingo"
+    elif -19.45 < lat < -19.09 and 30.35 < lng < 30.71:  # Mataga
+        return "Mataga"
+    # Mashonaland East
+    elif -17.85 < lat < -17.49 and 31.95 < lng < 32.31:  # Muchembere
+        return "Muchembere"
+    elif -17.75 < lat < -17.39 and 32.05 < lng < 32.41:  # Murerezi
+        return "Murerezi"
+    elif -17.65 < lat < -17.29 and 32.15 < lng < 32.51:  # Mushandirapamwe
+        return "Mushandirapamwe"
+    elif -17.55 < lat < -17.19 and 32.25 < lng < 32.61:  # Musume
+        return "Musume"
+    # Manicaland
+    elif -18.25 < lat < -17.89 and 32.85 < lng < 33.21:  # Ngungumbane
+        return "Ngungumbane"
+    elif -18.35 < lat < -17.99 and 32.95 < lng < 33.31:  # Nyamondo
+        return "Nyamondo"
+    elif -18.45 < lat < -18.09 and 33.05 < lng < 33.41:  # Ruremekedzo
+        return "Ruremekedzo"
+    elif -18.55 < lat < -18.19 and 33.15 < lng < 33.51:  # Vukomba
+        return "Vukomba"
+    # Masvingo
+    elif -20.15 < lat < -19.79 and 31.55 < lng < 31.91:  # Zvomukonde
+        return "Zvomukonde"
+    elif -20.25 < lat < -19.89 and 31.65 < lng < 32.01:  # Bangauya
+        return "Bangauya"
+    elif -20.35 < lat < -19.99 and 31.75 < lng < 32.11:  # Chikwizo
+        return "Chikwizo"
+    elif -20.45 < lat < -20.09 and 31.85 < lng < 32.21:  # Chimukoko
+        return "Chimukoko"
+    # Midlands
+    elif -19.15 < lat < -18.79 and 29.95 < lng < 30.31:  # Goronga
+        return "Goronga"
+    elif -19.25 < lat < -18.89 and 30.05 < lng < 30.41:  # Makaha
+        return "Makaha"
+    elif -19.35 < lat < -18.99 and 30.15 < lng < 30.51:  # Masarakufa
+        return "Masarakufa"
+    elif -19.45 < lat < -19.09 and 30.25 < lng < 30.61:  # Mukota
+        return "Mukota"
+    # Matabeleland
+    elif -20.75 < lat < -20.39 and 28.95 < lng < 29.31:  # Nyatana Game Park
+        return "Nyatana Game Park"
+    elif -20.85 < lat < -20.49 and 29.05 < lng < 29.41:  # Shanga
+        return "Shanga"
+    elif -20.95 < lat < -20.59 and 29.15 < lng < 29.51:  # Suswe
+        return "Suswe"
+    # Mashonaland Central
+    elif -16.75 < lat < -16.39 and 31.25 < lng < 31.61:  # Mukumbura
+        return "Mukumbura"
+    elif -16.85 < lat < -16.49 and 31.35 < lng < 31.71:  # Nembire
+        return "Nembire"
+    elif -16.95 < lat < -16.59 and 31.45 < lng < 31.81:  # Nohwedza
+        return "Nohwedza"
+    elif -17.55 < lat < -17.19 and 30.95 < lng < 31.31:  # Mutoko
+        return "Mutoko"
+    elif -17.65 < lat < -17.29 and 31.05 < lng < 31.41:  # Nyahondo
+        return "Nyahondo"
+    elif -17.75 < lat < -17.39 and 31.15 < lng < 31.51:  # Muzarabani
+        return "Muzarabani"
+    # Mashonaland East
+    elif -18.25 < lat < -17.89 and 31.75 < lng < 32.11:  # Manhumamwe
+        return "Manhumamwe"
+    elif -18.15 < lat < -17.79 and 31.85 < lng < 32.21:  # Marimuka
+        return "Marimuka"
+    elif -18.05 < lat < -17.69 and 31.95 < lng < 32.31:  # Marinda
+        return "Marinda"
+    elif -17.95 < lat < -17.59 and 32.05 < lng < 32.41:  # Musaverema
+        return "Musaverema"
+    # Manicaland
+    elif -18.85 < lat < -18.49 and 32.45 < lng < 32.81:  # Wedza
+        return "Wedza"
+    elif -18.75 < lat < -18.39 and 32.55 < lng < 32.91:  # Fanisoni
+        return "Fanisoni"
+    elif -18.65 < lat < -18.29 and 32.65 < lng < 33.01:  # Faroni
+        return "Faroni"
+    elif -18.55 < lat < -18.19 and 32.75 < lng < 33.11:  # Gwampa Forestry
+        return "Gwampa Forestry"
+    # Masvingo
+    elif -20.15 < lat < -19.79 and 31.25 < lng < 31.61:  # Bende
+        return "Bende"
+    elif -20.25 < lat < -19.89 and 31.35 < lng < 31.71:  # Chitsanza
+        return "Chitsanza"
+    elif -20.35 < lat < -19.99 and 31.45 < lng < 31.81:  # Gonde
+        return "Gonde"
+    elif -20.45 < lat < -20.09 and 31.55 < lng < 31.91:  # Guramatunhu
+        return "Guramatunhu"
+    # Midlands
+    elif -19.15 < lat < -18.79 and 29.45 < lng < 29.81:  # Mutombwa
+        return "Mutombwa"
+    elif -19.25 < lat < -18.89 and 29.55 < lng < 29.91:  # Nyabunje
+        return "Nyabunje"
+    elif -19.35 < lat < -18.99 and 29.65 < lng < 29.91:  # Nyadowa
+        return "Nyadowa"
+    elif -19.45 < lat < -19.09 and 29.75 < lng < 30.11:  # Nyagota
+        return "Nyagota"
+    # Matabeleland
+    elif -20.75 < lat < -20.39 and 28.25 < lng < 28.61:  # Rwenya Game Park
+        return "Rwenya Game Park"
+    elif -20.85 < lat < -20.49 and 28.35 < lng < 28.71:  # Sanhani
+        return "Sanhani"
+    elif -20.95 < lat < -20.59 and 28.45 < lng < 28.81:  # Sanyatwe
+        return "Sanyatwe"
+    elif -21.05 < lat < -20.69 and 28.55 < lng < 28.91:  # Tabudirira
+        return "Tabudirira"
+    # Special Cases
+    elif -17.55 < lat < -17.19 and 30.45 < lng < 30.81:  # Tongogara
+        return "Tongogara"
+    elif -17.65 < lat < -17.29 and 30.55 < lng < 30.91:  # Masvingo
+        return "Masvingo"
+    elif -17.75 < lat < -17.39 and 30.65 < lng < 31.01:  # Nyanga
+        return "Nyanga"
+    # Consolidated Areas
+    elif -19.81 < lat < -19.45 and 30.25 < lng < 30.61:  # Shamva Lscfa
+        return "Shamva Lscfa"
+    elif -19.91 < lat < -19.55 and 30.35 < lng < 30.71:  # Gundura
+        return "Gundura"
+    elif -20.01 < lat < -19.65 and 30.45 < lng < 30.81:  # Ndanga
+        return "Ndanga"
+
 
     # If not found locally, use Google Maps API
     url = f"https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&key={GOOGLE_MAPS_API_KEY}"

@@ -20858,24 +20858,28 @@ def message_handler_shona(prompt, sender, phone_id, message):
 
     text = prompt.strip().lower()
 
-    # English greetings
+# English greetings
     if text in ["hi", "hey", "hie"]:
-        user_state = {'step': 'welcome', 'sender': sender}       
-        update_user_state(sender, user_data)
-       
+        user_state = {'step': 'welcome', 'sender': sender}
+        updated_state = get_action('welcome', prompt, user_state, phone_id)
+        update_user_state(sender, updated_state)
+        return updated_state
 
     # Shona greetings
     elif text in ["mhoro", "makadini", "maswera sei", "ko sei zvako", "hesi"]:
-        user_state = {'step': 'welcome_shona', 'sender': sender}        
-        update_user_state(sender, user_data)
-        
+        user_state = {'step': 'welcome_shona', 'sender': sender}
+        updated_state = get_action('welcome_shona', prompt, user_state, phone_id)
+        update_user_state(sender, updated_state)
+        return updated_state
 
     # Ndebele greetings
     elif text in ["sawubona", "unjani", "salibonani", "hamba kahle", "ngiyakwemukela"]:
-        user_state = {'step': 'welcome_ndebele', 'sender': sender}        
-        update_user_state(sender, user_data)
-        return 
+        user_state = {'step': 'welcome_ndebele', 'sender': sender}
+        updated_state = get_action('welcome_ndebele', prompt, user_state, phone_id)
+        update_user_state(sender, updated_state)
+        return updated_state
 
+    
     if user_data.get('step') == 'talking_to_human_agent_shona':
         forward_message_to_agent_shona(prompt, user_data, phone_id)
         update_user_state(sender, user_data)
@@ -31414,24 +31418,28 @@ def message_handler_ndebele(prompt, sender, phone_id, message):
 
     text = prompt.strip().lower()
 
-    # English greetings
+# English greetings
     if text in ["hi", "hey", "hie"]:
-        user_state = {'step': 'welcome', 'sender': sender}       
-        update_user_state(sender, user_data)
-       
+        user_state = {'step': 'welcome', 'sender': sender}
+        updated_state = get_action('welcome', prompt, user_state, phone_id)
+        update_user_state(sender, updated_state)
+        return updated_state
 
     # Shona greetings
     elif text in ["mhoro", "makadini", "maswera sei", "ko sei zvako", "hesi"]:
-        user_state = {'step': 'welcome_shona', 'sender': sender}        
-        update_user_state(sender, user_data)
-        
+        user_state = {'step': 'welcome_shona', 'sender': sender}
+        updated_state = get_action('welcome_shona', prompt, user_state, phone_id)
+        update_user_state(sender, updated_state)
+        return updated_state
 
     # Ndebele greetings
     elif text in ["sawubona", "unjani", "salibonani", "hamba kahle", "ngiyakwemukela"]:
-        user_state = {'step': 'welcome_ndebele', 'sender': sender}        
-        update_user_state(sender, user_data)
-        return 
+        user_state = {'step': 'welcome_ndebele', 'sender': sender}
+        updated_state = get_action('welcome_ndebele', prompt, user_state, phone_id)
+        update_user_state(sender, updated_state)
+        return updated_state
 
+    
     if user_data.get('step') == 'talking_to_human_agent_ndebele':
         forward_message_to_agent_ndebele(prompt, user_data, phone_id)
         update_user_state(sender, user_data)
@@ -34049,24 +34057,26 @@ def message_handler(prompt, sender, phone_id, message):
 
     text = prompt.strip().lower()
 
-    # English greetings
+# English greetings
     if text in ["hi", "hey", "hie"]:
-        user_state = {'step': 'welcome', 'sender': sender}       
-        update_user_state(sender, user_data)
-       
+        user_state = {'step': 'welcome', 'sender': sender}
+        updated_state = get_action('welcome', prompt, user_state, phone_id)
+        update_user_state(sender, updated_state)
+        return updated_state
 
     # Shona greetings
     elif text in ["mhoro", "makadini", "maswera sei", "ko sei zvako", "hesi"]:
-        user_state = {'step': 'welcome_shona', 'sender': sender}        
-        update_user_state(sender, user_data)
-        
+        user_state = {'step': 'welcome_shona', 'sender': sender}
+        updated_state = get_action('welcome_shona', prompt, user_state, phone_id)
+        update_user_state(sender, updated_state)
+        return updated_state
 
     # Ndebele greetings
     elif text in ["sawubona", "unjani", "salibonani", "hamba kahle", "ngiyakwemukela"]:
-        user_state = {'step': 'welcome_ndebele', 'sender': sender}        
-        update_user_state(sender, user_data)
-        return 
-
+        user_state = {'step': 'welcome_ndebele', 'sender': sender}
+        updated_state = get_action('welcome_ndebele', prompt, user_state, phone_id)
+        update_user_state(sender, updated_state)
+        return updated_state
     
     # 🚨 Early exit if user is in human agent chat
     if user_data.get('step') == 'talking_to_human_agent':

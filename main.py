@@ -20878,6 +20878,13 @@ def message_handler_shona(prompt, sender, phone_id, message):
     next_state = get_action_shona(step, prompt, user_data, phone_id)
     update_user_state(sender, next_state)
 
+    
+    msg = message.strip().lower()
+    
+    # Check for greetings
+    if msg in ['hi', 'hey', 'hie']:
+        return handle_welcome()
+
     def get_action_shona(current_state, prompt, user_data, phone_id):
         prompt = (prompt or "").strip()
         handler = action_mapping.get(current_state, handle_welcome)
@@ -31413,6 +31420,12 @@ def message_handler_ndebele(prompt, sender, phone_id, message):
     next_state = get_action_ndebele(step, prompt, user_data, phone_id)
     update_user_state(sender, next_state)
 
+    msg = message.strip().lower()
+    
+    # Check for greetings
+    if msg in ['hi', 'hey', 'hie']:
+        return handle_welcome()
+
 def get_action_ndebele(current_state, prompt, user_data, phone_id):
     prompt = (prompt or "").strip()
     handler = action_mapping.get(current_state, handle_welcome)
@@ -34029,6 +34042,12 @@ def message_handler(prompt, sender, phone_id, message):
     step = user_data.get('step', 'welcome')
     next_state = get_action(step, prompt, user_data, phone_id)
     update_user_state(sender, next_state)
+
+    msg = message.strip().lower()
+    
+    # Check for greetings
+    if msg in ['hi', 'hey', 'hie']:
+        return handle_welcome()
 
 def get_action(current_state, prompt, user_data, phone_id):
     prompt = (prompt or "").strip()

@@ -20899,24 +20899,24 @@ def message_handler_shona(prompt, sender, phone_id, message):
     update_user_state(sender, next_state)
 
     
-      def get_action_shona(current_state, prompt, user_data, phone_id):
-        prompt = (prompt or "").strip()
-        handler = action_mapping.get(current_state, handle_welcome)
-        return handler(prompt, user_data, phone_id)
+def get_action_shona(current_state, prompt, user_data, phone_id):
+    prompt = (prompt or "").strip()
+    handler = action_mapping.get(current_state, handle_welcome)
+    return handler(prompt, user_data, phone_id)
 
-    def show_main_menu_shona(sender, phone_id):
-        menu_text = (
-            "Tingakubatsire sei nhasi?\n\n"
-            "1. Kukumbira mutengo\n"
-            "2. Tsvaga mutengo uchishandisa nzvimbo\n"
-            "3. Tarisa mamiriro eprojekiti\n"
-            "4. Mibvunzo yakajairika kana kudzidza nezvekuchera chibhorani\n"
-            "5. Mamwe masevhisi\n"
-            "6. Taura nemumiriri wevanhu\n\n"
-            "Pindura nenhamba (semuenzaniso, 1)"
-        )
-        send(menu_text, sender, phone_id)
-        return {'step': 'main_menu_shona', 'sender': sender}
+def show_main_menu_shona(sender, phone_id):
+    menu_text = (
+        "Tingakubatsire sei nhasi?\n\n"
+        "1. Kukumbira mutengo\n"
+        "2. Tsvaga mutengo uchishandisa nzvimbo\n"
+        "3. Tarisa mamiriro eprojekiti\n"
+        "4. Mibvunzo yakajairika kana kudzidza nezvekuchera chibhorani\n"
+        "5. Mamwe masevhisi\n"
+        "6. Taura nemumiriri wevanhu\n\n"
+        "Pindura nenhamba (semuenzaniso, 1)"
+    )
+    send(menu_text, sender, phone_id)
+    return {'step': 'main_menu_shona', 'sender': sender}
 
 
 

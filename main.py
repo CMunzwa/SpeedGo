@@ -9728,6 +9728,13 @@ def human_agent(prompt, user_data, phone_id):
     }
 
 
+def get_conversation(phone1, phone2):
+    """Retrieve conversation between two numbers"""
+    participants = sorted([phone1, phone2])
+    conv_key = f"conv_{participants[0]}_{participants[1]}"
+    return message_db.get(conv_key, [])
+
+
 def get_conversation_history(sender, limit=10):
     """
     Retrieves the most recent `limit` messages for a user from Redis.
@@ -10276,6 +10283,17 @@ def save_message(sender, message, direction, phone_id):
         'timestamp': time.time(),
         'phone_id': phone_id
     }
+
+    # Create conversation key (sorted phone numbers to ensure consistency)
+    participants = sorted([sender, recipient])
+    conv_key = f"conv_{participants[0]}_{participants[1]}"
+    
+    if conv_key not in message_db:
+        message_db[conv_key] = []
+    
+    message_db[conv_key].append(message)
+    return message
+    
     redis.lpush(f"conversation:{sender}", json.dumps(message_data))
     # Keep only last 100 messages per conversation
     redis.ltrim(f"conversation:{sender}", 0, 99)
@@ -34017,6 +34035,58 @@ app = Flask(__name__)
 def index():
     return render_template("connected.html")
 
+@app.route("/api/conversations/<phone_number>", methods=["GET"])
+def get_conversation_history(phone_number):
+    try:
+        # Get conversation between this number and your business number
+        messages = get_conversation(phone_number, +263775127488)
+        
+        # Format messages for the frontend
+        formatted_messages = []
+        for msg in messages:
+            formatted_messages.append({
+                "id": msg["id"],
+                "text": msg["text"],
+                "timestamp": msg["timestamp"],
+                "direction": msg["direction"],
+                "sender": msg["sender"],
+                "recipient": msg["recipient"]
+            })
+        
+        return jsonify({"messages": formatted_messages})
+    
+    except Exception as e:
+        logging.error(f"Error fetching conversation: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/messages", methods=["POST"])
+def save_message():
+    try:
+        data = request.json
+        sender = data.get("sender")
+        recipient = data.get("recipient")
+        text = data.get("text")
+        direction = data.get("direction", "outbound")
+        
+        if not all([sender, recipient, text]):
+            return jsonify({"error": "Missing required fields"}), 400
+            
+        message = store_message(
+            sender=sender,
+            recipient=recipient,
+            message_text=text,
+            phone_id=PHONE_ID,  # WhatsApp phone ID
+            direction=direction
+        )
+        
+        return jsonify(message), 201
+        
+    except Exception as e:
+        logging.error(f"Error saving message: {e}")
+        return jsonify({"error": str(e)}), 500
+        
+
 @app.route("/webhook", methods=["GET", "POST"])
 def webhook():
     if request.method == "GET":
@@ -34044,6 +34114,15 @@ def webhook():
                 from_number = message.get("from")
                 msg_type = message.get("type")
                 message_text = message.get("text", {}).get("body", "").strip()
+
+                store_message(
+                    sender=from_number,
+                    recipient=+263775127488,  # WhatsApp business number
+                    message_text=message_text,
+                    phone_id=phone_id,
+                    direction="inbound"
+                )
+                
             
                 # Handle agent messages
                 if from_number.endswith(AGENT_NUMBER.replace("+", "")):

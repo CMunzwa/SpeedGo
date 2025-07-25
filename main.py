@@ -34033,30 +34033,12 @@ def webhook():
         logging.info(f"Incoming webhook data: {json.dumps(data, indent=2)}")
 
         try:
-            # ✅ Handle subscription check with no 'entry'
-            if "object" in data and "entry" not in data:
-                logging.info("✅ Meta webhook verification POST received without 'entry'.")
-                return "OK", 200
-
-            # ✅ Defensive check: make sure entry exists
-            entry = data.get("entry", [])
-            if not entry:
-                logging.warning("POST received with no entry array.")
-                return "OK", 200
-
-            changes = entry[0].get("changes", [])
-            if not changes:
-                logging.warning("POST received with no changes array.")
-                return "OK", 200
-
-            change = changes[0]
-            field = change.get("field")
-
-            if field == "messaging_handovers":
-                logging.info("✅ Received messaging_handovers event.")
-                return "OK", 200
-
-            value = change.get("value", {})
+            entry = data.get("entry", [])[0]
+            changes = entry.get("changes", [])[0]
+            value = changes.get("value", {})
+            phone_id = value.get("metadata", {}).get("phone_number_id")
+            messages = value.get("messages", [])          
+    
             phone_id = value.get("metadata", {}).get("phone_number_id")
             messages = value.get("messages", [])
 

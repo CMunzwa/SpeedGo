@@ -34039,6 +34039,14 @@ def webhook():
             phone_id = value.get("metadata", {}).get("phone_number_id")
             messages = value.get("messages", [])
 
+            if "messaging_handovers" in changes.get("field", ""):
+                logging.info("Received messaging_handovers event.")
+                # You can log or handle thread control here if needed
+                return "Handover Event Received", 200
+    
+            phone_id = value.get("metadata", {}).get("phone_number_id")
+            messages = value.get("messages", [])
+
             if messages:
                 message = messages[0]
                 from_number = message.get("from")

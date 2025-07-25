@@ -34035,15 +34035,15 @@ def webhook():
         try:
             entry = data.get("entry", [])[0]
             changes = entry.get("changes", [])[0]
+            field = changes.get("field")
+            
+            if field == "messaging_handovers":
+                logging.info("✅ Received messaging_handovers verification or event.")
+                return "OK", 200 
+                
             value = changes.get("value", {})
             phone_id = value.get("metadata", {}).get("phone_number_id")
-            messages = value.get("messages", [])
-
-            if "messaging_handovers" in changes.get("field", ""):
-                logging.info("Received messaging_handovers event.")
-                # You can log or handle thread control here if needed
-                return "Handover Event Received", 200
-    
+            messages = value.get("messages", [])    
             phone_id = value.get("metadata", {}).get("phone_number_id")
             messages = value.get("messages", [])
 

@@ -9680,9 +9680,12 @@ def human_agent(prompt, user_data, phone_id):
         for msg in history
     ]) or "No previous conversation."
 
-    # 3. Select one agent number from the list (randomly)
-       
-    selected_agent = random.choice(AGENT_NUMBER)
+    # 3. Select one agent number from the list (ensure it's a string)
+    import random
+    if isinstance(AGENT_NUMBER, list):
+        selected_agent = str(random.choice(AGENT_NUMBER))  # Convert to string
+    else:
+        selected_agent = str(AGENT_NUMBER)  # Handle case where it's already a single number
 
     # 4. Send message to selected human agent
     agent_message = (
@@ -9708,9 +9711,10 @@ def human_agent(prompt, user_data, phone_id):
         'user': user_data.get('user', {}),
         'sender': customer_number,
         'waiting_since': time.time(),
-        'assigned_agent': selected_agent  # Store which agent was assigned
+        'assigned_agent': selected_agent
     })
 
+    
     # 7. Schedule fallback if no response in 90 seconds
     def send_fallback():
         user_data = get_user_state(customer_number)

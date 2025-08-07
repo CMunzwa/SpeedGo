@@ -21825,7 +21825,7 @@ def handle_pump_status_info_request_shona(prompt, user_data, phone_id):
 
 def custom_question_shona(prompt, user_data, phone_id):
     user = User.from_dict(user_data['user'])
-    # You can replace this with your real logic or integration with Gemini, etc.
+    
     response = (
         "Tatambira mubvunzo wenyu. Tichakupindurai nekukurumidza.\n"
         "Kana muchida, dzokai kumenu huru nekutumira 0."
@@ -34060,51 +34060,59 @@ def webhook():
         return "Failed", 403
 
     elif request.method == "POST":
-        data = request.get_json()
-        logging.info(f"Incoming webhook data: {json.dumps(data, indent=2)}")
+    data = request.get_json()
+    logging.info(f"Incoming webhook data: {json.dumps(data, indent=2)}")
 
-        try:
-            entry = data.get("entry", [])[0]
-            changes = entry.get("changes", [])[0]
-            value = changes.get("value", {})
-            phone_id = value.get("metadata", {}).get("phone_number_id")
-            messages = value.get("messages", [])          
-    
-            phone_id = value.get("metadata", {}).get("phone_number_id")
-            messages = value.get("messages", [])
+    try:
+        entry = data.get("entry", [])[0]
+        changes = entry.get("changes", [])[0]
+        value = changes.get("value", {})
+        phone_id = value.get("metadata", {}).get("phone_number_id")
+        messages = value.get("messages", [])          
 
-            if messages:
-                message = messages[0]
-                from_number = message.get("from")
-                msg_type = message.get("type")
-                message_text = message.get("text", {}).get("body", "").strip()
+        if messages:
+            message = messages[0]
+            from_number = message.get("from")
+            msg_type = message.get("type")
+            message_text = message.get("text", {}).get("body", "").strip()
+        
+            # Handle agent messages - check if sender is any of our agents
+            is_agent = any(
+                from_number.endswith(str(agent_num).replace("+", ""))
+                for agent_num in AGENT_NUMBER
+            )
             
-                # Handle agent messages
-                if from_number.endswith(AGENT_NUMBER.replace("+", "")):
-                    agent_state = get_user_state(AGENT_NUMBER)
-                    customer_number = agent_state.get("customer_number")
-            
-                    if not customer_number:
-                        send("⚠️ No customer to reply to. Wait for a new request.", AGENT_NUMBER, phone_id)
-                        return "OK"
+            if is_agent:
+                # Get the specific agent number that matched
+                matched_agent = next(
+                    agent_num for agent_num in AGENT_NUMBER
+                    if from_number.endswith(str(agent_num).replace("+", ""))
+                )
+                
+                agent_state = get_user_state(str(matched_agent))
+                customer_number = agent_state.get("customer_number")
+        
+                if not customer_number:
+                    send("⚠️ No customer to reply to. Wait for a new request.", str(matched_agent), str(phone_id))
+                    return "OK"
 
-                        # Always re-store the agent state with the customer_number to ensure it's not lost
-                        agent_state["customer_number"] = customer_number
-                        agent_state["sender"] = AGENT_NUMBER
+                # Always re-store the agent state with the customer_number to ensure it's not lost
+                agent_state["customer_number"] = customer_number
+                agent_state["sender"] = str(matched_agent)
+            
+                # Persist again defensively
+                update_user_state(str(matched_agent), agent_state)
+        
+                if agent_state.get("step") == "agent_reply":
+                    handle_agent_reply(message_text, customer_number, phone_id, agent_state)
                     
-                        # Persist again defensively
-                        update_user_state(AGENT_NUMBER, agent_state)
-            
-                    if agent_state.get("step") == "agent_reply":
-                        handle_agent_reply(message_text, customer_number, phone_id, agent_state)
-                        
-                        # 🔄 Re-save agent state to ensure customer_number is preserved
-                        agent_state["customer_number"] = customer_number
-                        agent_state["step"] = "talking_to_human_agent"
-                        update_user_state(AGENT_NUMBER, agent_state)
+                    # 🔄 Re-save agent state to ensure customer_number is preserved
+                    agent_state["customer_number"] = customer_number
+                    agent_state["step"] = "talking_to_human_agent"
+                    update_user_state(str(matched_agent), agent_state)
 
-                        return "OK"
-            
+                    return "OK"
+                    
                     if agent_state.get("step") == "talking_to_human_agent":
                         if message_text.strip() == "2":
                             # ✅ This is the agent saying "return to bot"

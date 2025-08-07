@@ -22,8 +22,8 @@ phone_id = os.environ.get("PHONE_ID")
 gen_api = os.environ.get("GEN_API")
 owner_phone = os.environ.get("OWNER_PHONE")
 GOOGLE_MAPS_API_KEY = "AlzaSyCXDMMhg7FzP|ElKmrlkv1TqtD3HgHwW50"
-AGENT_NUMBER = "+263779562095"
-AGENT_NUMBER = "+263776954188"
+AGENT_NUMBER = ["+263779562095", "+263776954188", "+263785019494"]
+
 
 # Upstash Redis setup
 redis = Redis(
@@ -9680,7 +9680,11 @@ def human_agent(prompt, user_data, phone_id):
         for msg in history
     ]) or "No previous conversation."
 
-    # 3. Send message to human agent
+    # 3. Select one agent number from the list (randomly)
+       
+    selected_agent = random.choice(AGENT_NUMBER)
+
+    # 4. Send message to selected human agent
     agent_message = (
         f"🚨 New Customer Assistance Request 🚨\n\n"
         f"📱 Customer: {customer_number}\n"
@@ -9689,22 +9693,45 @@ def human_agent(prompt, user_data, phone_id):
         f"Recent Conversation:\n{history_text}\n\n"
         f"Reply with:\n1 - Talk to customer\n2 - Back to bot"
     )
-    send(agent_message, AGENT_NUMBER, phone_id)
+    send(agent_message, selected_agent, phone_id)
 
-    # 4. Update agent state
-    update_user_state(AGENT_NUMBER, {
+    # 5. Update agent state
+    update_user_state(selected_agent, {
         'step': 'agent_reply',
         'customer_number': customer_number,
         'phone_id': phone_id
     })
 
-    # 5. Update customer state
+    # 6. Update customer state
     update_user_state(customer_number, {
         'step': 'waiting_for_human_agent_response',
         'user': user_data.get('user', {}),
         'sender': customer_number,
-        'waiting_since': time.time()
+        'waiting_since': time.time(),
+        'assigned_agent': selected_agent  # Store which agent was assigned
     })
+
+    # 7. Schedule fallback if no response in 90 seconds
+    def send_fallback():
+        user_data = get_user_state(customer_number)
+        if user_data and user_data.get('step') == 'waiting_for_human_agent_response':
+            send("If you haven't been contacted yet, you can call us directly at +263779562095 or +263779469216", customer_number, phone_id)
+            send("Would you like to:\n1. Return to main menu\n2. Keep waiting", customer_number, phone_id)
+            update_user_state(customer_number, {
+                'step': 'human_agent_followup',
+                'user': user_data.get('user', {}),
+                'sender': customer_number
+            })
+
+    fallback_timer = threading.Timer(90, send_fallback)
+    fallback_timer.start()
+
+    return {
+        'step': 'waiting_for_human_agent_response',
+        'user': user_data.get('user', {}),
+        'sender': customer_number,
+        'assigned_agent': selected_agent
+    }
 
     # 6. Schedule fallback if no response in 90 seconds
     def send_fallback():
